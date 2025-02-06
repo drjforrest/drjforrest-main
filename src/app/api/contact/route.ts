@@ -1,63 +1,107 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { z } from 'zod';
+import { 
+  checkRateLimit, 
+  validateEmail, 
+  validateMessage,
+  getClientIp 
+} from '@/lib/contact-protection';
 
-// Validation schema
-const contactSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email address'),
-  subject: z.string().min(1, 'Subject is required'),
-  message: z.string().min(1, 'Message is required')
+// Create transporter outside of the handler to reuse the connection
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
+  },
 });
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
+    // Get client IP and check rate limit
+    const clientIp = getClientIp();
+    const isWithinLimit = await checkRateLimit(clientIp);
     
-    // Validate input
-    const validatedData = contactSchema.parse(body);
-
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD // App-specific password
-      }
-    });
-
-    // Send email
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: 'jamie@drjforrest.com',
-      subject: `Website Contact: ${validatedData.subject}`,
-      text: `
-New contact form submission:
-
-Name: ${validatedData.name}
-Email: ${validatedData.email}
-Subject: ${validatedData.subject}
-
-Message:
-${validatedData.message}
-      `,
-      replyTo: validatedData.email
-    });
-
-    return NextResponse.json({ 
-      success: true,
-      message: 'Message sent successfully' 
-    });
-  } catch (error) {
-    console.error('Contact form error:', error);
-    
-    if (error instanceof z.ZodError) {
+    if (!isWithinLimit) {
       return NextResponse.json(
-        { error: 'Validation failed', details: error.errors },
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    const { name, email, subject, message } = body;
+
+    // Basic validation
+    if (!name || !email || !subject || !message) {
+      return NextResponse.json(
+        { error: 'All fields are required' },
         { status: 400 }
       );
     }
 
+    // Email validation
+    if (!validateEmail(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email address' },
+        { status: 400 }
+      );
+    }
+
+    // Message validation
+    const messageValidation = validateMessage(message);
+    if (!messageValidation.isValid) {
+      return NextResponse.json(
+        { error: messageValidation.error },
+        { status: 400 }
+      );
+    }
+
+    // Email content formatting
+    const mailOptions = {
+      from: process.env.SMTP_EMAIL,
+      to: process.env.SMTP_EMAIL,
+      subject: `Contact Form: ${subject}`,
+      replyTo: email,
+      text: `
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+IP Address: ${clientIp}
+
+Message:
+${message}
+      `,
+      html: `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+  <h2 style="color: #333;">New Contact Form Submission</h2>
+  <p><strong>From:</strong> ${name}</p>
+  <p><strong>Email:</strong> ${email}</p>
+  <p><strong>Subject:</strong> ${subject}</p>
+  <p><strong>IP Address:</strong> ${clientIp}</p>
+  <div style="margin-top: 20px;">
+    <h3 style="color: #555;">Message:</h3>
+    <p style="white-space: pre-wrap;">${message}</p>
+  </div>
+</div>
+      `
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json(
+      { message: 'Message sent successfully' },
+        { 
+          status: 200,
+          headers: {
+            'X-RateLimit-Remaining': '5',
+            'X-RateLimit-Reset': '3600'
+          }
+        }
+    );
+  } catch (error) {
+    console.error('Contact form error:', error);
     return NextResponse.json(
       { error: 'Failed to send message' },
       { status: 500 }

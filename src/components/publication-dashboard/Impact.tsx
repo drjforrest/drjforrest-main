@@ -10,6 +10,7 @@ interface ImpactProps {
   data: JournalImpact[];
 }
 
+
 export function Impact({ data }: ImpactProps) {
   return (
     <Card className="bg-surface">

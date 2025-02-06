@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FileText, GraduationCap, Building2, BookOpen, ChartBar } from 'lucide-react';
+import { FileText, GraduationCap, Building2, BookOpen, BarChart } from 'lucide-react';
 
 interface TimelineEntryProps {
   year: string;
@@ -77,7 +77,7 @@ function TimelineEntry({
 }
 
 export function ExperienceTimeline() {
-  const timelineEntries = [
+  const timelineEntries: TimelineEntryProps[] = [
     {
       year: '2023 - Present',
       title: 'Research & Strategy Lead',
@@ -88,7 +88,8 @@ export function ExperienceTimeline() {
         'Led development of technical documentation and research protocols',
         'Managed publication strategy for multi-country research findings'
       ],
-      type: 'experience'
+      type: 'experience',
+      index: 0
     },
     {
       year: '2022',
@@ -100,7 +101,8 @@ export function ExperienceTimeline() {
         'Coordinated multi-author submissions and revisions',
         'Developed clinical trial documentation standards'
       ],
-      type: 'publication'
+      type: 'publication',
+      index: 1
     },
     {
       year: '2021 - 2023',
@@ -112,7 +114,8 @@ export function ExperienceTimeline() {
         'Established publication strategy for trial outcomes',
         'Developed SOPs for clinical documentation'
       ],
-      type: 'experience'
+      type: 'experience',
+      index: 2
     },
     {
       year: '2017 - 2021',
@@ -124,7 +127,8 @@ export function ExperienceTimeline() {
         'Developed clinical research protocols',
         'Technical writing for grant applications and ethics submissions'
       ],
-      type: 'education'
+      type: 'education',
+      index: 3
     },
   ];
 
@@ -138,7 +142,7 @@ export function ExperienceTimeline() {
       >
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-12">
-            <ChartBar className="w-8 h-8 text-primary" />
+            <BarChart className="w-8 h-8 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">Professional Journey</h2>
           </div>
 
@@ -146,7 +150,12 @@ export function ExperienceTimeline() {
             {timelineEntries.map((entry, index) => (
               <TimelineEntry 
                 key={entry.title}
-                {...entry}
+                year={entry.year}
+                title={entry.title}
+                organization={entry.organization}
+                description={entry.description}
+                highlights={entry.highlights}
+                type={entry.type}
                 index={index}
               />
             ))}

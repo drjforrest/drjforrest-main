@@ -178,7 +178,7 @@ export function CV() {
       skills: ["Global Health", "Clinical Research", "Digital Health", "Health Systems", "Capacity Building"]
     }
   ];
-  
+
   return (
     <section className="w-full py-20" id="cv">
       <div className="container mx-auto px-6">
@@ -285,3 +285,4 @@ export function CV() {
     </section>
   );
 }
+  

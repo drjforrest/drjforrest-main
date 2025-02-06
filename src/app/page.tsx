@@ -1,8 +1,8 @@
-import { CV } from "@/components/CV";
 import { PublicationDashboard } from "@/components/publication-dashboard";
 import { BlogPreview } from "@/components/BlogPreview";
 import { FeaturedWork } from "@/components/FeaturedWork";
 import { ContactForm } from "@/components/ContactForm";
+import { CV } from "@/components/sections/CV";
 
 export default function Home() {
   return (
