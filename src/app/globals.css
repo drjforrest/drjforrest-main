@@ -2,20 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* From your color palette */
+    --primary: 26 58 92; /* Deep Blue */
+    --accent: 214 40 40; /* Crimson Red */
+    --success: 42 157 143; /* Emerald Green */
+    --foreground: 43 45 66; /* Charcoal Gray */
+    --background: 244 241 222; /* Ivory */
+    --muted: 112 66 20; /* Earth Brown */
+  }
+
+  .dark {
+    --primary: 42 157 143; /* Emerald Green becomes primary */
+    --background: 43 45 66; /* Charcoal becomes background */
+    --foreground: 244 241 222; /* Ivory becomes text */
+    --muted: 214 40 40; /* Crimson becomes muted */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Base heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-foreground;
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    @apply outline-2 outline-accent outline-offset-2;
+  }
+
+  /* Link styles */
+  a:not(.unstyled) {
+    @apply text-primary hover:text-primary/80 transition-colors;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .card {
+    @apply bg-background rounded-lg shadow-md transition-transform duration-300 hover:translate-y-[-4px] hover:shadow-lg;
+  }
+
+  .button {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200
+           bg-primary text-background hover:bg-primary/90
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .link {
+    @apply text-primary hover:text-accent transition-colors
+           underline-offset-4 hover:underline;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
