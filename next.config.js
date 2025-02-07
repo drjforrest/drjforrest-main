@@ -24,6 +24,15 @@ const nextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/images/favicon.ico',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

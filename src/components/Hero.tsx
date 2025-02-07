@@ -9,8 +9,6 @@ import { Card } from './ui/card';
 export function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-3rem)] flex items-center justify-center z-0">
-      <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] bg-repeat opacity-[0.02] dark:opacity-[0.03] pointer-events-none" />
-      
       <div className="container mx-auto px-4 py-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,24 +45,18 @@ export function Hero() {
 
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
             <Button 
-              asChild 
               variant="default" 
               size="lg"
-              className="text-background hover:text-background"
+              onClick={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Link href="#publications">
-                View Publications
-              </Link>
+              View Publications
             </Button>
             <Button 
               variant="outline" 
-              size="lg" 
-              asChild
-              className="text-foreground hover:text-foreground"
+              size="lg"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Link href="#contact">
-                Get in Touch
-              </Link>
+              Get in Touch
             </Button>
           </div>
 
