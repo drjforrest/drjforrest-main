@@ -2,7 +2,7 @@
 
 import { Building2, GraduationCap, BookOpen, Award, Binary } from "lucide-react";
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { type CVEntryProps, type PublicationEntry, type AwardEntry, type SkillCategory } from "@/types/cv";
 
 function CVEntry({ title, organization, period, description, index }: CVEntryProps) {
@@ -12,11 +12,13 @@ function CVEntry({ title, organization, period, description, index }: CVEntryPro
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card className="p-6 bg-surface-elevated/95 backdrop-blur mb-8 hover:elevation-2 transition-all duration-300">
-        <h3 className="text-xl font-semibold text-content">{title}</h3>
-        <div className="text-primary mb-2">{organization}</div>
-        <div className="text-sm text-content-muted mb-2">{period}</div>
-        <p className="text-content-muted">{description}</p>
+      <Card className="bg-surface-elevated/95 backdrop-blur mb-8 hover:elevation-2 transition-all duration-300">
+        <CardContent>
+          <h3 className="text-xl font-semibold text-content">{title}</h3>
+          <div className="text-primary mb-2">{organization}</div>
+          <div className="text-sm text-content-muted mb-2">{period}</div>
+          <p className="text-content-muted">{description}</p>
+        </CardContent>
       </Card>
     </motion.div>
   );
@@ -24,58 +26,64 @@ function CVEntry({ title, organization, period, description, index }: CVEntryPro
 
 function PublicationCard({ title, journal, year, citation, doi, impact }: PublicationEntry) {
   return (
-    <Card className="p-6 bg-surface-elevated/95 backdrop-blur mb-6 hover:elevation-2 transition-all duration-300">
-      <h4 className="text-lg font-medium text-content">{title}</h4>
-      <div className="text-primary italic mb-2">{journal}</div>
-      <div className="text-sm text-content-muted mb-2">{year}</div>
-      <p className="text-content-muted text-sm">{citation}</p>
-      {doi && (
-        <a 
-          href={`https://doi.org/${doi}`}
-          target="_blank"
-          rel="noopener noreferrer" 
-          className="text-primary hover:underline text-sm mt-2 inline-block"
-        >
-          DOI: {doi}
-        </a>
-      )}
-      {impact && (
-        <div className="text-sm text-content-muted mt-2">
-          Impact Factor: {impact}
-        </div>
-      )}
+    <Card className="bg-surface-elevated/95 backdrop-blur mb-6 hover:elevation-2 transition-all duration-300">
+      <CardContent>
+        <h4 className="text-lg font-medium text-content">{title}</h4>
+        <div className="text-primary italic mb-2">{journal}</div>
+        <div className="text-sm text-content-muted mb-2">{year}</div>
+        <p className="text-content-muted text-sm">{citation}</p>
+        {doi && (
+          <a 
+            href={`https://doi.org/${doi}`}
+            target="_blank"
+            rel="noopener noreferrer" 
+            className="text-primary hover:underline text-sm mt-2 inline-block"
+          >
+            DOI: {doi}
+          </a>
+        )}
+        {impact && (
+          <div className="text-sm text-content-muted mt-2">
+            Impact Factor: {impact}
+          </div>
+        )}
+      </CardContent>
     </Card>
   );
 }
 
 function AwardCard({ title, organization, year, amount, description }: AwardEntry) {
   return (
-    <Card className="p-6 bg-surface-elevated/95 backdrop-blur mb-6 hover:elevation-2 transition-all duration-300">
-      <h4 className="text-lg font-medium text-content">{title}</h4>
-      <div className="text-primary mb-1">{organization}</div>
-      <div className="text-sm text-content-muted mb-2">{year}</div>
-      {amount && (
-        <div className="text-sm font-medium text-primary mb-2">{amount}</div>
-      )}
-      <p className="text-content-muted">{description}</p>
+    <Card className="bg-surface-elevated/95 backdrop-blur mb-6 hover:elevation-2 transition-all duration-300">
+      <CardContent>
+        <h4 className="text-lg font-medium text-content">{title}</h4>
+        <div className="text-primary mb-1">{organization}</div>
+        <div className="text-sm text-content-muted mb-2">{year}</div>
+        {amount && (
+          <div className="text-sm font-medium text-primary mb-2">{amount}</div>
+        )}
+        <p className="text-content-muted">{description}</p>
+      </CardContent>
     </Card>
   );
 }
 
 function SkillsCard({ name, skills }: SkillCategory) {
   return (
-    <Card className="p-6 bg-surface-elevated/95 backdrop-blur mb-6 hover:elevation-2 transition-all duration-300">
-      <h4 className="text-lg font-medium text-content mb-4">{name}</h4>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
+    <Card className="bg-surface-elevated/95 backdrop-blur mb-6 hover:elevation-2 transition-all duration-300">
+      <CardContent>
+        <h4 className="text-lg font-medium text-content mb-4">{name}</h4>
+        <div className="flex flex-wrap gap-2">
+          {skills.map((skill, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </CardContent>
     </Card>
   );
 }
@@ -187,102 +195,108 @@ export function CV() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="bg-surface-elevated/95 backdrop-blur p-8 mb-12">
-            <h2 className="text-3xl font-bold text-center mb-16">Professional Experience & Education</h2>
-          
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Professional Experience Column */}
-              <div>
-                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                  <Building2 className="w-6 h-6 text-primary" />
-                  Professional Experience
-                </h3>
-                {experience.map((entry, index) => (
-                  <CVEntry key={entry.title} {...entry} index={index} />
-                ))}
-              </div>
-              
-              {/* Education Column */}
-              <div>
-                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                  <GraduationCap className="w-6 h-6 text-primary" />
-                  Education
-                </h3>
-                <div className="space-y-8">
-                  {education.map((entry, index) => (
-                    <CVEntry 
-                      key={entry.title} 
-                      {...entry} 
-                      index={index + experience.length}
-                    />
+          <Card className="bg-surface-elevated/95 backdrop-blur mb-12">
+            <CardContent className="p-8">
+              <h2 className="text-3xl font-bold text-center mb-16">Professional Experience & Education</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Professional Experience Column */}
+                <div>
+                  <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                    <Building2 className="w-6 h-6 text-primary" />
+                    Professional Experience
+                  </h3>
+                  {experience.map((entry, index) => (
+                    <CVEntry key={entry.title} {...entry} index={index} />
                   ))}
                 </div>
+                
+                {/* Education Column */}
+                <div>
+                  <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                    <GraduationCap className="w-6 h-6 text-primary" />
+                    Education
+                  </h3>
+                  <div className="space-y-8">
+                    {education.map((entry, index) => (
+                      <CVEntry 
+                        key={entry.title} 
+                        {...entry} 
+                        index={index + experience.length}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            </CardContent>
           </Card>
 
           {/* Publications Section */}
-          <Card className="bg-surface-elevated/95 backdrop-blur p-8 mb-12">
-            <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-              <BookOpen className="w-6 h-6 text-primary" />
-              Selected Publications
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {publications.map((pub, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <PublicationCard {...pub} />
-                </motion.div>
-              ))}
-            </div>
+          <Card className="bg-surface-elevated/95 backdrop-blur mb-12">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-primary" />
+                Selected Publications
+              </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {publications.map((pub, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <PublicationCard {...pub} />
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
           </Card>
 
           {/* Awards & Grants Section */}
-          <Card className="bg-surface-elevated/95 backdrop-blur p-8 mb-12">
-            <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-              <Award className="w-6 h-6 text-primary" />
-              Awards & Grants
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {awards.map((award, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <AwardCard {...award} />
-                </motion.div>
-              ))}
-            </div>
+          <Card className="bg-surface-elevated/95 backdrop-blur mb-12">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <Award className="w-6 h-6 text-primary" />
+                Awards & Grants
+              </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {awards.map((award, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <AwardCard {...award} />
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
           </Card>
 
           {/* Skills & Expertise Section */}
-          <Card className="bg-surface-elevated/95 backdrop-blur p-8">
-            <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-              <Binary className="w-6 h-6 text-primary" />
-              Skills & Expertise
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {skills.map((category, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <SkillsCard {...category} />
-                </motion.div>
-              ))}
-            </div>
+          <Card className="bg-surface-elevated/95 backdrop-blur">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                <Binary className="w-6 h-6 text-primary" />
+                Skills & Expertise
+              </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {skills.map((category, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <SkillsCard {...category} />
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
           </Card>
         </motion.div>
       </div>
     </section>
   );
 }
-  

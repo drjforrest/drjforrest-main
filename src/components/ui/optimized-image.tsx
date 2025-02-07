@@ -36,7 +36,7 @@ export function OptimizedImage({
           'duration-700 ease-in-out',
           isLoading ? 'scale-110 blur-lg' : 'scale-100 blur-0'
         )}
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
       />
     </div>
   );
