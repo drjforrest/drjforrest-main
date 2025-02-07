@@ -2,26 +2,28 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     extend: {
       colors: {
-        background: 'rgb(var(--background) / <alpha-value>)',
-        foreground: 'rgb(var(--foreground) / <alpha-value>)',
-        primary: 'rgb(var(--primary) / <alpha-value>)',
-        accent: 'rgb(var(--accent) / <alpha-value>)',
-        success: 'rgb(var(--success) / <alpha-value>)',
-        muted: 'rgb(var(--muted) / <alpha-value>)',
+        background: 'rgb(var(--background))',
+        foreground: 'rgb(var(--foreground))',
+        primary: 'rgb(var(--primary))',
+        accent: 'rgb(var(--accent))',
+        success: 'rgb(var(--success))',
+        muted: 'rgb(var(--muted))',
         surface: {
-          DEFAULT: 'rgb(var(--surface) / <alpha-value>)',
-          muted: 'rgb(var(--surface-muted) / <alpha-value>)',
-          elevated: 'rgb(var(--surface-elevated) / <alpha-value>)',
+          DEFAULT: 'rgb(var(--surface))',
+          muted: 'rgb(var(--surface-muted))',
+          elevated: 'rgb(var(--surface-elevated))',
         },
-        border: 'rgb(var(--border) / <alpha-value>)',
+        border: 'rgb(var(--border))',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',

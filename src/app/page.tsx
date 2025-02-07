@@ -18,7 +18,6 @@ export default function Home() {
       className="min-h-screen bg-background text-foreground"
     >
       <Hero />
-      <IconBanner />
       <section className="py-20">
         <div className="container mx-auto px-6">
           <ExperienceTimeline />

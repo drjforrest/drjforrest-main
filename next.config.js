@@ -3,12 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'drjforrest.com',
-      },
-    ],
+    domains: ['drjforrest.com'],
     unoptimized: true,
   },
   webpack: (config, { isServer }) => {
