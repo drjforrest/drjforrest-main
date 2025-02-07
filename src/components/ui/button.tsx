@@ -9,17 +9,28 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary hover:bg-primary/90 text-background',
+        default: [
+          'bg-primary',
+          'text-white',
+          'hover:bg-primary/90',
+          'hover:text-white',
+        ].join(' '),
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-primary text-primary hover:bg-primary hover:text-background',
+        outline: [
+          'border',
+          'border-primary',
+          'text-primary',
+          'hover:bg-primary/10',
+          'hover:text-primary',
+        ].join(' '),
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-primary/5 text-foreground/80 hover:text-primary',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-10 px-4 py-2',
-        sm: 'h-8 px-3 rounded-md text-xs',
-        lg: 'h-12 px-8 rounded-md text-base',
+        sm: 'h-9 px-3',
+        lg: 'h-11 px-8',
         icon: 'h-10 w-10',
       },
     },
