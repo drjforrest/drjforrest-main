@@ -61,13 +61,8 @@ export function Hero() {
           {/* Navigation Cards */}
           <div className="mt-16 grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             <Card
-              variant="elevated"
-              padding="md"
-              interactive
-              motionProps={{
-                whileHover: { scale: 1.02 },
-                transition: { duration: 0.2 }
-              }}
+              variant="interactive"
+              className="p-4 cursor-pointer"
               onClick={() => window.open('https://apps.drjforrest.com', '_blank')}
             >
               <div className="flex flex-col items-center text-center gap-4">
@@ -82,13 +77,8 @@ export function Hero() {
             </Card>
 
             <Card
-              variant="elevated"
-              padding="md"
-              interactive
-              motionProps={{
-                whileHover: { scale: 1.02 },
-                transition: { duration: 0.2 }
-              }}
+              variant="interactive"
+              className="p-4 cursor-pointer"
               onClick={() => window.open('https://blog.drjforrest.com', '_blank')}
             >
               <div className="flex flex-col items-center text-center gap-4">

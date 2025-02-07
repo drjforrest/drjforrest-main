@@ -73,7 +73,10 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         </Button>
       </div>
 
-      <Card variant="elevated" className="w-full max-w-5xl mx-auto">
+      <Card 
+        variant="default"
+        className="w-full max-w-5xl mx-auto"
+      >
         <CardContent className="p-6">
           <motion.div
             key={activeProject}

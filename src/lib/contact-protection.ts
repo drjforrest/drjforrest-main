@@ -1,5 +1,5 @@
 import { RateLimiter } from 'limiter';
-import { Filter } from 'bad-words';
+import BadWords from 'bad-words';
 import { headers } from 'next/headers';
 
 // Create a rate limiter: 5 requests per IP per hour
@@ -9,7 +9,7 @@ const limiters = new Map<string, RateLimiter>();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Initialize profanity filter
-const filter = new Filter();
+const filter = new BadWords();
 
 // Interface for validation result
 interface ValidationResult {

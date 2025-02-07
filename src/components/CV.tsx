@@ -13,28 +13,28 @@ function CVEntry({ title, organization, period, description, index }: CVEntryPro
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card 
-        variant="elevated" 
-        padding="lg"
-        className="mb-8 hover:shadow-xl transition-all duration-300 bg-background/50 backdrop-blur-sm border border-primary/5"
-        motionProps={{
-          whileHover: { scale: 1.02 },
-          transition: { duration: 0.2 }
-        }}
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.2 }}
       >
-        <div className="space-y-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="text-xl font-bold text-primary">{title}</h3>
-              <div className="text-lg font-medium mt-1">{organization}</div>
+        <Card 
+          variant="default" 
+          className="mb-8 hover:shadow-xl transition-all duration-300 bg-background/50 backdrop-blur-sm border border-primary/5 p-6"
+        >
+          <div className="space-y-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-xl font-bold text-primary">{title}</h3>
+                <div className="text-lg font-medium mt-1">{organization}</div>
+              </div>
+              <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
+                {period}
+              </span>
             </div>
-            <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
-              {period}
-            </span>
+            <p className="text-muted-foreground leading-relaxed">{description}</p>
           </div>
-          <p className="text-muted-foreground leading-relaxed">{description}</p>
-        </div>
-      </Card>
+        </Card>
+      </motion.div>
     </motion.div>
   );
 }
