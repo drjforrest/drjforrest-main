@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { SiteHeader } from "@/components/SiteHeader";
-import { PageTransition } from "@/components/ui/page-transition";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ClientProvider } from "@/components/providers/ClientProvider";
+import { Navigation } from "@/components/Navigation";
 import "@/styles/theme.css";
 import "./globals.css";
 
@@ -20,14 +20,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <SiteHeader />
-          <PageTransition>
-            <main className="pt-16">
-              {children}
-            </main>
-          </PageTransition>
+          <ClientProvider>
+            <div className="relative">
+              <Navigation />
+              <main className="pt-16">
+                {children}
+              </main>
+            </div>
+          </ClientProvider>
         </ThemeProvider>
       </body>
     </html>

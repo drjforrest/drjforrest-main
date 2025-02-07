@@ -9,6 +9,7 @@ import { Mail, Linkedin, Github, Send, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { trackFormSubmission, trackExternalLink } from '@/lib/analytics';
+import { SectionTitle } from "@/components/ui/section-title";
 
 interface FormData {
   name: string;
@@ -60,7 +61,8 @@ export function ContactForm() {
   };
 
   return (
-    <section className="py-20 bg-muted/50" id="contact">
+    <section className="py-20">
+      <SectionTitle>Get in Touch</SectionTitle>
       <div className="container px-4">
         <motion.div 
           className="max-w-4xl mx-auto"
@@ -69,7 +71,6 @@ export function ContactForm() {
           transition={{ duration: 0.5 }}
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
             <p className="text-content-muted max-w-2xl mx-auto">
               I'm always interested in connecting with colleagues and exploring new opportunities
               in global health, clinical research, and data science.

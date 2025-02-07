@@ -20,9 +20,8 @@ interface ValidationResult {
 // Add at the top with other constants
 const limiterLastUsed = new Map<string, number>();
 
-export function getClientIp(): string {
-  const headersList = headers();
-  // Check various headers that might contain the real IP
+export async function getClientIp(): Promise<string> {
+  const headersList = await headers();
   return (
     headersList.get('x-real-ip') ||
     headersList.get('x-forwarded-for')?.split(',')[0] ||
@@ -110,10 +109,10 @@ export function validateMessage(text: string): ValidationResult {
 // Update the cleanup interval
 setInterval(() => {
   const now = Date.now();
-  for (const [ip, lastUsed] of limiterLastUsed.entries()) {
+  Array.from(limiterLastUsed.entries()).forEach(([ip, lastUsed]) => {
     if (now - lastUsed > 3600000) {
       limiters.delete(ip);
       limiterLastUsed.delete(ip);
     }
-  }
+  });
 }, 3600000);

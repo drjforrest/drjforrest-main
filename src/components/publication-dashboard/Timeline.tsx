@@ -1,171 +1,150 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { EnhancedTooltip } from '@/components/ui/enhanced-tooltip';
-import { RotateCcw } from 'lucide-react';
-import type { TimelineData, MilestoneMarker } from '@/types/publications';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, ComposedChart } from 'recharts';
 
 interface TimelineProps {
-  data: TimelineData[];
+  data: Array<{ year: string; count: number }>;
 }
 
 export function Timeline({ data }: TimelineProps) {
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-
-  // Calculate cumulative total for each year
-  const cumulativeData = data.map((item, index) => {
-    const previousTotal = index > 0 ? 
-      data.slice(0, index).reduce((sum, d) => sum + d.count, 0) : 0;
-    return {
-      ...item,
-      total: previousTotal + item.count
-    };
-  });
-
-  // Find significant milestones (years with 5+ publications)
-  const milestones = cumulativeData.reduce<MilestoneMarker[]>((acc, curr) => {
-    if (curr.count >= 5) {
-      acc.push({
-        year: curr.year,
-        label: `${curr.count} publications`
-      });
-    }
-    return acc;
-  }, []);
+  // Process data in chronological order from 2011 to present
+  const chartData = data
+    .filter(d => parseInt(d.year) >= 2011)
+    .slice()
+    .reverse();
+    
+  // Calculate cumulative totals
+  const processedData = chartData.reduce((acc, curr, idx) => {
+    const prevTotal = idx > 0 ? acc[idx - 1].total : 0;
+    return [...acc, {
+      year: curr.year,
+      papers: curr.count,
+      total: prevTotal + curr.count,
+      // Add a smoothed trend line for annual papers
+      trend: Math.max(
+        curr.count,
+        idx > 0 ? (acc[idx - 1].papers + curr.count) / 2 : curr.count
+      )
+    }];
+  }, [] as Array<{ year: string; papers: number; total: number; trend: number }>);
 
   return (
-    <Card className="bg-surface">
+    <Card className="bg-background">
       <CardContent className="pt-6">
-        <div className="relative">
-          <div className="absolute top-0 right-0 z-10">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setSelectedYear(null)}
-              disabled={!selectedYear}
-              className="text-primary hover:text-primary-dark"
+        <div className="h-[350px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart 
+              data={processedData}
+              margin={{ top: 10, right: 10, left: 50, bottom: 0 }}
             >
-              <RotateCcw className="h-4 w-4" />
-            </Button>
-          </div>
-          
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart 
-                data={cumulativeData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-              >
-                <CartesianGrid 
-                  strokeDasharray="3 3" 
-                  className="opacity-30"
-                  stroke="var(--border)"
-                />
-                <XAxis 
-                  dataKey="year" 
-                  tick={{ fill: 'var(--content-muted)' }}
-                  stroke="var(--border)"
-                />
-                <YAxis 
-                  tick={{ fill: 'var(--content-muted)' }}
-                  stroke="var(--border)"
-                  label={{ 
-                    value: 'Publications', 
-                    angle: -90, 
-                    position: 'insideLeft',
-                    style: { fill: 'var(--content-muted)' }
-                  }}
-                />
-                
-                {/* Annual publications line */}
-                <Line 
-                  type="monotone" 
-                  dataKey="count"
-                  name="Annual"
-                  stroke="var(--primary)"
-                  strokeWidth={2}
-                  dot={{ r: 4, strokeWidth: 2, fill: 'var(--background)', stroke: 'var(--primary)' }}
-                  activeDot={{ 
-                    r: 6,
-                    fill: 'var(--primary)',
-                    onClick: (props: any) => {
-                      const year = props.payload.year;
-                      setSelectedYear(selectedYear === year ? null : year);
-                    }
-                  }}
-                />
-
-                {/* Cumulative total line */}
-                <Line 
-                  type="monotone" 
-                  dataKey="total"
-                  name="Cumulative"
-                  stroke="var(--primary-light)"
-                  strokeWidth={2}
-                  dot={{ r: 4, strokeWidth: 2, fill: 'var(--background)', stroke: 'var(--primary-light)' }}
-                  activeDot={{ 
-                    r: 6,
-                    fill: 'var(--primary-light)',
-                    onClick: (props: any) => {
-                      const year = props.payload.year;
-                      setSelectedYear(selectedYear === year ? null : year);
-                    }
-                  }}
-                />
-
-                {/* Milestone markers */}
-                {milestones.map((milestone, index) => (
-                  <ReferenceLine
-                    key={index}
-                    x={milestone.year}
-                    stroke="var(--content-muted)"
-                    strokeDasharray="3 3"
-                    label={{
-                      value: milestone.label,
-                      position: 'top',
-                      fill: 'var(--content-muted)',
-                      fontSize: 12
-                    }}
-                  />
-                ))}
-
-                <Tooltip
-                  content={
-                    <EnhancedTooltip
-                      solutions={{
-                        count: "Annual publications",
-                        total: "Cumulative total"
-                      }}
-                      formatter={(value) => `${value} publications`}
-                    />
-                  }
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Context Box */}
-          {selectedYear && (
-            <div className="mt-6 p-4 bg-surface-muted rounded-lg">
-              <h4 className="text-sm font-medium mb-2">{selectedYear} Publication Metrics</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-xs text-content-muted">Annual Publications</p>
-                  <p className="text-sm font-medium">
-                    {cumulativeData.find(d => d.year === selectedYear)?.count}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-content-muted">Cumulative Total</p>
-                  <p className="text-sm font-medium">
-                    {cumulativeData.find(d => d.year === selectedYear)?.total}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
+              {/* Subtle grid lines */}
+              <CartesianGrid 
+                strokeDasharray="3 3" 
+                vertical={false}
+                stroke="#666"
+                opacity={0.1}
+              />
+              
+              {/* X-Axis (Years) */}
+              <XAxis 
+                dataKey="year" 
+                stroke="#666"
+                fontSize={12}
+                tickLine={false}
+                axisLine={{ strokeWidth: 1 }}
+                dy={10}
+              />
+              
+              {/* Right Y-Axis (Total Publications) - Now primary */}
+              <YAxis 
+                yAxisId="total"
+                orientation="right"
+                stroke="#666"
+                fontSize={12}
+                tickLine={false}
+                axisLine={{ strokeWidth: 1 }}
+                domain={[0, 60]}
+                ticks={[0, 15, 30, 45, 60]}
+                label={{ 
+                  value: 'Total Publications', 
+                  angle: 90, 
+                  position: 'insideRight',
+                  style: { fill: '#666', fontSize: 12 },
+                  offset: 0
+                }}
+              />
+              
+              {/* Left Y-Axis (Publications per Year) - Now secondary */}
+              <YAxis 
+                yAxisId="annual"
+                orientation="left"
+                stroke="#666"
+                fontSize={12}
+                tickLine={false}
+                axisLine={{ strokeWidth: 1 }}
+                domain={[0, 8]}
+                ticks={[0, 2, 4, 6, 8]}
+                label={{ 
+                  value: 'Publications per Year', 
+                  angle: -90, 
+                  position: 'insideLeft',
+                  style: { fill: '#666', fontSize: 12 },
+                  offset: 0
+                }}
+              />
+              
+              {/* Simple tooltip */}
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                }}
+                formatter={(value: number, name: string) => [
+                  `${value}`,
+                  name === 'total' ? 'Total Publications' : 'Publications'
+                ]}
+              />
+              
+              {/* Area for cumulative total - prominent */}
+              <Area
+                yAxisId="total"
+                type="monotone"
+                dataKey="total"
+                name="total"
+                stroke="rgb(214, 40, 40)"
+                fill="rgba(214, 40, 40, 0.15)"
+                strokeWidth={2}
+                dot={{ r: 3, fill: "rgb(214, 40, 40)" }}
+                activeDot={{ r: 4, fill: "rgb(214, 40, 40)" }}
+              />
+              
+              {/* Smoothed trend line - very muted */}
+              <Line
+                yAxisId="annual"
+                type="monotone"
+                dataKey="trend"
+                name="papers"
+                stroke="rgba(26, 58, 92, 0.3)"
+                strokeWidth={1}
+                dot={{ r: 2, fill: "rgba(26, 58, 92, 0.3)" }}
+                activeDot={{ r: 3, fill: "rgba(26, 58, 92, 0.5)" }}
+              />
+              
+              {/* Actual annual papers - extremely subtle dots */}
+              <Line
+                yAxisId="annual"
+                type="monotone"
+                dataKey="papers"
+                stroke="none"
+                dot={{ r: 1, fill: "rgba(26, 58, 92, 0.1)" }}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
         </div>
       </CardContent>
     </Card>

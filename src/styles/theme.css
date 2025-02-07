@@ -1,29 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Light mode */
-  .light {
-    --background: rgb(244, 241, 222);  /* Ivory/Chiffon yellow from mainTheme */
-    --foreground: rgb(43, 45, 66);     /* Charcoal from mainTheme */
-    --primary: rgb(26, 58, 92);        /* Deep navy from mainTheme */
-    --primary-light: rgb(42, 157, 143); /* Emerald from mainTheme */
-    --surface: rgb(244, 241, 222);     /* Same as background */
-    --surface-elevated: rgb(255, 255, 255);
-    --surface-muted: rgb(237, 234, 215);
-    --content: rgb(43, 45, 66);        /* Same as foreground */
-    --content-muted: rgb(112, 66, 20); /* Warm brown from mainTheme */
-    --border: rgb(226, 232, 240);
-  }
+  --background: 244 241 222;  /* Ivory */
+  --foreground: 43 45 66;     /* Charcoal */
+  --primary: 26 58 92;        /* Deep navy */
+  --accent: 214 40 40;        /* Crimson */
+  --success: 42 157 143;      /* Emerald */
+  --muted: 112 66 20;         /* Earth brown */
+}
 
-  /* Dark mode */
-  .dark {
-    --background: rgb(43, 45, 66);     /* Charcoal background */
-    --foreground: rgb(244, 241, 222);  /* Ivory text */
-    --primary: rgb(42, 157, 143);      /* Emerald primary */
-    --primary-light: rgb(26, 58, 92);  /* Navy becomes secondary */
-    --surface: rgb(49, 51, 73);        /* Slightly lighter than background */
-    --surface-elevated: rgb(55, 57, 82);
-    --surface-muted: rgb(61, 63, 89);
-    --content: rgb(244, 241, 222);     /* Same as foreground */
-    --content-muted: rgb(112, 66, 20); /* Warm brown maintains grounding */
-    --border: rgb(45, 55, 72);
+.dark {
+  --background: 43 45 66;     /* Charcoal */
+  --foreground: 244 241 222;  /* Ivory */
+  --primary: 42 157 143;      /* Emerald */
+  --accent: 214 40 40;        /* Crimson */
+  --success: 26 58 92;        /* Navy */
+  --muted: 112 66 20;         /* Earth brown */
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
   }
 }
