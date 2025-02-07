@@ -1,65 +1,48 @@
 'use client';
 
 import * as React from 'react';
-import { motion, MotionProps } from 'framer-motion';
+import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { motion } from 'framer-motion';
 
 const cardVariants = cva(
-  'rounded-lg border bg-background transition-all duration-200',
+  'rounded-lg border border-foreground/10 bg-background shadow-sm transition-all duration-300',
   {
     variants: {
       variant: {
-        default: 'border-foreground/10 shadow-sm hover:shadow-md',
-        elevated: 'border-foreground/10 shadow-md hover:shadow-lg',
-        outline: 'border-foreground/20 hover:border-foreground/30',
-        ghost: 'border-transparent',
+        default: 'hover:border-primary/20',
+        interactive: 'hover:border-primary/20 hover:translate-y-[-4px] cursor-pointer',
       },
       padding: {
+        default: 'p-6',
         none: '',
-        sm: 'p-4',
-        md: 'p-6',
-        lg: 'p-8',
       },
       interactive: {
-        true: 'cursor-pointer hover:-translate-y-1',
+        true: 'hover:shadow-lg hover:translate-y-[-4px] cursor-pointer',
         false: '',
       },
     },
     defaultVariants: {
       variant: 'default',
-      padding: 'md',
+      padding: 'default',
       interactive: false,
     },
   }
 );
 
-export interface CardProps
+interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
   asChild?: boolean;
-  motionProps?: MotionProps;
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ 
-    className, 
-    variant, 
-    padding, 
-    interactive, 
-    asChild = false,
-    motionProps,
-    ...props 
-  }, ref) => {
-    const Comp = asChild ? motion.div : motion.div;
-    
+  ({ className, variant, padding, interactive, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'div';
     return (
       <Comp
         ref={ref}
         className={cardVariants({ variant, padding, interactive, className })}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        {...motionProps}
         {...props}
       />
     );
@@ -67,6 +50,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = 'Card';
 
+// Create a motion version of the Card
+const MotionCard = motion(Card);
+
+// Subcomponents for structured content
 const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -125,9 +112,11 @@ CardFooter.displayName = 'CardFooter';
 
 export {
   Card,
+  MotionCard,
   CardHeader,
   CardFooter,
   CardTitle,
   CardDescription,
   CardContent,
+  cardVariants,
 };

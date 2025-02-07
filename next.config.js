@@ -1,20 +1,34 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'drjforrest.com',
+      },
+    ],
+    unoptimized: true,
   },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { isServer }) => {
+    // Handle SVG files
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
 
-    if (dev && !isServer) {
-      config.devtool = "eval-source-map";
+    // Handle client-side modules
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        net: false,
+        tls: false,
+      };
     }
 
     return config;
   },
 };
+
+module.exports = nextConfig;

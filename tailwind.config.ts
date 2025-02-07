@@ -16,6 +16,12 @@ const config: Config = {
         accent: 'rgb(var(--accent) / <alpha-value>)',
         success: 'rgb(var(--success) / <alpha-value>)',
         muted: 'rgb(var(--muted) / <alpha-value>)',
+        surface: {
+          DEFAULT: 'rgb(var(--surface) / <alpha-value>)',
+          muted: 'rgb(var(--surface-muted) / <alpha-value>)',
+          elevated: 'rgb(var(--surface-elevated) / <alpha-value>)',
+        },
+        border: 'rgb(var(--border) / <alpha-value>)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',
@@ -31,9 +37,52 @@ const config: Config = {
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: 'rgb(var(--foreground))',
+            a: {
+              color: 'rgb(var(--primary))',
+              '&:hover': {
+                color: 'rgb(var(--primary) / 0.8)',
+              },
+            },
+            h1: {
+              color: 'rgb(var(--foreground))',
+            },
+            h2: {
+              color: 'rgb(var(--foreground))',
+            },
+            h3: {
+              color: 'rgb(var(--foreground))',
+            },
+            h4: {
+              color: 'rgb(var(--foreground))',
+            },
+            blockquote: {
+              color: 'rgb(var(--foreground) / 0.8)',
+              borderLeftColor: 'rgb(var(--primary) / 0.2)',
+            },
+            code: {
+              color: 'rgb(var(--foreground))',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            pre: {
+              backgroundColor: 'rgb(var(--muted) / 0.1)',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 
 export default config
