@@ -1,19 +1,19 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
+  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all duration-200',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-background hover:bg-primary/90 hover:text-background',
+        default: 'bg-primary hover:bg-primary/90 text-background',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline: 'border border-primary text-primary hover:bg-primary hover:text-background',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        ghost: 'hover:bg-primary/5 text-foreground/80 hover:text-primary',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
@@ -31,7 +31,7 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends HTMLMotionProps<'button'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }

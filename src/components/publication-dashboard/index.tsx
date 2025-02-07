@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
@@ -8,7 +8,7 @@ import { Timeline } from './Timeline';
 import { Impact } from './Impact';
 import { Focus } from './Focus';
 import { ProjectCarousel } from '@/components/ui/project-carousel';
-import { Clock, TrendingUp, Target, Briefcase } from 'lucide-react';
+import { Clock, TrendingUp, Target, Briefcase, Loader2 } from 'lucide-react';
 import { SectionTitle } from "@/components/ui/section-title";
 
 const projects = [
@@ -28,6 +28,8 @@ const projects = [
 ];
 
 export function PublicationDashboard() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const publications = [
     {"year": "2024", "count": 3},
     {"year": "2023", "count": 6},
@@ -61,6 +63,11 @@ export function PublicationDashboard() {
     { name: 'Public Health', papers: 2 }
   ];
 
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => setIsLoading(false), 500);
+  }, []);
+
   return (
     <section className="py-20">
       <SectionTitle
@@ -93,21 +100,29 @@ export function PublicationDashboard() {
             </TabsList>
 
             <div className="mt-6">
-              <TabsContent value="timeline" className="m-0">
-                <Timeline data={publications} />
-              </TabsContent>
+              {isLoading ? (
+                <div className="flex items-center justify-center h-[200px]">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              ) : (
+                <>
+                  <TabsContent value="timeline" className="m-0">
+                    <Timeline data={publications} />
+                  </TabsContent>
 
-              <TabsContent value="impact" className="m-0">
-                <Impact data={journalImpact} />
-              </TabsContent>
+                  <TabsContent value="impact" className="m-0">
+                    <Impact data={journalImpact} />
+                  </TabsContent>
 
-              <TabsContent value="focus" className="m-0">
-                <Focus data={researchFocus} />
-              </TabsContent>
+                  <TabsContent value="focus" className="m-0">
+                    <Focus data={researchFocus} />
+                  </TabsContent>
 
-              <TabsContent value="projects" className="m-0">
-                <ProjectCarousel projects={projects} />
-              </TabsContent>
+                  <TabsContent value="projects" className="m-0">
+                    <ProjectCarousel projects={projects} />
+                  </TabsContent>
+                </>
+              )}
             </div>
 
             <motion.div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 p-6 bg-muted/5 rounded-lg border border-primary/10">

@@ -25,4 +25,10 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  :root {
+    --text-primary: var(--primary);
+    --text-muted: rgb(var(--foreground) / 0.8);
+    --text-subtle: rgb(var(--foreground) / 0.6);
+  }
 }

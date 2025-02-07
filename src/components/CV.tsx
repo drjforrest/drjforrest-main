@@ -16,7 +16,7 @@ function CVEntry({ title, organization, period, description, index }: CVEntryPro
       <Card 
         variant="elevated" 
         padding="lg"
-        className="mb-8 hover:shadow-xl transition-all duration-300"
+        className="mb-8 hover:shadow-xl transition-all duration-300 bg-background/50 backdrop-blur-sm border border-primary/5"
         motionProps={{
           whileHover: { scale: 1.02 },
           transition: { duration: 0.2 }
@@ -61,20 +61,69 @@ export function CV() {
     }
   ];
 
+  const certifications = [
+    {
+      title: "Clinical Research Leadership",
+      organization: "TOGETHER Trial Network",
+      period: "2022",
+      description: "Led clinical trial operations and partnerships across multiple countries for COVID-19 therapeutics research.",
+    },
+    {
+      title: "Data Science for Global Health",
+      organization: "Gates Foundation",
+      period: "2020",
+      description: "Advanced analytics and visualization for health systems strengthening in Africa.",
+    }
+  ];
+
+  const achievements = [
+    {
+      title: "Global Health Impact Award",
+      organization: "Gates Foundation",
+      period: "2023",
+      description: "Recognized for outstanding contributions to clinical research capacity building in Africa through the ACTIVATE initiative.",
+    }
+  ];
+
   return (
-    <section className="py-20 bg-muted/30">
-      <SectionTitle>Education</SectionTitle>
+    <section className="py-20">
+      <SectionTitle>Professional Background</SectionTitle>
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
-          <div className="space-y-8">
-            {education.map((entry, index) => (
-              <CVEntry key={entry.title} {...entry} index={index} />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+            <div className="space-y-10">
+              <h3 className="text-2xl font-bold">Education</h3>
+              <div className="space-y-6">
+                {education.map((entry, index) => (
+                  <CVEntry key={entry.title} {...entry} index={index} />
+                ))}
+              </div>
+            </div>
+            
+            <div className="space-y-10">
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Key Certifications</h3>
+                <div className="space-y-6">
+                  {certifications.map((entry, index) => (
+                    <CVEntry key={entry.title} {...entry} index={index} />
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Achievements</h3>
+                <div className="space-y-6">
+                  {achievements.map((entry, index) => (
+                    <CVEntry key={entry.title} {...entry} index={index} />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -12,6 +12,7 @@ import { trackFormSubmission, trackExternalLink } from '@/lib/analytics';
 import { SectionTitle } from "@/components/ui/section-title";
 
 interface FormData {
+  [key: string]: string;
   name: string;
   email: string;
   subject: string;
@@ -65,65 +66,45 @@ export function ContactForm() {
       <SectionTitle>Get in Touch</SectionTitle>
       <div className="container px-4">
         <motion.div 
-          className="max-w-4xl mx-auto"
+          className="max-w-5xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           <div className="text-center mb-12">
-            <p className="text-content-muted max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground">
               I'm always interested in connecting with colleagues and exploring new opportunities
               in global health, clinical research, and data science.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-[2fr,1fr] gap-8">
+          <div className="grid md:grid-cols-[1.5fr,1fr] gap-8">
             {/* Contact Form */}
-            <Card className="p-6 bg-surface-elevated elevation-1 hover:elevation-2 transition-all duration-300">
+            <Card className="p-8 bg-background/50 backdrop-blur-sm border border-primary/10 hover:shadow-lg transition-all duration-300">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Name
-                    </label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      required
-                      className="bg-background"
-                    />
-                  </div>
+                <div className="space-y-4">
+                  {[
+                    { id: 'name', label: 'Name', type: 'text' },
+                    { id: 'email', label: 'Email', type: 'email' },
+                    { id: 'subject', label: 'Subject', type: 'text' }
+                  ].map(({ id, label, type }) => (
+                    <div key={id}>
+                      <label htmlFor={id} className="block text-sm font-medium mb-2 text-foreground/80">
+                        {label}
+                      </label>
+                      <Input
+                        id={id}
+                        type={type}
+                        value={formData[id]}
+                        onChange={(e) => setFormData(prev => ({ ...prev, [id]: e.target.value }))}
+                        required
+                        className="bg-background/80 border-primary/10 focus:border-primary/20"
+                      />
+                    </div>
+                  ))}
                   
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      required
-                      className="bg-background"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Subject
-                    </label>
-                    <Input
-                      id="subject"
-                      value={formData.subject}
-                      onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                      required
-                      className="bg-background"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground/80">
                       Message
                     </label>
                     <Textarea
@@ -132,14 +113,14 @@ export function ContactForm() {
                       value={formData.message}
                       onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                       required
-                      className="bg-background"
+                      className="bg-background/80 border-primary/10 focus:border-primary/20"
                     />
                   </div>
                 </div>
 
                 <Button 
                   type="submit"
-                  className="w-full"
+                  className="w-full bg-primary text-background hover:bg-primary/90"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -154,102 +135,48 @@ export function ContactForm() {
                     </>
                   )}
                 </Button>
-
-                {submitStatus === 'success' && (
-                  <motion.p 
-                    className="text-green-500 text-sm text-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    Message sent successfully! I'll get back to you soon.
-                  </motion.p>
-                )}
-
-                {submitStatus === 'error' && (
-                  <motion.p 
-                    className="text-red-500 text-sm text-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    There was an error sending your message. Please try again.
-                  </motion.p>
-                )}
               </form>
             </Card>
 
             {/* Contact Info */}
-            <Card className="p-6 bg-surface-elevated elevation-1 hover:elevation-2 transition-all duration-300">
+            <Card className="p-8 bg-background/50 backdrop-blur-sm border border-primary/10">
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
-                  <div className="space-y-4">
-                    <button
-                      onClick={() => handleExternalLink('email', 'mailto:jamie@drjforrest.com')}
-                      className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors"
-                    >
-                      <Mail className="h-5 w-5 text-primary" />
-                      <span>jamie@drjforrest.com</span>
-                    </button>
-                    
-                    <button
-                      onClick={() => handleExternalLink('linkedin', 'https://www.linkedin.com/in/jamie_forrest')}
-                      className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors"
-                    >
-                      <Linkedin className="h-5 w-5 text-primary" />
-                      <span>Connect on LinkedIn</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleExternalLink('github', 'https://github.com/drjforrest')}
-                      className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors"
-                    >
-                      <Github className="h-5 w-5 text-primary" />
-                      <span>GitHub Profile</span>
-                    </button>
+                  <h3 className="text-lg font-semibold mb-4 text-primary">Contact Information</h3>
+                  <div className="space-y-3">
+                    {[
+                      { icon: Mail, text: 'jamie@drjforrest.com', action: 'email' },
+                      { icon: Linkedin, text: 'Connect on LinkedIn', action: 'linkedin' },
+                      { icon: Github, text: 'GitHub Profile', action: 'github' }
+                    ].map(({ icon: Icon, text, action }) => (
+                      <button
+                        key={text}
+                        onClick={() => handleExternalLink(action, `${action === 'email' ? 'mailto:' : ''}${text}`)}
+                        className="w-full flex items-center gap-3 p-2.5 rounded-lg hover:bg-primary/5 transition-colors"
+                      >
+                        <Icon className="h-5 w-5 text-primary" />
+                        <span className="text-foreground/80">{text}</span>
+                      </button>
+                    ))}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Looking to collaborate?</h3>
-                  <p className="text-content-muted">
-                    I'm open to discussing opportunities in:
-                  </p>
-                  <ul className="mt-2 space-y-2 text-content-muted">
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                      Clinical Research Leadership
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                      Global Health Projects
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                      Data Science Initiatives
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                      Health Systems Strengthening
-                    </li>
+                  <h3 className="text-lg font-semibold mb-4 text-primary">Looking to collaborate?</h3>
+                  <p className="text-foreground/70 mb-3">I'm open to discussing opportunities in:</p>
+                  <ul className="space-y-2">
+                    {[
+                      'Clinical Research Leadership',
+                      'Global Health Projects',
+                      'Data Science Initiatives',
+                      'Health Systems Strengthening'
+                    ].map((item) => (
+                      <li key={item} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        <span className="text-foreground/80">{item}</span>
+                      </li>
+                    ))}
                   </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">More Resources</h3>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => handleExternalLink('blog', 'https://blog.drjforrest.com')}
-                      className="w-full text-left text-primary hover:underline"
-                    >
-                      Read my blog →
-                    </button>
-                    <button
-                      onClick={() => handleExternalLink('apps', 'https://apps.drjforrest.com')}
-                      className="w-full text-left text-primary hover:underline"
-                    >
-                      Check out my apps →
-                    </button>
-                  </div>
                 </div>
               </div>
             </Card>

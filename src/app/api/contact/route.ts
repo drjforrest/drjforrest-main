@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 export async function POST(request: Request) {
   try {
     // Get client IP and check rate limit
-    const clientIp = getClientIp();
+    const clientIp = await getClientIp(); // Await the promise here
     const isWithinLimit = await checkRateLimit(clientIp);
     
     if (!isWithinLimit) {
@@ -29,16 +29,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = await request.json();
-    const { name, email, subject, message } = body;
-
-    // Basic validation
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: 'All fields are required' },
-        { status: 400 }
-      );
-    }
+    // Parse the request body
+    const { name, email, subject, message } = await request.json();
 
     // Email validation
     if (!validateEmail(email)) {
@@ -92,13 +84,13 @@ ${message}
 
     return NextResponse.json(
       { message: 'Message sent successfully' },
-        { 
-          status: 200,
-          headers: {
-            'X-RateLimit-Remaining': '5',
-            'X-RateLimit-Reset': '3600'
-          }
+      { 
+        status: 200,
+        headers: {
+          'X-RateLimit-Remaining': '5',
+          'X-RateLimit-Reset': '3600'
         }
+      }
     );
   } catch (error) {
     console.error('Contact form error:', error);

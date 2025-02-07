@@ -1,29 +1,13 @@
+// Corrected code snippet
 'use client';
 
 import { Hero } from "@/components/Hero";
-import { Timeline } from "@/components/Timeline";
-import { ProjectCarousel } from "@/components/ui/project-carousel";
+import { IconBanner } from "@/components/IconBanner";
+import { ExperienceTimeline } from "@/components/experience-timeline";
 import { PublicationDashboard } from "@/components/publication-dashboard";
-import { CV } from "@/components/sections/CV";
+import { CV } from "@/components/CV";
 import { ContactForm } from "@/components/ContactForm";
 import { motion } from "framer-motion";
-
-// Project data can be moved to a separate file if preferred
-const projects = [
-  {
-    title: "The Momentum Health Study",
-    period: "2011 - 2015",
-    paperThumbnail: "/projects/momentum-health.png",
-    description: "Canada's largest gay men's health study...",
-    expandedDescription: "Led the coordination of this groundbreaking cohort study...",
-    impact: "The study's findings directly informed HIV prevention strategies...",
-    paperLink: "https://www.momentumstudy.ca",
-    paperTitle: "Social Media Use and HIV Transmission Risk Behavior among Gay and Bisexual Men",
-    journal: "AIDS and Behavior",
-    citationCount: 45
-  },
-  // ... other projects
-];
 
 export default function Home() {
   return (
@@ -34,10 +18,10 @@ export default function Home() {
       className="min-h-screen bg-background text-foreground"
     >
       <Hero />
-      <Timeline />
+      <IconBanner />
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <ProjectCarousel projects={projects} />
+          <ExperienceTimeline />
         </div>
       </section>
       <PublicationDashboard />
