@@ -32,10 +32,10 @@ export function InteractiveTimeline({ events }: InteractiveTimelineProps) {
   return (
     <div className="relative">
       {/* Timeline line */}
-      <div className="absolute left-[2.25rem] top-0 bottom-0 w-px bg-border" />
+      <div className="absolute left-[2.25rem] top-0 bottom-0 w-[3px] bg-accent/60 z-0" />
 
       {/* Events */}
-      <div className="space-y-8">
+      <div className="relative z-10 space-y-8">
         {sortedEvents.map((event, index) => (
           <motion.div
             key={`${event.year}-${index}`}
@@ -46,19 +46,22 @@ export function InteractiveTimeline({ events }: InteractiveTimelineProps) {
           >
             {/* Year marker */}
             <motion.div
-              className="absolute left-0 w-[1.125rem] h-[1.125rem] rounded-full bg-primary"
+              className="absolute left-0 w-[1.125rem] h-[1.125rem] rounded-full bg-primary shadow-md"
               whileHover={{ scale: 1.2 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            />
+            >
+              <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
+            </motion.div>
 
             <button
               className="w-full text-left"
               onClick={() => setSelectedEvent(selectedEvent?.year === event.year ? null : event)}
             >
               <Card
+                variant="interactive"
                 className={cn(
-                  "p-6 bg-surface-elevated/95 backdrop-blur cursor-pointer hover:elevation-3 transition-all duration-300",
-                  selectedEvent?.year === event.year ? 'elevation-3' : ''
+                  "p-6 shadow-md",
+                  selectedEvent?.year === event.year ? 'shadow-lg scale-[1.02] -translate-y-1' : ''
                 )}
               >
                 <div className="flex justify-between items-start">
@@ -78,7 +81,7 @@ export function InteractiveTimeline({ events }: InteractiveTimelineProps) {
                   )}
                 </div>
 
-                <h3 className="text-lg font-semibold mt-2">{event.title}</h3>
+                <h3 className="text-lg font-semibold mt-2 text-foreground">{event.title}</h3>
 
                 <AnimatePresence>
                   {selectedEvent?.year === event.year && (
@@ -89,11 +92,11 @@ export function InteractiveTimeline({ events }: InteractiveTimelineProps) {
                       transition={{ duration: 0.3 }}
                       className="mt-4"
                     >
-                      <p className="text-content-muted">{event.description}</p>
+                      <p className="text-foreground/80">{event.description}</p>
                       {event.impact && (
                         <div className="mt-4 p-4 rounded-lg bg-primary/5">
-                          <h4 className="text-sm font-medium mb-2">Impact</h4>
-                          <p className="text-sm text-content-muted">{event.impact}</p>
+                          <h4 className="text-sm font-medium mb-2 text-primary">Impact</h4>
+                          <p className="text-sm text-foreground/80">{event.impact}</p>
                         </div>
                       )}
                     </motion.div>

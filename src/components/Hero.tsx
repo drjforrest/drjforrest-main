@@ -1,10 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PenLine, LineChart, Globe } from 'lucide-react';
-import Link from 'next/link';
+import { PenLine, LineChart, Globe, Code2, BookText } from 'lucide-react';
 import { Button } from './ui/button';
-import { Card } from './ui/card';
 
 export function Hero() {
   return (
@@ -43,56 +41,37 @@ export function Hero() {
             <p>Building sustainable partnerships across global health ecosystems</p>
           </div>
 
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Button 
-              variant="default" 
-              size="lg"
-              onClick={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })}
+          <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              View Publications
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              <Button 
+                variant="default"
+                size="lg"
+                className="h-16 px-8 text-lg"
+                onClick={() => window.open('https://apps.drjforrest.com', '_blank')}
+              >
+                <Code2 className="mr-2 h-5 w-5" />
+                Discover Apps
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              Get in Touch
-            </Button>
-          </div>
-
-          {/* Navigation Cards */}
-          <div className="mt-16 grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <Card
-              variant="interactive"
-              className="p-4 cursor-pointer"
-              onClick={() => window.open('https://apps.drjforrest.com', '_blank')}
-            >
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="p-3 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <PenLine className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Interactive Tools</h3>
-                  <p className="text-sm text-muted-foreground">Try out our quiz game and citation builder applications</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card
-              variant="interactive"
-              className="p-4 cursor-pointer"
-              onClick={() => window.open('https://blog.drjforrest.com', '_blank')}
-            >
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="p-3 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Globe className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Technical Blog</h3>
-                  <p className="text-sm text-muted-foreground">Read about Digital Development in the Age of AI in Africa</p>
-                </div>
-              </div>
-            </Card>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="h-16 px-8 text-lg"
+                onClick={() => window.open('https://blog.drjforrest.com', '_blank')}
+              >
+                <BookText className="mr-2 h-5 w-5" />
+                Read Blog
+              </Button>
+            </motion.div>
           </div>
         </motion.div>
       </div>

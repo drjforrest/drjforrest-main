@@ -10,11 +10,12 @@
     "clean": "rm -rf .next node_modules package-lock.json && npm cache clean --force && npm install"
   },
   "dependencies": {
+    "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-tabs": "1.0.4",
     "@types/nodemailer": "6.4.14",
     "bad-words": "3.0.4",
     "class-variance-authority": "0.7.0",
-    "clsx": "2.0.0",
+    "clsx": "^2.0.0",
     "framer-motion": "10.16.4",
     "limiter": "2.1.0",
     "lucide-react": "0.294.0",
@@ -24,7 +25,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "recharts": "2.10.3",
-    "tailwind-merge": "2.1.0",
+    "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {

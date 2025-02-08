@@ -6,10 +6,10 @@
   :root {
     --background: 244 241 222;   /* Ivory */
     --foreground: 43 45 66;      /* Charcoal */
-    --primary: 79 70 229;        /* Indigo */
-    --accent: 245 158 11;        /* Amber */
-    --success: 16 185 129;       /* Teal */
-    --muted: 112 66 20;          /* Earth Brown */
+    --primary: 26 58 92;         /* Deep navy */
+    --accent: 114 83 52;         /* Rich bronze */
+    --success: 42 157 143;       /* Emerald */
+    --muted: 112 66 20;          /* Warm brown */
     
     --surface: 244 241 222;
     --surface-muted: 236 233 214;
@@ -20,10 +20,10 @@
   .dark {
     --background: 43 45 66;      /* Charcoal */
     --foreground: 244 241 222;   /* Ivory */
-    --primary: 16 185 129;       /* Teal */
-    --accent: 245 158 11;        /* Amber */
-    --success: 79 70 229;        /* Indigo */
-    --muted: 112 66 20;          /* Earth Brown */
+    --primary: 42 157 143;       /* Emerald */
+    --accent: 114 83 52;         /* Bronze */
+    --success: 26 58 92;         /* Navy */
+    --muted: 112 66 20;          /* Warm brown */
     
     --surface: 43 45 66;
     --surface-muted: 35 37 58;
@@ -58,7 +58,7 @@
   .card {
     @apply bg-surface rounded-lg shadow-md 
            transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg
-           border border-foreground/10;
+           border border-foreground/5;
   }
 
   .button {

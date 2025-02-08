@@ -12,7 +12,7 @@ export const projects = [
     citationCount: 45
   },
   {
-    title: "Global Fund Program Evaluations",
+    title: "Global Fund Program Evaluations", // TODO: Add thumbnail
     period: "2016 - 2018",
     paperThumbnail: "/projects/global-fund.png",
     description: "Co-led comprehensive evaluations of HIV, TB, and Malaria program service delivery in Guyana, Haiti, and Cameroon, focusing on key population access and program effectiveness.",

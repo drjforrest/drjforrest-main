@@ -9,20 +9,17 @@ interface TimelineProps {
 }
 
 export function Timeline({ data }: TimelineProps) {
-  // Process data in chronological order from 2011 to present
   const chartData = data
     .filter(d => parseInt(d.year) >= 2011)
     .slice()
     .reverse();
     
-  // Calculate cumulative totals
   const processedData = chartData.reduce((acc, curr, idx) => {
     const prevTotal = idx > 0 ? acc[idx - 1].total : 0;
     return [...acc, {
       year: curr.year,
       papers: curr.count,
       total: prevTotal + curr.count,
-      // Add a smoothed trend line for annual papers
       trend: Math.max(
         curr.count,
         idx > 0 ? (acc[idx - 1].papers + curr.count) / 2 : curr.count
@@ -31,7 +28,7 @@ export function Timeline({ data }: TimelineProps) {
   }, [] as Array<{ year: string; papers: number; total: number; trend: number }>);
 
   return (
-    <Card className="bg-background">
+    <Card className="bg-card">
       <CardContent className="pt-6">
         <div className="h-[350px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -39,29 +36,26 @@ export function Timeline({ data }: TimelineProps) {
               data={processedData}
               margin={{ top: 10, right: 10, left: 50, bottom: 0 }}
             >
-              {/* Subtle grid lines */}
               <CartesianGrid 
                 strokeDasharray="3 3" 
                 vertical={false}
-                stroke="#666"
-                opacity={0.1}
+                stroke="var(--foreground)"
+                opacity={0.05}
               />
               
-              {/* X-Axis (Years) */}
               <XAxis 
                 dataKey="year" 
-                stroke="#666"
+                stroke="var(--foreground)"
                 fontSize={12}
                 tickLine={false}
                 axisLine={{ strokeWidth: 1 }}
                 dy={10}
               />
               
-              {/* Right Y-Axis (Total Publications) - Now primary */}
               <YAxis 
                 yAxisId="total"
                 orientation="right"
-                stroke="#666"
+                stroke="var(--foreground)"
                 fontSize={12}
                 tickLine={false}
                 axisLine={{ strokeWidth: 1 }}
@@ -71,16 +65,15 @@ export function Timeline({ data }: TimelineProps) {
                   value: 'Total Publications', 
                   angle: 90, 
                   position: 'insideRight',
-                  style: { fill: '#666', fontSize: 12 },
+                  style: { fill: 'var(--foreground)', fontSize: 12 },
                   offset: 0
                 }}
               />
               
-              {/* Left Y-Axis (Publications per Year) - Now secondary */}
               <YAxis 
                 yAxisId="annual"
                 orientation="left"
-                stroke="#666"
+                stroke="var(--foreground)"
                 fontSize={12}
                 tickLine={false}
                 axisLine={{ strokeWidth: 1 }}
@@ -90,19 +83,18 @@ export function Timeline({ data }: TimelineProps) {
                   value: 'Publications per Year', 
                   angle: -90, 
                   position: 'insideLeft',
-                  style: { fill: '#666', fontSize: 12 },
-                  offset: 0
+                  style: { fill: 'var(--foreground)', fontSize: 12 },
+                  offset: 0,
+                  dy: 50
                 }}
               />
               
-              {/* Simple tooltip */}
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
+                  backgroundColor: 'var(--background)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '8px',
                   fontSize: '12px',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                 }}
                 formatter={(value: number, name: string) => [
                   `${value}`,
@@ -110,38 +102,31 @@ export function Timeline({ data }: TimelineProps) {
                 ]}
               />
               
-              {/* Area for cumulative total - prominent */}
+              {/* Area chart for cumulative total */}
               <Area
                 yAxisId="total"
                 type="monotone"
                 dataKey="total"
                 name="total"
-                stroke="rgb(214, 40, 40)"
-                fill="rgba(214, 40, 40, 0.15)"
+                stroke="rgb(var(--primary))"
+                fill="rgb(var(--primary))"
+                fillOpacity={0.15}
                 strokeWidth={2}
-                dot={{ r: 3, fill: "rgb(214, 40, 40)" }}
-                activeDot={{ r: 4, fill: "rgb(214, 40, 40)" }}
+                dot={{ r: 3, fill: "rgb(var(--primary))" }}
+                activeDot={{ r: 4, fill: "rgb(var(--primary))" }}
               />
               
-              {/* Smoothed trend line - very muted */}
-              <Line
-                yAxisId="annual"
-                type="monotone"
-                dataKey="trend"
-                name="papers"
-                stroke="rgba(26, 58, 92, 0.3)"
-                strokeWidth={1}
-                dot={{ r: 2, fill: "rgba(26, 58, 92, 0.3)" }}
-                activeDot={{ r: 3, fill: "rgba(26, 58, 92, 0.5)" }}
-              />
-              
-              {/* Actual annual papers - extremely subtle dots */}
+              {/* Line for annual papers */}
               <Line
                 yAxisId="annual"
                 type="monotone"
                 dataKey="papers"
-                stroke="none"
-                dot={{ r: 1, fill: "rgba(26, 58, 92, 0.1)" }}
+                name="papers"
+                stroke="rgb(var(--accent))"
+                strokeWidth={2}
+                strokeOpacity={0.6}
+                dot={{ r: 2, fill: "rgb(var(--accent))", fillOpacity: 0.6 }}
+                activeDot={{ r: 3, fill: "rgb(var(--accent))", fillOpacity: 0.8 }}
               />
             </ComposedChart>
           </ResponsiveContainer>
