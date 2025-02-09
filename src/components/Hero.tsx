@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PenLine, LineChart, Globe, Code2, BookText } from 'lucide-react';
+import { PenLine, LineChart, Globe, Code2, Book } from 'lucide-react';
 import { Button } from './ui/button';
 
 export function Hero() {
@@ -78,7 +78,7 @@ export function Hero() {
                 className="h-14 px-8 text-lg border-primary/20 hover:bg-primary/5"
                 onClick={() => window.open('https://blog.drjforrest.com', '_blank')}
               >
-                <BookText className="mr-2 h-6 w-6" />
+                <Book className="mr-2 h-6 w-6" />
                 Read Blog
               </Button>
             </motion.div>
