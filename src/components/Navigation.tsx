@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './theme/theme-toggle';
-import { LineChart, FileText, Grid2X2, Menu, X, BookOpen } from "lucide-react";
+import { LineChart, FileText, LayoutGrid, Menu, X, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Navigation() {
@@ -23,7 +23,7 @@ export function Navigation() {
 
   const navLinks = [
     { href: 'https://blog.drjforrest.com', icon: FileText, label: 'Blog', external: true },
-    { href: 'https://apps.drjforrest.com', icon: Grid2X2, label: 'Apps', external: true },
+    { href: 'https://apps.drjforrest.com', icon: LayoutGrid, label: 'Apps', external: true },
     { href: '/#contact', icon: BookOpen, label: 'Contact' }
   ];
 
