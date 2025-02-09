@@ -14,7 +14,7 @@ const RSSFeed: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/rss")
+    fetch("https://www.inoreader.com/stream/user/1005214099/tag/drjforrest.com")
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch RSS feed');
         return res.json();
