@@ -1,90 +1,79 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss"
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
-  darkMode: 'class',
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
       colors: {
-        background: 'rgb(var(--background))',
-        foreground: 'rgb(var(--foreground))',
-        primary: 'rgb(var(--primary))',
-        accent: 'rgb(var(--accent))',
-        success: 'rgb(var(--success))',
-        muted: 'rgb(var(--muted))',
-        surface: {
-          DEFAULT: 'rgb(var(--surface))',
-          muted: 'rgb(var(--surface-muted))',
-          elevated: 'rgb(var(--surface-elevated))',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
-        border: 'rgb(var(--border))',
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-out',
-        'slide-up': 'slideUp 0.5s ease-out',
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(10px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: 'rgb(var(--foreground))',
-            a: {
-              color: 'rgb(var(--primary))',
-              '&:hover': {
-                color: 'rgb(var(--primary) / 0.8)',
-              },
-            },
-            h1: {
-              color: 'rgb(var(--foreground))',
-            },
-            h2: {
-              color: 'rgb(var(--foreground))',
-            },
-            h3: {
-              color: 'rgb(var(--foreground))',
-            },
-            h4: {
-              color: 'rgb(var(--foreground))',
-            },
-            blockquote: {
-              color: 'rgb(var(--foreground) / 0.8)',
-              borderLeftColor: 'rgb(var(--primary) / 0.2)',
-            },
-            code: {
-              color: 'rgb(var(--foreground))',
-            },
-            'code::before': {
-              content: '""',
-            },
-            'code::after': {
-              content: '""',
-            },
-            pre: {
-              backgroundColor: 'rgb(var(--muted) / 0.1)',
-            },
-          },
-        },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require("tailwindcss-animate")],
 }
 
 export default config
