@@ -45,7 +45,7 @@ export default function Home() {
             <a 
               href="/cv.pdf" 
               download 
-              className="px-6 py-3 text-lg font-semibold bg-primary text-white rounded-2xl shadow-md hover:bg-primary/80 transition"
+              className="px-6 py-3 text-lg font-semibold bg-primary !text-white rounded-2xl shadow-md hover:bg-primary/80 hover:text-white transition-all"
             >
               Download CV
             </a>
