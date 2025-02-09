@@ -50,26 +50,27 @@ export const positionData: Position[] = [
     ]
   },
   {
-    title: "Research Associaate",
+    title: "Research Associate",
     organization: "Global Evaluative Sciences",
     location: "Vancouver, Canada",
     period: "2015 - 2017",
-    description: "Supported an adnaced statistical methods team in technical writing and scientific communication for health economics and outcomes research.",
+    description: "Supported an advanced statistical methods team in technical writing and scientific communication for health economics and outcomes research.",
     achievements: [
-      "LDeveloped the report synthesizing available evidence nto inform the WHO HIV Treatment Guidelines",
+      "Developed the report synthesizing available evidence to inform the WHO HIV Treatment Guidelines",
+      "Led statistical analysis for multiple systematic reviews",
+      "Contributed to health economics research initiatives"
     ]
   },
   {
     title: "Research Coordinator",
     organization: "BC Centre for Excellence in HIV/AIDS",
     location: "Vancouver, Canada",
-    period: "2010- 2015",
-    description: "SManaged the research operations of a large clinical and socio-behavioural study on the healkth of gay and bisexual nmen",
+    period: "2010 - 2015",
+    description: "Managed the research operations of a large clinical and socio-behavioural study on the health of gay and bisexual men.",
     achievements: [
       "Established and managed the study clinic and staff",
       "Led writing and implementation of Standard Operating Procedures",
-      "Co-authored several manuscripts and developed an independent research aim exploring shealth outcomes of ocial netwrking that would become the foundation of my doctoral studies"
+      "Co-authored several manuscripts and developed an independent research aim exploring health outcomes of social networking that would become the foundation of my doctoral studies"
     ]
   }
-
 ];
