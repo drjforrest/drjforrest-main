@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, ComposedChart } from 'recharts';
 import { motion } from 'framer-motion';
 
@@ -12,26 +12,56 @@ const Legend = ({ color, label }: { color: string; label: string }) => (
 );
 
 export function Timeline() {
-  // Sample data - replace with your actual data
-  const data = Array.from({ length: 13 }, (_, i) => {
-    const year = 2011 + i;
-    return {
-      year: year.toString(),
-      papers: Math.floor(Math.random() * 8),
-      total: 0  // Will be calculated
-    };
-  }).reduce((acc, curr, idx) => {
+  const [showAnnual, setShowAnnual] = useState(false);
+
+  const yearlyData = [
+    { year: '2009', papers: 1 },
+    { year: '2010', papers: 0 },
+    { year: '2011', papers: 1 },
+    { year: '2012', papers: 2 },
+    { year: '2013', papers: 2 },
+    { year: '2014', papers: 7 },
+    { year: '2015', papers: 6 },
+    { year: '2016', papers: 5 },
+    { year: '2017', papers: 4 },
+    { year: '2018', papers: 3 },
+    { year: '2019', papers: 1 },
+    { year: '2020', papers: 3 },
+    { year: '2021', papers: 5 },
+    { year: '2022', papers: 9 },
+    { year: '2023', papers: 2 },
+    { year: '2024', papers: 2 }
+  ];
+
+  // Calculate cumulative total
+  const data = yearlyData.reduce((acc, curr, idx) => {
     const prevTotal = idx > 0 ? acc[idx - 1].total : 0;
-    curr.total = prevTotal + curr.papers;
-    return [...acc, curr];
+    return [...acc, {
+      ...curr,
+      total: prevTotal + curr.papers
+    }];
   }, [] as any[]);
+
+  // Find max values for axis ranges
+  const maxPapers = Math.max(...data.map(d => d.papers));
+  const maxTotal = Math.max(...data.map(d => d.total));
 
   return (
     <div className="space-y-6">
-      {/* Legend */}
-      <div className="flex justify-center gap-8">
-        <Legend color="bg-primary/80" label="Cumulative Publications" />
-        <Legend color="bg-accent/20" label="Publications per Year" />
+      {/* Toggle and Legend */}
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex items-center gap-8">
+          <Legend color="bg-primary/80" label="Cumulative Publications" />
+          {showAnnual && (
+            <Legend color="bg-accent/20" label="Publications per Year" />
+          )}
+        </div>
+        <button
+          onClick={() => setShowAnnual(!showAnnual)}
+          className="px-4 py-2 text-sm rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+        >
+          {showAnnual ? 'Hide' : 'Show'} annual publication count
+        </button>
       </div>
       
       {/* Chart */}
@@ -59,20 +89,22 @@ export function Timeline() {
               fontSize={12}
               tickLine={false}
               axisLine={{ strokeWidth: 1, stroke: 'var(--primary)', opacity: 0.2 }}
-              domain={[0, 60]}
-              ticks={[0, 15, 30, 45, 60]}
+              domain={[0, Math.ceil(maxTotal / 10) * 10]}
+              ticks={Array.from({ length: 6 }, (_, i) => Math.ceil(maxTotal / 5) * i)}
             />
             
-            <YAxis 
-              yAxisId="annual"
-              orientation="left"
-              stroke="var(--foreground)"
-              fontSize={12}
-              tickLine={false}
-              axisLine={{ strokeWidth: 1, stroke: 'var(--primary)', opacity: 0.2 }}
-              domain={[0, 8]}
-              ticks={[0, 2, 4, 6, 8]}
-            />
+            {showAnnual && (
+              <YAxis 
+                yAxisId="annual"
+                orientation="left"
+                stroke="var(--foreground)"
+                fontSize={12}
+                tickLine={false}
+                axisLine={{ strokeWidth: 1, stroke: 'var(--primary)', opacity: 0.2 }}
+                domain={[0, Math.ceil(maxPapers / 5) * 5]}
+                ticks={Array.from({ length: 6 }, (_, i) => Math.ceil(maxPapers / 5) * i)}
+              />
+            )}
             
             <Tooltip 
               contentStyle={{ 
@@ -88,18 +120,20 @@ export function Timeline() {
               ]}
             />
             
-            {/* Line for annual papers - now behind the area */}
-            <Line
-              yAxisId="annual"
-              type="monotone"
-              dataKey="papers"
-              name="papers"
-              stroke="rgb(var(--accent))"
-              strokeWidth={2}
-              strokeOpacity={0.2}
-              dot={{ r: 2, fill: "rgb(var(--accent))", fillOpacity: 0.2 }}
-              activeDot={{ r: 3, fill: "rgb(var(--accent))", fillOpacity: 0.4 }}
-            />
+            {/* Line for annual papers - only shown when toggle is on */}
+            {showAnnual && (
+              <Line
+                yAxisId="annual"
+                type="monotone"
+                dataKey="papers"
+                name="papers"
+                stroke="rgb(var(--accent))"
+                strokeWidth={2}
+                strokeOpacity={0.2}
+                dot={{ r: 2, fill: "rgb(var(--accent))", fillOpacity: 0.2 }}
+                activeDot={{ r: 3, fill: "rgb(var(--accent))", fillOpacity: 0.4 }}
+              />
+            )}
             
             {/* Area chart for cumulative total */}
             <Area
@@ -120,7 +154,7 @@ export function Timeline() {
 
       {/* Year Range Indicator */}
       <div className="text-center text-sm text-foreground/60">
-        Publication data from 2011 to 2023
+        Publication data from 2009 to 2024
       </div>
     </div>
   );

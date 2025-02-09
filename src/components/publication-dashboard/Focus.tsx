@@ -5,30 +5,30 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { motion } from 'framer-motion';
 
 const focusData = [
+  { name: 'HIV/AIDS', papers: 20 },
   { name: 'Clinical Trials', papers: 15 },
-  { name: 'Global Health', papers: 12 },
-  { name: 'Data Science', papers: 10 },
-  { name: 'Health Systems', papers: 8 },
-  { name: 'Other', papers: 5 }
+  { name: 'COVID-19', papers: 12 },
+  { name: 'Public Health', papers: 5 },
+  { name: 'Other', papers: 2 }
+];
+
+const COLORS = [
+  'rgb(var(--primary))',    // Main theme color
+  'rgb(var(--accent))',     // Accent color
+  'rgb(var(--success))',    // Success color
+  'rgb(var(--muted))',      // Muted color
+  'rgb(var(--neutral))'     // Neutral color
 ];
 
 export function Focus() {
-  const pieData = focusData.map((item, index) => ({
-    ...item,
-    opacity: 1 - (index * 0.15)
-  }));
-
   return (
     <div className="space-y-8">
       <div className="flex justify-center flex-wrap gap-6">
-        {pieData.map(({ name, papers, opacity }, index) => (
+        {focusData.map(({ name, papers }, index) => (
           <div key={name} className="flex items-center gap-2">
             <div 
               className="w-3 h-3 rounded-full" 
-              style={{ 
-                backgroundColor: `rgb(var(--primary))`,
-                opacity 
-              }} 
+              style={{ backgroundColor: COLORS[index] }} 
             />
             <span className="text-sm text-foreground/70">
               {name} ({papers})
@@ -41,7 +41,7 @@ export function Focus() {
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={pieData}
+              data={focusData}
               cx="50%"
               cy="50%"
               innerRadius={80}
@@ -49,11 +49,10 @@ export function Focus() {
               paddingAngle={2}
               dataKey="papers"
             >
-              {pieData.map((entry, index) => (
+              {focusData.map((entry, index) => (
                 <Cell 
                   key={entry.name}
-                  fill="rgb(var(--primary))"
-                  opacity={entry.opacity}
+                  fill={COLORS[index]}
                 />
               ))}
             </Pie>

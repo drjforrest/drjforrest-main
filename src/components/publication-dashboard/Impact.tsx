@@ -5,11 +5,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { motion } from 'framer-motion';
 
 const journalData = [
-  { name: 'Nature Medicine', count: 2, tier: 'Highest Impact' },
-  { name: 'The Lancet Regional Health', count: 3, tier: 'High Impact' },
-  { name: 'Clinical Infectious Diseases', count: 4, tier: 'High Impact' },
-  { name: 'JMIR Public Health', count: 5, tier: 'Peer Reviewed' },
-  { name: 'BMC Public Health', count: 6, tier: 'Peer Reviewed' }
+  { name: 'N Engl J Med', count: 2, tier: 'Highest Impact' },
+  { name: 'Lancet Global Health', count: 2, tier: 'Highest Impact' },
+  { name: 'Lancet HIV', count: 5, tier: 'High Impact' },
+  { name: 'Am J Trop Med Hyg', count: 5, tier: 'High Impact' },
+  { name: 'JAMA Netw Open', count: 2, tier: 'High Impact' }
 ];
 
 export function Impact() {
@@ -46,7 +46,7 @@ export function Impact() {
           <BarChart
             data={chartData}
             margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            barSize={40}
+            barSize={60}
           >
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--primary)" opacity={0.1} />
             <XAxis
