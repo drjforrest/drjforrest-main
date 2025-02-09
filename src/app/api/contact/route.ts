@@ -1,101 +1,39 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { 
-  checkRateLimit, 
-  validateEmail, 
-  validateMessage,
-  getClientIp 
-} from '@/lib/contact-protection';
-
-// Create transporter outside of the handler to reuse the connection
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.SMTP_EMAIL,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
 
 export async function POST(request: Request) {
   try {
-    // Get client IP and check rate limit
-    const clientIp = await getClientIp(); // Await the promise here
-    const isWithinLimit = await checkRateLimit(clientIp);
+    const body = await request.json();
     
-    if (!isWithinLimit) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
-    }
+    // Configure nodemailer with your email service
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',  // or your preferred email service
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
 
-    // Parse the request body
-    const { name, email, subject, message } = await request.json();
-
-    // Email validation
-    if (!validateEmail(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
-    }
-
-    // Message validation
-    const messageValidation = validateMessage(message);
-    if (!messageValidation.isValid) {
-      return NextResponse.json(
-        { error: messageValidation.error },
-        { status: 400 }
-      );
-    }
-
-    // Email content formatting
+    // Setup email data
     const mailOptions = {
-      from: process.env.SMTP_EMAIL,
-      to: process.env.SMTP_EMAIL,
-      subject: `Contact Form: ${subject}`,
-      replyTo: email,
+      from: process.env.EMAIL_USER,
+      to: process.env.CONTACT_EMAIL,
+      subject: `Contact Form: ${body.subject}`,
       text: `
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
-IP Address: ${clientIp}
-
-Message:
-${message}
-      `,
-      html: `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-  <h2 style="color: #333;">New Contact Form Submission</h2>
-  <p><strong>From:</strong> ${name}</p>
-  <p><strong>Email:</strong> ${email}</p>
-  <p><strong>Subject:</strong> ${subject}</p>
-  <p><strong>IP Address:</strong> ${clientIp}</p>
-  <div style="margin-top: 20px;">
-    <h3 style="color: #555;">Message:</h3>
-    <p style="white-space: pre-wrap;">${message}</p>
-  </div>
-</div>
+        Name: ${body.name}
+        Email: ${body.email}
+        Message: ${body.message}
       `
     };
 
     // Send email
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { message: 'Message sent successfully' },
-      { 
-        status: 200,
-        headers: {
-          'X-RateLimit-Remaining': '5',
-          'X-RateLimit-Reset': '3600'
-        }
-      }
-    );
+    return NextResponse.json({ message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error('Error sending email:', error);
     return NextResponse.json(
-      { error: 'Failed to send message' },
+      { error: 'Failed to send email' },
       { status: 500 }
     );
   }
