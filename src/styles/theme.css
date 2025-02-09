@@ -2,33 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Light mode */
-  --background: 244 241 222;  /* Ivory */
-  --foreground: 43 45 66;     /* Charcoal */
-  --primary: 26 58 92;        /* Deep navy */
-  --accent: 214 40 40;        /* Crimson */
-  --success: 42 157 143;      /* Emerald */
-  --muted: 112 66 20;         /* Earth brown */
-}
-
-.dark {
-  --background: 43 45 66;     /* Charcoal */
-  --foreground: 244 241 222;  /* Ivory */
-  --primary: 42 157 143;      /* Emerald */
-  --accent: 214 40 40;        /* Crimson */
-  --success: 26 58 92;        /* Navy */
-  --muted: 112 66 20;         /* Earth brown */
-}
-
 @layer base {
-  body {
-    @apply bg-background text-foreground;
-  }
-
   :root {
+    /* Base colors */
+    --background: 244 241 222;   /* Ivory */
+    --foreground: 43 45 66;      /* Charcoal */
+    --primary: 26 58 92;         /* Deep navy */
+    --accent: 114 83 52;         /* Rich bronze */
+    --success: 42 157 143;       /* Emerald */
+    --muted: 112 66 20;          /* Warm brown */
+    
+    /* Surface colors */
+    --surface: 244 241 222;      /* Same as background */
+    --surface-muted: 236 233 214;
+    --surface-elevated: 248 245 226;
+    
+    /* Text variations */
     --text-primary: var(--primary);
     --text-muted: rgb(var(--foreground) / 0.8);
     --text-subtle: rgb(var(--foreground) / 0.6);
+  }
+
+  .dark {
+    /* Base colors */
+    --background: 43 45 66;      /* Charcoal */
+    --foreground: 244 241 222;   /* Ivory */
+    --primary: 42 157 143;       /* Emerald */
+    --accent: 114 83 52;         /* Bronze */
+    --success: 26 58 92;         /* Navy */
+    --muted: 112 66 20;          /* Warm brown */
+    
+    /* Surface colors */
+    --surface: 43 45 66;         /* Same as background */
+    --surface-muted: 35 37 58;
+    --surface-elevated: 51 53 74;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
   }
 }

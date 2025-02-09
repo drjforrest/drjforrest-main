@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export function CareerTimeline() {
   return (
-    <div className="relative">
+    <div className="relative container mx-auto px-4">
       {/* Vertical Line - Now Uses Deep Navy */}
       <div 
         className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px]" 

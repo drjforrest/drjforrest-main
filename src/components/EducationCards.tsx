@@ -29,7 +29,8 @@ export function EducationCards() {
   };
 
   return (
-    <div className="space-y-8">
+    <section className="relative container mx-auto px-4 py-12">
+      <div className="space-y-8">
       {/* Education Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {educationData.map((edu, index) => (
@@ -162,6 +163,7 @@ export function EducationCards() {
           </Card>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </section>
   );
 }

@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Linkedin, Github, Send, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { trackFormSubmission, trackExternalLink } from '@/lib/analytics';
-import { SectionTitle } from "@/components/ui/section-title";
 
 interface FormData {
   [key: string]: string;
@@ -63,7 +62,6 @@ export function ContactForm() {
 
   return (
     <section className="py-20">
-      <SectionTitle>Get in Touch</SectionTitle>
       <div className="container px-4">
         <motion.div 
           className="max-w-5xl mx-auto"

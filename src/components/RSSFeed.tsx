@@ -1,5 +1,8 @@
+'use client';
+
 import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Rss } from "lucide-react";
 
 interface Article {
   title: string;
@@ -8,62 +11,71 @@ interface Article {
   pubDate: string;
 }
 
-const RSSFeed: React.FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export function RSSFeed() {
+  const [interests, setInterests] = useState<string[]>([]);
+
+  // Set default interests immediately
+  const defaultInterests = [
+    "#Automation",
+    "#AI",
+    "#Photography",
+    "#Travel",
+    "#CanadianPolitics"
+  ];
 
   useEffect(() => {
-    fetch("https://www.inoreader.com/stream/user/1005214099/tag/drjforrest.com")
+    // Set default interests first
+    setInterests(defaultInterests);
+
+    // Then try to fetch from API
+    fetch("/api/rss?format=json")
       .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch RSS feed');
+        console.log("RSS API Response:", res.status);
         return res.json();
       })
       .then((data: Article[]) => {
-        setArticles(data);
-        setIsLoading(false);
+        console.log("RSS API Data:", data);
+        if (data[0]?.description) {
+          const tags = data[0].description.split(" ").filter(tag => tag.startsWith("#"));
+          console.log("Parsed Tags:", tags);
+          if (tags.length > 0) {
+            setInterests(tags);
+          }
+        }
       })
       .catch((err) => {
-        console.error("Error fetching RSS:", err);
-        setError(err.message);
-        setIsLoading(false);
+        console.error("Error fetching interests:", err);
       });
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="p-6 text-center">
-        <p>Loading articles...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="p-6 text-center text-red-500">
-        <p>Error loading articles: {error}</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Latest Articles</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {articles.map((article, index) => (
-          <Card
-            key={index}
-            onClick={() => window.open(article.link, "_blank")}
-            className="p-4 cursor-pointer hover:bg-muted/50 transition-all"
+    <div className="w-full max-w-6xl mx-auto">
+      <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {interests.map((tag, index) => (
+            <span
+              key={index}
+              className="px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-default text-lg font-medium"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="flex flex-col items-center gap-4">
+          <Button
+            variant="outline"
+            size="lg"
+            className="flex items-center gap-2 hover:bg-primary/10"
+            onClick={() => window.open("/api/rss", "_blank")}
           >
-            <h3 className="text-lg font-semibold">{article.title}</h3>
-            <p className="text-sm text-muted-foreground">{article.pubDate}</p>
-            <p className="text-foreground/80 mt-2 line-clamp-3">{article.description}</p>
-          </Card>
-        ))}
+            <Rss className="w-5 h-5" />
+            Subscribe to RSS Feed
+          </Button>
+          <p className="text-sm text-muted-foreground">
+            Stay updated with my latest interests and activities
+          </p>
+        </div>
       </div>
     </div>
   );
-};
-
-export default RSSFeed;
+}

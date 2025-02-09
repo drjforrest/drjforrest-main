@@ -2,18 +2,13 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { FileText, TrendingUp, Globe, Award } from 'lucide-react';
-
-// You'll need to update these imports with your actual data files
-import { publicationTimelineData } from '@/data/publication-timeline';
-import { journalImpactData } from '@/data/journal-impact';
-import { researchFocusData } from '@/data/research-focus';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export function ResearchImpactDashboard() {
   return (
-    <div className="space-y-6">
+    <section className="relative">
+      <div className="container mx-auto px-4 py-12 space-y-6">
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
@@ -98,6 +93,7 @@ export function ResearchImpactDashboard() {
           </ScrollArea>
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </section>
   );
 }

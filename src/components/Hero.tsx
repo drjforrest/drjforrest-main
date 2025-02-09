@@ -11,7 +11,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center z-0">
+    <section className="relative min-h-[70vh] flex items-center justify-center z-0 pt-16">
       <div className="container mx-auto px-4 py-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -25,9 +25,9 @@ export function Hero() {
 
           <div className="flex justify-center gap-8">
             {[
-              { icon: PenLine, text: "Technical writing & scientific communication", color: "var(--primary)" },
-              { icon: LineChart, text: "Data-driven results monitoring and evaluation", color: "var(--accent)" },
-              { icon: Globe, text: "Global Impact from networked partnerships", color: "var(--success)" }
+              { icon: PenLine, text: "Technical Writing & Communication", color: "var(--primary)" },
+              { icon: LineChart, text: "Data-driven Monitoring & Evaluation", color: "var(--accent)" },
+              { icon: Globe, text: "Global Collaboration with Local Impact", color: "var(--success)" }
             ].map(({ icon: Icon, text, color }, index) => (
               <motion.div
                 key={text}
