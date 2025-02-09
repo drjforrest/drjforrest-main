@@ -8,10 +8,12 @@ import { motion } from 'framer-motion';
 export function CareerTimeline() {
   return (
     <div className="relative">
-      {/* Vertical line */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-accent/60" 
-           style={{ zIndex: 0 }} />
-      
+      {/* Vertical Line - Now Uses Deep Navy */}
+      <div 
+        className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px]" 
+        style={{ backgroundColor: "rgb(var(--primary))", zIndex: 0 }} 
+      />
+
       <div className="space-y-12">
         {positionData.map((position, index) => (
           <div
@@ -51,16 +53,19 @@ export function CareerTimeline() {
               </motion.div>
             </div>
 
-            {/* Center dot */}
+            {/* Center Dot - Now Uses Rich Bronze */}
             <motion.div 
-              className="w-4 h-4 bg-primary rounded-full relative shadow-md"
-              style={{ zIndex: 2 }}
+              className="w-4 h-4 rounded-full relative shadow-md"
+              style={{ backgroundColor: "rgb(var(--accent))", zIndex: 2 }}
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.2 }}
             >
-              <div className="w-8 h-8 bg-primary/20 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+              <div 
+                className="w-8 h-8 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse"
+                style={{ backgroundColor: "rgba(var(--accent), 0.2)" }} /* Faded accent for glow effect */
+              />
             </motion.div>
 
             {/* Empty space for alternating layout */}

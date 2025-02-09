@@ -5,43 +5,53 @@ import { PenLine, LineChart, Globe, Code2, BookText } from 'lucide-react';
 import { Button } from './ui/button';
 
 export function Hero() {
+  const iconMotion = {
+    rest: { scale: 1 },
+    hover: { scale: 1.1 }
+  };
+
   return (
-    <section className="relative min-h-[calc(100vh-3rem)] flex items-center justify-center z-0">
-      <div className="container mx-auto px-4 py-16 relative z-10">
+    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center z-0">
+      <div className="container mx-auto px-4 py-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-4xl mx-auto text-center space-y-16"
         >
-          <motion.div 
-            className="flex items-center justify-center gap-4 mb-12"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="p-4 bg-primary/10 rounded-2xl">
-              <PenLine className="w-10 h-10 text-primary" />
-            </div>
-            <div className="p-4 bg-accent/10 rounded-2xl">
-              <LineChart className="w-10 h-10 text-accent" />
-            </div>
-            <div className="p-4 bg-success/10 rounded-2xl">
-              <Globe className="w-10 h-10 text-success" />
-            </div>
-          </motion.div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
             Innovative Global Health Solutions
           </h1>
+
+          <div className="flex justify-center gap-8">
+            {[
+              { icon: PenLine, text: "Technical writing & scientific communication", color: "var(--primary)" },
+              { icon: LineChart, text: "Data-driven results monitoring and evaluation", color: "var(--accent)" },
+              { icon: Globe, text: "Global Impact from networked partnerships", color: "var(--success)" }
+            ].map(({ icon: Icon, text, color }, index) => (
+              <motion.div
+                key={text}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+                variants={iconMotion}
+                className="flex flex-col items-center gap-3"
+              >
+                <div className="p-5 bg-background/80 backdrop-blur-sm shadow-lg rounded-2xl">
+                  <Icon className="w-8 h-8" style={{ color: `rgb(${color})` }} />
+                </div>
+                <span className="text-sm font-medium text-foreground/70">{text}</span>
+              </motion.div>
+            ))}
+          </div>
           
-          <div className="space-y-3 text-xl text-muted-foreground max-w-3xl mx-auto">
-            <p>Transforming complex health research into actionable insights</p>
-            <p>Driving evidence-based decisions through data analytics</p>
-            <p>Building sustainable partnerships across global health ecosystems</p>
+          <div className="space-y-4">
+            <p className="text-lg text-foreground/80">Transforming complex health research into actionable insights</p>
+            <p className="text-lg text-foreground/80">Driving evidence-based decisions through data analytics</p>
+            <p className="text-lg text-foreground/80">Building sustainable partnerships across global health ecosystems</p>
           </div>
 
-          <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 pt-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -50,10 +60,10 @@ export function Hero() {
               <Button 
                 variant="default"
                 size="lg"
-                className="h-16 px-8 text-lg"
+                className="h-14 px-8 text-lg bg-primary hover:bg-primary/90"
                 onClick={() => window.open('https://apps.drjforrest.com', '_blank')}
               >
-                <Code2 className="mr-2 h-5 w-5" />
+                <Code2 className="mr-2 h-6 w-6" />
                 Discover Apps
               </Button>
             </motion.div>
@@ -65,10 +75,10 @@ export function Hero() {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="h-16 px-8 text-lg"
+                className="h-14 px-8 text-lg border-primary/20 hover:bg-primary/5"
                 onClick={() => window.open('https://blog.drjforrest.com', '_blank')}
               >
-                <BookText className="mr-2 h-5 w-5" />
+                <BookText className="mr-2 h-6 w-6" />
                 Read Blog
               </Button>
             </motion.div>

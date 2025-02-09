@@ -48,5 +48,28 @@ export const positionData: Position[] = [
       "Directed medical writing initiatives in East Africa",
       "Managed strategic healthcare initiatives"
     ]
+  },
+  {
+    title: "Research Associaate",
+    organization: "Global Evaluative Sciences",
+    location: "Vancouver, Canada",
+    period: "2015 - 2017",
+    description: "Supported an adnaced statistical methods team in technical writing and scientific communication for health economics and outcomes research.",
+    achievements: [
+      "LDeveloped the report synthesizing available evidence nto inform the WHO HIV Treatment Guidelines",
+    ]
+  },
+  {
+    title: "Research Coordinator",
+    organization: "BC Centre for Excellence in HIV/AIDS",
+    location: "Vancouver, Canada",
+    period: "2010- 2015",
+    description: "SManaged the research operations of a large clinical and socio-behavioural study on the healkth of gay and bisexual nmen",
+    achievements: [
+      "Established and managed the study clinic and staff",
+      "Led writing and implementation of Standard Operating Procedures",
+      "Co-authored several manuscripts and developed an independent research aim exploring shealth outcomes of ocial netwrking that would become the foundation of my doctoral studies"
+    ]
   }
+
 ];

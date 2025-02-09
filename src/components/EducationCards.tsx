@@ -33,33 +33,47 @@ export function EducationCards() {
       {/* Education Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {educationData.map((edu, index) => (
-          <Card key={index} className="bg-card hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <CardTitle className="text-lg font-semibold text-primary">
-                  {edu.degree}
-                </CardTitle>
-                <GraduationCap className="h-5 w-5 text-primary/60" />
-              </div>
-              <CardDescription>
-                {edu.institution}
-                <br />
-                {edu.location} | {edu.period}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p className="text-sm font-medium">Focus: {edu.focus}</p>
-                {edu.thesis && (
-                  <div className="text-sm text-muted-foreground">
-                    <span className="font-medium">Thesis:</span>
-                    <br />
-                    {edu.thesis}
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ y: -4 }}
+          >
+            <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <GraduationCap className="h-5 w-5 text-primary" />
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+                  <div>
+                    <CardTitle className="text-lg font-semibold text-primary">
+                      {edu.degree}
+                    </CardTitle>
+                    <CardDescription>
+                      {edu.institution}
+                      <br />
+                      {edu.location} | {edu.period}
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <p className="text-sm font-medium text-foreground/80">
+                    <span className="text-primary">Focus:</span> {edu.focus}
+                  </p>
+                  {edu.thesis && (
+                    <div className="text-sm text-foreground/70">
+                      <span className="font-medium text-primary">Thesis:</span>
+                      <br />
+                      {edu.thesis}
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
 
@@ -71,30 +85,38 @@ export function EducationCards() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          whileHover={{ y: -4 }}
         >
-          <Card className="bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
             <CardHeader>
-              <div className="flex items-center space-x-2">
-                <Award className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <Award className="h-5 w-5 text-primary" />
+                </div>
                 <CardTitle className="text-lg">Awards</CardTitle>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               {awards.map((award, index) => (
                 <motion.div 
                   key={index} 
-                  className="space-y-1"
+                  className="space-y-2"
                   variants={itemVariants}
                 >
-                  <h4 className="font-medium text-primary">{award.title}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {award.organization} | {award.year}
-                  </p>
-                  {award.description && (
-                    <p className="text-sm text-muted-foreground">
-                      {award.description}
-                    </p>
-                  )}
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
+                    <div>
+                      <h4 className="font-medium text-primary">{award.title}</h4>
+                      <p className="text-sm text-foreground/70">
+                        {award.organization} | {award.year}
+                      </p>
+                      {award.description && (
+                        <p className="text-sm text-foreground/70 mt-1">
+                          {award.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </CardContent>
@@ -107,25 +129,33 @@ export function EducationCards() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          whileHover={{ y: -4 }}
         >
-          <Card className="bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
             <CardHeader>
-              <div className="flex items-center space-x-2">
-                <ScrollText className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <ScrollText className="h-5 w-5 text-primary" />
+                </div>
                 <CardTitle className="text-lg">Certifications</CardTitle>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               {certifications.map((cert, index) => (
                 <motion.div 
                   key={index} 
-                  className="space-y-1"
+                  className="space-y-2"
                   variants={itemVariants}
                 >
-                  <h4 className="font-medium text-primary">{cert.title}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {cert.organization}
-                  </p>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
+                    <div>
+                      <h4 className="font-medium text-primary">{cert.title}</h4>
+                      <p className="text-sm text-foreground/70">
+                        {cert.organization}
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </CardContent>
