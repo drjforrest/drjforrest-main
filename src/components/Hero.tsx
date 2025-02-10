@@ -30,7 +30,7 @@ function IconSquare({
 
 export function Hero() {
   return (
-    <div className="bg-background pt-16">
+    <div className="bg-background pt-16 relative min-h-screen">
       <div className="container mx-auto px-4 py-24 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -90,35 +90,84 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-12 space-y-4 text-lg text-foreground"
+            className="mt-12 space-y-6 text-xl font-medium"
           >
-            <p>Transforming complex health research into actionable insights</p>
-            <p>Driving evidence-based decisions through data analytics</p>
-            <p>Building sustainable partnerships across global health ecosystems</p>
+            <p className="text-foreground/90 leading-relaxed">
+              Bridging health research and real-world impact through clear, compelling communication
+            </p>
+            <p className="text-foreground/90 leading-relaxed">
+              Driving evidence-based decisions through data analytics
+            </p>
+            <p className="text-foreground/90 leading-relaxed">
+              Building sustainable partnerships across global health ecosystems
+            </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-16 flex justify-center gap-4"
+            className="mt-16 flex flex-col items-center gap-8"
           >
-            <Link href="/apps" passHref>
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+            <motion.div 
+              className="flex flex-col items-center gap-3 text-primary"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ 
+                opacity: 1, 
+                y: [0, 10, 0]
+              }}
+              transition={{
+                y: {
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut"
+                }
+              }}
+            >
+              <span className="text-lg font-medium">Discover My Journey</span>
+              <p className="text-sm text-muted-foreground max-w-md">
+                Learn about my experience, research impact, and global health initiatives
+              </p>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="28" 
+                height="28" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="mt-2"
               >
-                Discover Apps
-              </Button>
-            </Link>
-            <Link href="https://blog.drjforrest.com" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="lg"
-              >
-                Read Blog
-              </Button>
-            </Link>
+                <path d="M12 5v14" />
+                <path d="m19 12-7 7-7-7" />
+              </svg>
+            </motion.div>
+
+            <div className="flex flex-col items-center gap-4 mt-8 pt-8 border-t border-muted">
+              <span className="text-sm text-muted-foreground">Also available</span>
+              <div className="flex justify-center gap-4">
+                <Link href="/apps" passHref>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-muted-foreground"
+                  >
+                    Apps
+                  </Button>
+                </Link>
+                <Link href="https://blog.drjforrest.com" target="_blank" rel="noopener noreferrer">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-muted-foreground"
+                  >
+                    Blog
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
