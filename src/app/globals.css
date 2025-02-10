@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --radius: 0.75rem;
     --background: 244 241 222;   /* Ivory */
     --foreground: 43 45 66;      /* Charcoal */
     --primary: 26 58 92;         /* Deep navy */
@@ -83,15 +84,6 @@
 
   .hero-description {
     @apply mt-6 text-lg text-foreground/70 max-w-3xl mx-auto;
-  }
-
-  .icon-banner {
-    @apply flex justify-center gap-16 md:gap-24 py-12;
-  }
-
-  .icon-item {
-    @apply flex flex-col items-center gap-2;
-    @apply p-3 rounded-full bg-primary/10;
   }
 
   .button-group {

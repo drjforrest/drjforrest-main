@@ -11,9 +11,15 @@ const buttonVariants = cva(
       variant: {
         default: [
           'bg-primary',
-          'text-[rgb(244,241,222)]',
+          'text-background',
           'hover:bg-primary/90',
-          'hover:text-[rgb(244,241,222)]',
+          'hover:text-background',
+        ].join(' '),
+        white: [
+          'bg-primary',
+          '[&_*]:text-white',
+          'hover:bg-primary/90',
+          '[&_*]:hover:text-white',
         ].join(' '),
         outline: [
           'border',
