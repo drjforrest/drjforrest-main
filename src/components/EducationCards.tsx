@@ -30,9 +30,9 @@ export function EducationCards() {
 
   return (
     <section className="relative container mx-auto px-4 py-12">
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
       {/* Education Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
         {educationData.map((edu, index) => (
           <motion.div
             key={index}
@@ -42,16 +42,16 @@ export function EducationCards() {
             whileHover={{ y: -4 }}
           >
             <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
+              <CardHeader className="p-4 sm:p-6">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
                     <GraduationCap className="h-5 w-5 text-primary" />
                   </div>
-                  <div>
-                    <CardTitle className="text-lg font-semibold text-primary">
+                  <div className="min-w-0">
+                    <CardTitle className="text-base sm:text-lg font-semibold text-primary break-words">
                       {edu.degree}
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-sm">
                       {edu.institution}
                       <br />
                       {edu.location} | {edu.period}
@@ -59,16 +59,16 @@ export function EducationCards() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 sm:p-6 text-sm">
                 <div className="space-y-3">
-                  <p className="text-sm font-medium text-foreground/80">
+                  <p className="font-medium text-foreground/80">
                     <span className="text-primary">Focus:</span> {edu.focus}
                   </p>
                   {edu.thesis && (
-                    <div className="text-sm text-foreground/70">
+                    <div className="text-foreground/70">
                       <span className="font-medium text-primary">Thesis:</span>
                       <br />
-                      {edu.thesis}
+                      <span className="break-words">{edu.thesis}</span>
                     </div>
                   )}
                 </div>
@@ -79,7 +79,7 @@ export function EducationCards() {
       </div>
 
       {/* Awards and Certifications */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         {/* Awards */}
         <motion.div
           variants={cardVariants}
