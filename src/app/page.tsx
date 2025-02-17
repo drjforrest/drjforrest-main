@@ -10,6 +10,19 @@ import { ContactForm } from "@/components/ContactForm";
 import { SectionTitle } from "@/components/ui/section-title";
 import { Button } from "@/components/ui/button";
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
+export const metadata = {
+  title: 'Dr. Jamie I. Forrest',
+  description: 'Global Health Research & Analytics',
+  // ... other metadata
+}
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
