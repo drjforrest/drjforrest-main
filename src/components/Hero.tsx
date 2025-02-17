@@ -53,7 +53,7 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight"
           >
-            Transforming Global Health Through Strategic Innovation
+            Transforming Global Health Through Innovation
           </motion.h1>
 
           <motion.p
@@ -62,8 +62,7 @@ export function Hero() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-lg sm:text-xl text-foreground/80 px-4 sm:px-0"
           >
-            Strategic global health leader with 15+ years of experience driving clinical research 
-            innovation and health system strengthening
+            Strategic partnerships, effective technical & scientific communication, evidence-based approaches to resuults monitoring and evaluation
           </motion.p>
 
           <motion.div
@@ -74,48 +73,19 @@ export function Hero() {
           >
             <IconFeature
               icon={Network}
-              title="Clinical Trial Innovation"
-              description="Leading platform trials and research initiatives"
+              title="Research Innovation"
+              description="Clinical research partnerships"
             />
             <IconFeature
               icon={FileText}
               title="Research Impact"
-              description="Publications in leading medical journals"
+              description="Published in leading scientific journals"
             />
             <IconFeature
               icon={Globe}
               title="Global Implementation"
               description="Building sustainable health solutions"
             />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="flex flex-col sm:flex-row justify-center gap-4 mt-8 px-4 sm:px-0"
-          >
-            <Button 
-              size="lg"
-              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white gap-2"
-              asChild
-            >
-              <Link href="#publications">
-                View Research Impact
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto gap-2"
-              asChild
-            >
-              <Link href="/contact">
-                <Globe className="w-4 h-4" />
-                Connect & Collaborate
-              </Link>
-            </Button>
           </motion.div>
         </div>
       </div>

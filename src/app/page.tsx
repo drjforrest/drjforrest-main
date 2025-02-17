@@ -6,12 +6,6 @@ export const viewport = {
   maximumScale: 1,
   userScalable: false,
 }
-
-export const metadata = {
-  title: 'Dr. Jamie I. Forrest',
-  description: 'Global Health Research & Analytics',
-}
-
 export default function Page() {
   return <HomeContent />;
 }

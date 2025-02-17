@@ -4,6 +4,15 @@ import * as React from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// Define the ButtonProps type
+type ButtonProps = {
+  className?: string;
+  variant?: VariantProps<typeof buttonVariants>['variant'];
+  size?: VariantProps<typeof buttonVariants>['size'];
+  asChild?: boolean;
+  children: React.ReactNode;
+} & HTMLMotionProps<'button'>; // Extend with HTML button props
+
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
   {
@@ -44,19 +53,15 @@ const buttonVariants = cva(
   }
 );
 
-interface ButtonProps
-  extends HTMLMotionProps<'button'>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-  children?: React.ReactNode;
-}
-
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+    if (asChild) {
+      return <span className={buttonVariants({ variant, size, className })}>{children}</span>;
+    }
     return (
       <motion.button
         className={buttonVariants({ variant, size, className })}
-        ref={ref as any}
+        ref={ref}
         whileTap={{ scale: 0.98 }}
         whileHover={{ scale: 1.02 }}
         {...props}
@@ -66,6 +71,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-Button.displayName = 'Button';
 
 export { Button, buttonVariants };

@@ -1,0 +1,4399 @@
+PROJECT INVENTORY 2025-02-16
+Project: 
+Timestamp: 2025-02-16 17:53:24
+Root Directory: /Users/drjforrest/Development/DevProjects/WebDev/new-main/
+
+--- Begin Project Code ---
+
+--- File: (Project Directory Structure) ---
+├── README.md 
+├── all-project-code_2025-02-16.txt 
+├── next-env.d.ts 
+├── next.config.js 
+├── package-lock.json 
+├── package.json 
+├── postcss.config.js 
+├── public 
+│   ├── assets 
+│   │   └── Jamie-I-Forrest-PhD-MPH-.pdf 
+│   ├── file.svg 
+│   ├── globe.svg 
+│   ├── next.svg 
+│   ├── projects 
+│   │   ├── activate-africa.png 
+│   │   ├── cfe-logo.png 
+│   │   ├── global-fund.png 
+│   │   ├── momentum-health.png 
+│   │   ├── purpose-africa.png 
+│   │   ├── rwanda-health.png 
+│   │   ├── rwanda-moh-logo.png 
+│   │   └── together-trial.png 
+│   ├── vercel.svg 
+│   └── window.svg 
+├── src 
+│   ├── app 
+│   │   ├── api 
+│   │   │   ├── contact 
+│   │   │   │   └── route.ts 
+│   │   │   └── rss 
+│   │   │       └── route.ts 
+│   │   ├── favicon.ico 
+│   │   ├── globals.css 
+│   │   ├── home-content.tsx 
+│   │   ├── layout.tsx 
+│   │   ├── not-found.tsx 
+│   │   ├── page.tsx 
+│   │   ├── providers.tsx 
+│   │   └── rss.xml 
+│   │       └── route.ts 
+│   ├── components 
+│   │   ├── CareerTimeline.tsx 
+│   │   ├── ContactForm.tsx 
+│   │   ├── EducationCards.tsx 
+│   │   ├── Hero.tsx 
+│   │   ├── RSSFeed.tsx 
+│   │   ├── ResearchImpactDashboard.tsx 
+│   │   ├── layout 
+│   │   │   ├── Navigation.tsx 
+│   │   │   └── footer.tsx 
+│   │   ├── providers 
+│   │   │   └── ThemeProvider.tsx 
+│   │   ├── publication-dashboard 
+│   │   │   ├── Focus.tsx 
+│   │   │   ├── Impact.tsx 
+│   │   │   ├── Timeline.tsx 
+│   │   │   └── index.tsx 
+│   │   ├── theme 
+│   │   │   └── theme-toggle.tsx 
+│   │   └── ui 
+│   │       ├── alert.tsx 
+│   │       ├── animated-card.tsx 
+│   │       ├── animated-container.tsx 
+│   │       ├── button.tsx 
+│   │       ├── card.tsx 
+│   │       ├── cursor-effect.tsx 
+│   │       ├── enhanced-tooltip.tsx 
+│   │       ├── input.tsx 
+│   │       ├── interactive-timeline.tsx 
+│   │       ├── label.tsx 
+│   │       ├── optimized-image.tsx 
+│   │       ├── page-transition.tsx 
+│   │       ├── parallax-background.tsx 
+│   │       ├── project-carousel.tsx 
+│   │       ├── publication-card.tsx 
+│   │       ├── scroll-area.tsx 
+│   │       ├── scroll-indicator.tsx 
+│   │       ├── scroll-progress.tsx 
+│   │       ├── section-heading.tsx 
+│   │       ├── section-title.tsx 
+│   │       ├── skeleton.tsx 
+│   │       ├── skill-badge.tsx 
+│   │       ├── smooth-scroll.tsx 
+│   │       ├── switch.tsx 
+│   │       ├── tabs.tsx 
+│   │       ├── textarea.tsx 
+│   │       ├── toggle.tsx 
+│   │       └── tooltip.tsx 
+│   ├── hooks 
+│   │   └── use-scroll-animation.ts 
+│   └── types 
+│       ├── cv.ts 
+│       ├── publications.ts 
+│       └── theme.ts 
+├── tailwind.config.ts 
+├── tsconfig.json 
+└── vercel.json 
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/vercel.json (Timestamp: 2025-02-09 13:00:28) ---
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/apps/web"
+    }
+  ]
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/vercel.json ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/next-env.d.ts (Timestamp: 2025-02-09 18:20:37) ---
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/next-env.d.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/tailwind.config.ts (Timestamp: 2025-02-09 19:05:07) ---
+import type { Config } from "tailwindcss"
+
+const config: Config = {
+  darkMode: ["class"],
+  content: [
+    './src/pages/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    './src/styles/**/*.{css,ts}',
+  ],
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        background: "rgb(var(--background))",
+        foreground: "rgb(var(--foreground))",
+        primary: "rgb(var(--primary))",
+        accent: "rgb(var(--accent))",
+        success: "rgb(var(--success))",
+        muted: "rgb(var(--muted))",
+        surface: {
+          DEFAULT: "rgb(var(--surface))",
+          muted: "rgb(var(--surface-muted))",
+          elevated: "rgb(var(--surface-elevated))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+}
+
+export default config
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/tailwind.config.ts ---
+
+--- Skipping package-lock.json (Too large: 124.10 KB) ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/package.json (Timestamp: 2025-02-16 16:24:16) ---
+{
+  "name": "drjforrest-main",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-scroll-area": "^1.0.5",
+    "@radix-ui/react-switch": "^1.0.3",
+    "@radix-ui/react-tabs": "^1.1.3",
+    "@radix-ui/react-tooltip": "^1.0.7",
+    "@vercel/analytics": "^1.1.2",
+    "bad-words": "^3.0.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.0.0",
+    "limiter": "^2.1.0",
+    "lucide-react": "^0.263.1",
+    "next": "^15.1.6",
+    "next-themes": "^0.2.1",
+    "nodemailer": "^6.9.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.15.1",
+    "rss-parser": "^3.13.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7",
+    "@radix-ui/react-toggle": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/bad-words": "^3.0.3",
+    "@types/node": "^20.0.0",
+    "@types/nodemailer": "^6.4.14",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.0.0"
+  }
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/package.json ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/tsconfig.json (Timestamp: 2025-02-07 08:57:08) ---
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/tsconfig.json ---
+
+--- Skipping global-fund.png (Too large: 856.62 KB) ---
+
+--- Skipping momentum-health.png (Too large: 1485.50 KB) ---
+
+--- Skipping rwanda-health.png (Too large: 1359.94 KB) ---
+
+--- Skipping together-trial.png (Too large: 589.64 KB) ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/cv.ts (Timestamp: 2025-02-06 06:42:45) ---
+export interface CVEntryBase {
+  title: string;
+  organization: string;
+  period: string;
+  description: string;
+}
+
+export interface CVEntryProps extends CVEntryBase {
+  index: number;
+}
+
+export interface PublicationEntry {
+  title: string;
+  journal: string;
+  year: string;
+  citation: string;
+  doi?: string;
+  impact?: string;
+}
+
+export interface AwardEntry {
+  title: string;
+  organization: string;
+  year: string;
+  amount?: string;
+  description: string;
+}
+
+export interface SkillCategory {
+  name: string;
+  skills: string[];
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/cv.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/theme.ts (Timestamp: 2025-02-06 18:15:18) ---
+import { ReactNode } from 'react'
+
+export interface ThemeProviderProps {
+  children: ReactNode;
+  attribute?: string;
+  defaultTheme?: string;
+  storageKey?: string;
+  enableSystem?: boolean;
+  disableTransitionOnChange?: boolean;
+} 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/theme.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/publications.ts (Timestamp: 2025-02-08 03:48:45) ---
+// Publication Dashboard Types
+export interface PublicationTimeline {
+  year: string;
+  count: number;
+  total?: number;
+  trend?: number;
+}
+
+export interface JournalImpact {
+  name: string;
+  count: number;
+  tier: 'Highest Impact' | 'High Impact' | 'Peer Reviewed';
+}
+
+export interface ResearchFocus {
+  name: string;
+  papers: number;
+}
+
+export interface DashboardMetrics {
+  totalPublications: number;
+  highImpactPapers: number;
+  maxPapersInYear: number;
+  firstAuthorPublications: number;
+}
+
+export interface KeyProject {
+  title: string;
+  period: string;
+  paperThumbnail: string;
+  description: string;
+  expandedDescription: string;
+  impact: string;
+  paperLink?: string;
+  paperTitle: string;
+  journal: string;
+  citationCount: number;
+}
+
+// Career Timeline Types
+export interface Position {
+  title: string;
+  organization: string;
+  location: string;
+  period: string;
+  description: string;
+  achievements: string[];
+}
+
+// Education Types
+export interface Education {
+  degree: string;
+  institution: string;
+  location: string;
+  period: string;
+  thesis?: string;
+  focus: string;
+}
+
+export interface Award {
+  title: string;
+  organization: string;
+  year: string;
+  description?: string;
+}
+
+export interface Certification {
+  title: string;
+  organization: string;
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/publications.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx (Timestamp: 2025-02-16 15:38:21) ---
+import { Analytics } from '@vercel/analytics/react';
+import { Metadata } from 'next';
+import { Navigation } from '@/components/layout/Navigation';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { ScrollProgress } from '@/components/ui/scroll-progress';
+import { SmoothScroll } from '@/components/ui/smooth-scroll';
+import '@/app/globals.css';
+
+export const metadata: Metadata = {
+  title: 'Dr. Jamie Forrest - Global Health Research, Technical Writing & Analytics',
+  description: 'Strategic global health leader transforming research into impact through innovative partnerships and evidence-based solutions.',
+  keywords: ['global health', 'research', 'data analytics', 'health systems', 'clinical trials'],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body className="overflow-x-hidden">
+        <ThemeProvider>
+          <ScrollProgress />
+          <SmoothScroll />
+          <Navigation />
+          <div className="min-h-screen flex flex-col">
+            {children}
+          </div>
+        </ThemeProvider>
+        <Analytics />
+      </body>
+    </html>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-16 16:32:04) ---
+'use client';
+
+import { motion } from "framer-motion";
+import { Hero } from "@/components/Hero";
+import { CareerTimeline } from "@/components/CareerTimeline";
+import { EducationCards } from "@/components/EducationCards";
+import { PublicationDashboard } from "@/components/publication-dashboard";
+import RSSFeed from "@/components/RSSFeed";
+import { ContactForm } from "@/components/ContactForm";
+import { SectionTitle } from "@/components/ui/section-title";
+import { Button } from "@/components/ui/button";
+
+export default function HomeContent() {
+  return (
+    <main className="flex min-h-screen flex-col">
+      <section className="mb-16">
+        <Hero />
+      </section>
+      
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-16 mb-24"
+      >
+        <SectionTitle>Career Journey</SectionTitle>
+        <div className="mt-8">
+          <CareerTimeline />
+        </div>
+      </motion.section>
+
+      <section className="container mx-auto px-4 py-16 mb-24">
+        <SectionTitle>Publications & Research Impact</SectionTitle>
+        <div className="mt-8">
+          <PublicationDashboard />
+        </div>
+      </section>
+      
+      <section className="container mx-auto px-4 py-16 mb-24">
+        <SectionTitle>Education & Achievements</SectionTitle>
+        <div className="mt-8">
+          <EducationCards />
+        </div>
+        <div className="mt-8 flex justify-center">
+          <Button
+            asChild
+            size="lg"
+            className="!text-white"
+          >
+            <a 
+              href="/assets/jamie-forrest-cv.pdf" 
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-2 !text-white"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download CV
+            </a>
+          </Button>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-16 mb-24">
+        <SectionTitle>Personal Interests</SectionTitle>
+        <div className="mt-8">
+          <RSSFeed />
+        </div>
+      </section>
+      
+      <section className="container mx-auto px-4 py-16 mb-24">
+        <SectionTitle>Get in Touch</SectionTitle>
+        <div className="mt-8">
+          <ContactForm />
+        </div>
+      </section>
+    </main>
+  );
+} 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/page.tsx (Timestamp: 2025-02-16 16:29:48) ---
+import HomeContent from './home-content';
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
+export const metadata = {
+  title: 'Dr. Jamie I. Forrest',
+  description: 'Global Health Research & Analytics',
+}
+
+export default function Page() {
+  return <HomeContent />;
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/page.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/globals.css (Timestamp: 2025-02-16 15:38:42) ---
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --background: 244 241 222;   /* Ivory */
+    --foreground: 43 45 66;      /* Charcoal */
+    --primary: 26 58 92;         /* Deep navy */
+    --accent: 114 83 52;         /* Rich bronze */
+    --success: 42 157 143;       /* Emerald */
+    --muted: 112 66 20;          /* Warm brown */
+    
+    --surface: 244 241 222;
+    --surface-muted: 236 233 214;
+    --surface-elevated: 248 245 226;
+  }
+
+  .dark {
+    --background: 43 45 66;      /* Charcoal */
+    --foreground: 244 241 222;   /* Ivory */
+    --primary: 26 58 92;         /* Keep navy for consistency */
+    --accent: 114 83 52;         /* Keep bronze for consistency */
+    --muted: 189 189 189;        /* Light Gray */
+    
+    --surface: 43 45 66;
+    --surface-muted: 35 37 58;
+    --surface-elevated: 51 53 74;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Adjust based on your header height */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Improved Section Spacing */
+  section {
+    @apply py-16 md:py-24;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  /* Section transitions when scrolling into view */
+  section[data-animate="true"] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  section[data-animate="true"].in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Consistent heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-foreground;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl leading-tight; }
+  h2 { @apply text-3xl md:text-4xl leading-tight; }
+  h3 { @apply text-2xl md:text-3xl leading-snug; }
+  h4 { @apply text-xl md:text-2xl leading-snug; }
+
+  /* Improved link states */
+  a:not(.unstyled) {
+    @apply text-primary transition-colors duration-200;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  a:not(.unstyled):hover {
+    @apply text-primary/80;
+  }
+
+  /* Better focus styles */
+  :focus-visible {
+    @apply outline-2 outline-primary outline-offset-2 ring-0;
+  }
+
+  /* Improved touch targets on mobile */
+  @media (max-width: 640px) {
+    button, 
+    a.button,
+    input[type="button"],
+    input[type="submit"] {
+      @apply min-h-[44px] min-w-[44px];
+    }
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply bg-surface rounded-lg shadow-md 
+           transition-all duration-300
+           hover:shadow-lg
+           border border-foreground/5
+           p-6;
+  }
+
+  .button {
+    @apply px-4 py-2 rounded-md font-medium 
+           transition-all duration-200
+           bg-primary text-background 
+           hover:bg-primary/90
+           active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--primary) / 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary) / 0.5);
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/globals.css ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/not-found.tsx (Timestamp: 2025-02-16 16:27:02) ---
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
+export const metadata = {
+  title: '404 - Page Not Found',
+  description: 'The page you are looking for does not exist.',
+}
+
+// ... rest of your not-found component 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/not-found.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/providers.tsx (Timestamp: 2025-02-06 03:27:54) ---
+'use client';
+
+import { ThemeProvider } from 'next-themes';
+import { ReactNode } from 'react';
+
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      {children}
+    </ThemeProvider>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/providers.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/rss.xml/route.ts (Timestamp: 2025-02-09 12:39:07) ---
+import { NextResponse } from 'next/server';
+import { generateRSSFeed } from '@/lib/generate-rss';
+import type { RSSItem } from '@/lib/generate-rss';
+
+export async function GET() {
+  // For now, let's include some sample items
+  // You can replace these with real data from your CMS or database
+  const items: RSSItem[] = [
+    {
+      title: "Latest Research Updates",
+      link: "https://drjforrest.com/research",
+      description: "Recent updates in global health research and analytics",
+      pubDate: new Date(),
+    },
+    // Add more items as needed
+  ];
+
+  const feed = generateRSSFeed(items);
+
+  return new NextResponse(feed, {
+    headers: {
+      'Content-Type': 'application/xml',
+      'Cache-Control': 's-maxage=3600, stale-while-revalidate'
+    },
+  });
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/rss.xml/route.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/contact/route.ts (Timestamp: 2025-02-09 12:15:36) ---
+import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    
+    // Configure nodemailer with your email service
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',  // or your preferred email service
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    // Setup email data
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.CONTACT_EMAIL,
+      subject: `Contact Form: ${body.subject}`,
+      text: `
+        Name: ${body.name}
+        Email: ${body.email}
+        Message: ${body.message}
+      `
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
+      { status: 500 }
+    );
+  }
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/contact/route.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts (Timestamp: 2025-02-09 18:38:43) ---
+import { NextResponse } from "next/server";
+import RSSParser from 'rss-parser';
+
+const INOREADER_FEED_URL = "https://www.inoreader.com/stream/user/1005214099/tag/drjforrest.com";
+
+const parser = new RSSParser();
+
+export async function GET(request: Request) {
+  try {
+    const url = new URL(request.url);
+    const format = url.searchParams.get("format");
+
+    // Fetch the RSS feed
+    const response = await fetch(INOREADER_FEED_URL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch RSS feed: ${response.statusText}`);
+    }
+
+    const xmlText = await response.text();
+    const feed = await parser.parseString(xmlText);
+
+    if (format === "json") {
+      return NextResponse.json(feed.items.map(item => ({
+        title: item.title,
+        link: item.link,
+        description: item.contentSnippet || item.description,
+        pubDate: item.pubDate,
+      })));
+    }
+
+    // Return the raw XML for RSS feed subscribers
+    return new NextResponse(xmlText, {
+      headers: {
+        "Content-Type": "application/xml",
+        "Cache-Control": "s-maxage=3600, stale-while-revalidate"
+      }
+    });
+  } catch (error) {
+    console.error('RSS Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to load RSS feed' },
+      { status: 500 }
+    );
+  }
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-16 15:40:29) ---
+'use client';
+
+import { Button } from "@/components/ui/button";
+import { 
+  BookOpen, 
+  Globe, 
+  Network,
+  FileText,
+  ArrowRight 
+} from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+function IconFeature({ 
+  icon: Icon,
+  title,
+  description,
+}: { 
+  icon: any;
+  title: string;
+  description: string;
+}) {
+  return (
+    <motion.div 
+      className="flex flex-col items-center gap-3 w-full sm:w-auto px-4"
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300, damping: 10 }}
+    >
+      <div className="p-4 rounded-lg bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl 
+                    transition-all duration-300 border border-primary/10 w-full sm:w-auto">
+        <div className="flex items-center sm:flex-col gap-4 sm:gap-2">
+          <Icon className="w-8 h-8 text-primary flex-shrink-0" />
+          <div className="text-left sm:text-center">
+            <h3 className="font-medium text-primary">{title}</h3>
+            <p className="text-sm text-foreground/70 mt-1 sm:max-w-[250px]">
+              {description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export function Hero() {
+  return (
+    <div className="relative overflow-hidden">
+      <div className="container mx-auto px-4 py-12 sm:py-24">
+        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }} 
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight"
+          >
+            Transforming Global Health Through Strategic Innovation
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-lg sm:text-xl text-foreground/80 px-4 sm:px-0"
+          >
+            Strategic global health leader with 15+ years of experience driving clinical research 
+            innovation and health system strengthening
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-6 sm:gap-16 mt-8 sm:mt-12"
+          >
+            <IconFeature
+              icon={Network}
+              title="Clinical Trial Innovation"
+              description="Leading platform trials and research initiatives"
+            />
+            <IconFeature
+              icon={FileText}
+              title="Research Impact"
+              description="Publications in leading medical journals"
+            />
+            <IconFeature
+              icon={Globe}
+              title="Global Implementation"
+              description="Building sustainable health solutions"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex flex-col sm:flex-row justify-center gap-4 mt-8 px-4 sm:px-0"
+          >
+            <Button 
+              size="lg"
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white gap-2"
+              asChild
+            >
+              <Link href="#publications">
+                View Research Impact
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button 
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto gap-2"
+              asChild
+            >
+              <Link href="/contact">
+                <Globe className="w-4 h-4" />
+                Connect & Collaborate
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Mobile-optimized background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-background to-background/50" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20">
+          <svg viewBox="0 0 800 800" className="w-full h-full">
+            <motion.circle 
+              cx="400" 
+              cy="400" 
+              r="300" 
+              className="stroke-primary fill-none" 
+              strokeWidth="2"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx (Timestamp: 2025-02-16 14:41:42) ---
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { positionData } from '@/data/positions';
+import { Card } from '@/components/ui/card';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Briefcase, MapPin, Calendar } from 'lucide-react';
+
+export function CareerTimeline() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="relative container mx-auto px-4">
+        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-primary/20" />
+        <div className="space-y-12">
+          {[1, 2, 3].map((_, index) => (
+            <div
+              key={index}
+              className={`flex items-center ${
+                index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+              }`}
+            >
+              <div className="w-full md:w-1/2 px-4 md:px-8">
+                <Card className="p-6 bg-white/90 backdrop-blur-sm border border-primary/10">
+                  <div className="space-y-3">
+                    <Skeleton className="h-6 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                    <Skeleton className="h-4 w-1/3" />
+                    <Skeleton className="h-20 w-full" />
+                  </div>
+                </Card>
+              </div>
+              <div className="hidden md:block w-4 h-4 rounded-full bg-primary/20" />
+              <div className="hidden md:block w-1/2" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative container mx-auto px-4">
+      {/* Vertical Timeline Line */}
+      <div 
+        className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px]" 
+        style={{ 
+          background: "linear-gradient(180deg, transparent 0%, rgb(var(--primary)) 5%, rgb(var(--primary)) 95%, transparent 100%)",
+          zIndex: 0 
+        }} 
+      />
+
+      <div className="space-y-12">
+        {positionData.map((position, index) => (
+          <div
+            key={`${position.title}-${index}`}
+            className={`flex items-center ${
+              index % 2 === 0 ? 'md:flex-row flex-col' : 'md:flex-row-reverse flex-col'
+            }`}
+            style={{ position: 'relative', zIndex: 1 }}
+          >
+            {/* Timeline content */}
+            <div className="w-full md:w-1/2 px-4 md:px-8">
+              <motion.div
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, y: 0 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <Card 
+                  className="p-6 bg-white/90 backdrop-blur-sm border border-primary/10 
+                           shadow-lg hover:shadow-xl transition-all duration-300 
+                           transform hover:-translate-y-1 cursor-pointer
+                           hover:border-primary/20"
+                  onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-1">
+                        <h3 className="text-xl font-semibold text-primary">
+                          {position.title}
+                        </h3>
+                        <div className="flex items-center gap-2 text-foreground/70">
+                          <Briefcase className="w-4 h-4" />
+                          <span>{position.organization}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-foreground/70">
+                          <MapPin className="w-4 h-4" />
+                          <span>{position.location}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-foreground/70">
+                          <Calendar className="w-4 h-4" />
+                          <span>{position.period}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <p className="text-foreground/80">
+                      {position.description}
+                    </p>
+
+                    <AnimatePresence>
+                      {expandedIndex === index && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-4 space-y-2 border-t border-primary/10">
+                            <h4 className="font-medium text-primary">Key Achievements:</h4>
+                            <ul className="space-y-2">
+                              {position.achievements.map((achievement, i) => (
+                                <motion.li 
+                                  key={i}
+                                  initial={{ opacity: 0, x: -20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: i * 0.1 }}
+                                  className="flex items-start gap-2 text-foreground/70"
+                                >
+                                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                                  <span>{achievement}</span>
+                                </motion.li>
+                              ))}
+                            </ul>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </Card>
+              </motion.div>
+            </div>
+
+            {/* Center Dot */}
+            <motion.div 
+              className="w-4 h-4 rounded-full relative shadow-md my-4 md:my-0"
+              style={{ backgroundColor: "#26385C" }}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.2 }}
+            >
+              <div 
+                className="w-8 h-8 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse"
+                style={{ backgroundColor: "rgba(38, 56, 92, 0.2)" }}
+              />
+            </motion.div>
+
+            {/* Empty space for alternating layout */}
+            <div className="hidden md:block w-1/2" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx (Timestamp: 2025-02-13 06:19:17) ---
+'use client';
+
+import React from 'react';
+import { educationData, certifications, awards } from '@/data/education';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { GraduationCap, Award, ScrollText } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+export function EducationCards() {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.3 }
+    }
+  };
+
+  return (
+    <section className="relative container mx-auto px-4 py-12">
+      <div className="space-y-6 sm:space-y-8">
+      {/* Education Section */}
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
+        {educationData.map((edu, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ y: -4 }}
+          >
+            <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
+              <CardHeader className="p-4 sm:p-6">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                    <GraduationCap className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <CardTitle className="text-base sm:text-lg font-semibold text-primary break-words">
+                      {edu.degree}
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      {edu.institution}
+                      <br />
+                      {edu.location} | {edu.period}
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 text-sm">
+                <div className="space-y-3">
+                  <p className="font-medium text-foreground/80">
+                    <span className="text-primary">Focus:</span> {edu.focus}
+                  </p>
+                  {edu.thesis && (
+                    <div className="text-foreground/70">
+                      <span className="font-medium text-primary">Thesis:</span>
+                      <br />
+                      <span className="break-words">{edu.thesis}</span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Awards and Certifications */}
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+        {/* Awards */}
+        <motion.div
+          variants={cardVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          whileHover={{ y: -4 }}
+        >
+          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <Award className="h-5 w-5 text-primary" />
+                </div>
+                <CardTitle className="text-lg">Awards</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {awards.map((award, index) => (
+                <motion.div 
+                  key={index} 
+                  className="space-y-2"
+                  variants={itemVariants}
+                >
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
+                    <div>
+                      <h4 className="font-medium text-primary">{award.title}</h4>
+                      <p className="text-sm text-foreground/70">
+                        {award.organization} | {award.year}
+                      </p>
+                      {award.description && (
+                        <p className="text-sm text-foreground/70 mt-1">
+                          {award.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Certifications */}
+        <motion.div
+          variants={cardVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          whileHover={{ y: -4 }}
+        >
+          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <ScrollText className="h-5 w-5 text-primary" />
+                </div>
+                <CardTitle className="text-lg">Certifications</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {certifications.map((cert, index) => (
+                <motion.div 
+                  key={index} 
+                  className="space-y-2"
+                  variants={itemVariants}
+                >
+                  <div className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
+                    <div>
+                      <h4 className="font-medium text-primary">{cert.title}</h4>
+                      <p className="text-sm text-foreground/70">
+                        {cert.organization}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+      </div>
+    </section>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-09 19:33:24) ---
+'use client';
+
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Rss, AlertCircle, ExternalLink } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion";
+
+interface FeedItem {
+  title: string;
+  link: string;
+  description: string;
+  pubDate: string;
+}
+
+const defaultInterests = [
+  "#Automation",
+  "#AI",
+  "#Photography",
+  "#Travel",
+  "#CanadianPolitics"
+];
+
+function processFeedItems(items: FeedItem[]) {
+  return items
+    .filter(item => item.description.length < 300)
+    .map(item => ({
+      ...item,
+      description: item.description.slice(0, 200)
+    }))
+    .slice(0, 5);
+}
+
+export default function RSSFeed() {
+  const [items, setItems] = useState<FeedItem[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchRSS() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch("/api/rss?format=json");
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setItems(processFeedItems(data));
+      } catch (err) {
+        console.error("Error fetching RSS feed:", err);
+        setError("Failed to load the RSS feed.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchRSS();
+  }, []);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full max-w-6xl mx-auto"
+    >
+      <div className="flex flex-col gap-6">
+        {error && (
+          <Alert variant="destructive" className="w-full">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
+        {/* Subscribe Button at the top */}
+        <div className="flex flex-col items-center gap-3">
+          <Button
+            variant="outline"
+            size="lg"
+            className="flex items-center gap-2 hover:bg-primary/10"
+            onClick={() => window.open("/api/rss", "_blank")}
+          >
+            <Rss className="w-5 h-5" />
+            Subscribe to RSS Feed
+          </Button>
+          <p className="text-sm text-muted-foreground">
+            Below is a curated RSS Feed of my interests. The feed will refresh with the page or use the feed in your preferred RSS Reader with the link above.
+          </p>
+        </div>
+
+        {/* Interest Tags */}
+        <div className="flex flex-wrap justify-center gap-4">
+          {defaultInterests.map((tag, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-default text-lg font-medium"
+            >
+              {tag}
+            </motion.span>
+          ))}
+        </div>
+        
+        {/* Feed Items */}
+        <div className="grid gap-4">
+          {loading ? (
+            // Loading skeletons
+            Array(3).fill(0).map((_, index) => (
+              <div key={index} className="bg-white rounded-lg shadow p-6">
+                <div className="animate-pulse">
+                  <div className="h-6 bg-primary/10 rounded w-3/4 mb-2" />
+                  <div className="h-4 bg-primary/5 rounded w-1/4 mb-4" />
+                  <div className="h-4 bg-primary/10 rounded w-full" />
+                </div>
+              </div>
+            ))
+          ) : items.length > 0 ? (
+            items.map((item, index) => (
+              <motion.div
+                key={item.link}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-all duration-200">
+                  <a 
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="text-lg font-semibold text-primary mb-1 group-hover:text-primary">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {new Date(item.pubDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </p>
+                        <p className="text-sm text-card-foreground">
+                          {item.description}
+                        </p>
+                      </div>
+                      <ExternalLink className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                    </div>
+                  </a>
+                </div>
+              </motion.div>
+            ))
+          ) : (
+            <div className="bg-white rounded-lg shadow p-6">
+              <p className="text-center text-muted-foreground">No items to display</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx (Timestamp: 2025-02-09 14:54:34) ---
+"use client";
+
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Linkedin, Github, Send, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { trackFormSubmission, trackExternalLink } from '@/lib/analytics';
+
+interface FormData {
+  [key: string]: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export function ContactForm() {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      setSubmitStatus('success');
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      trackFormSubmission('contact', true);
+    } catch (error) {
+      setSubmitStatus('error');
+      trackFormSubmission('contact', false);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleExternalLink = (platform: string, url: string) => {
+    trackExternalLink(platform);
+    window.open(url, '_blank');
+  };
+
+  return (
+    <section className="py-20">
+      <div className="container px-4">
+        <motion.div 
+          className="max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="text-center mb-12">
+            <p className="text-lg text-foreground/80">
+              I'm always interested in connecting with colleagues and exploring new opportunities
+              in global health, clinical research, and data science.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-[1.5fr,1fr] gap-8">
+            {/* Contact Form */}
+            <Card className="p-8 bg-white/90 backdrop-blur-sm border border-primary/10 shadow-lg transition-all duration-300">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-4">
+                  {[
+                    { id: 'name', label: 'Name', type: 'text', icon: 'user' },
+                    { id: 'email', label: 'Email', type: 'email', icon: 'mail' },
+                    { id: 'subject', label: 'Subject', type: 'text', icon: 'message' }
+                  ].map(({ id, label, type }) => (
+                    <motion.div 
+                      key={id}
+                      whileTap={{ scale: 0.995 }}
+                    >
+                      <label htmlFor={id} className="block text-sm font-medium mb-2 text-foreground/80">
+                        {label}
+                      </label>
+                      <div className="relative">
+                        <Input
+                          id={id}
+                          type={type}
+                          value={formData[id]}
+                          onChange={(e) => setFormData(prev => ({ ...prev, [id]: e.target.value }))}
+                          onFocus={() => setFocusedField(id)}
+                          onBlur={() => setFocusedField(null)}
+                          required
+                          className={`bg-background/50 border-primary/10 focus:border-primary/20 h-12 px-4 transition-all duration-300
+                            ${focusedField === id ? 'shadow-lg' : 'shadow-sm'}`}
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+                  
+                  <motion.div whileTap={{ scale: 0.995 }}>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground/80">
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      rows={6}
+                      value={formData.message}
+                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                      onFocus={() => setFocusedField('message')}
+                      onBlur={() => setFocusedField(null)}
+                      required
+                      className={`bg-background/50 border-primary/10 focus:border-primary/20 transition-all duration-300
+                        ${focusedField === 'message' ? 'shadow-lg' : 'shadow-sm'}`}
+                    />
+                  </motion.div>
+                </div>
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    type="submit"
+                    className="w-full h-12 bg-primary hover:bg-primary/90 text-background shadow-lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </motion.div>
+              </form>
+            </Card>
+
+            {/* Contact Info */}
+            <Card className="p-8 bg-white/90 backdrop-blur-sm border border-primary/10 shadow-lg">
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-primary">Contact Information</h3>
+                  <div className="space-y-3">
+                    {[
+                      { icon: Mail, text: 'jamie@drjforrest.com', action: 'email' },
+                      { icon: Linkedin, text: 'Connect on LinkedIn', action: 'linkedin' },
+                      { icon: Github, text: 'GitHub Profile', action: 'github' }
+                    ].map(({ icon: Icon, text, action }) => (
+                      <motion.button
+                        key={text}
+                        whileHover={{ scale: 1.02, x: 4 }}
+                        onClick={() => handleExternalLink(action, `${action === 'email' ? 'mailto:' : ''}${text}`)}
+                        className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 transition-colors"
+                      >
+                        <div className="p-2 rounded-full bg-primary/10">
+                          <Icon className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-foreground/80">{text}</span>
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-primary">Looking to collaborate?</h3>
+                  <p className="text-foreground/70 mb-4">I'm open to discussing opportunities in:</p>
+                  <div className="space-y-3">
+                    {[
+                      'Clinical Research Leadership',
+                      'Global Health Projects',
+                      'Data Science Initiatives',
+                      'Health Systems Strengthening'
+                    ].map((item) => (
+                      <motion.div 
+                        key={item} 
+                        className="flex items-center gap-3 p-2"
+                        whileHover={{ x: 4 }}
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                        <span className="text-foreground/80">{item}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ResearchImpactDashboard.tsx (Timestamp: 2025-02-09 14:01:21) ---
+'use client';
+
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { FileText, TrendingUp, Globe, Award } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+export function ResearchImpactDashboard() {
+  return (
+    <section className="relative">
+      <div className="container mx-auto px-4 py-12 space-y-6">
+      {/* Key Metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                <FileText className="h-6 w-6 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-primary mb-1">45+</div>
+              <p className="text-sm font-medium text-foreground/70">
+                Peer-reviewed Publications
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                <TrendingUp className="h-6 w-6 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-primary mb-1">9</div>
+              <p className="text-sm font-medium text-foreground/70">
+                High-Impact Journal Papers
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                <Globe className="h-6 w-6 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-primary mb-1">15+</div>
+              <p className="text-sm font-medium text-foreground/70">
+                Countries Impacted
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                <Award className="h-6 w-6 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-primary mb-1">2021</div>
+              <p className="text-sm font-medium text-foreground/70">
+                Sackett Trial Award
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Featured Publications */}
+      <Card className="bg-white/90">
+        <CardHeader>
+          <CardTitle>Featured Publications</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea className="h-[300px] pr-4">
+            <div className="space-y-4">
+              <div className="space-y-2 pb-4 border-b border-foreground/10">
+                <h3 className="font-medium text-primary">Resilient Clinical Trial Infrastructure in Response to COVID-19</h3>
+                <p className="text-sm text-foreground/70">
+                  American Journal of Tropical Medicine & Hygiene (2022)
+                </p>
+              </div>
+              <div className="space-y-2 pb-4 border-b border-foreground/10">
+                <h3 className="font-medium text-primary">Early Treatment of COVID-19: A Missed Opportunity</h3>
+                <p className="text-sm text-foreground/70">
+                  Infectious Diseases & Therapies (2021)
+                </p>
+              </div>
+              {/* Add more publications */}
+            </div>
+          </ScrollArea>
+        </CardContent>
+      </Card>
+      </div>
+    </section>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ResearchImpactDashboard.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/project-carousel.tsx (Timestamp: 2025-02-07 14:41:19) ---
+'use client';
+
+import * as React from 'react';
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
+import { Button } from './button';
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+
+interface Project {
+  title: string;
+  period: string;
+  paperThumbnail: string;
+  description: string;
+  expandedDescription: string;
+  impact: string;
+  paperLink?: string;
+  paperTitle?: string;
+  journal?: string;
+  citationCount?: number;
+}
+
+interface ProjectCarouselProps {
+  projects: Project[];
+}
+
+export function ProjectCarousel({ projects }: ProjectCarouselProps) {
+  const [activeProject, setActiveProject] = React.useState(0);
+  const [direction, setDirection] = React.useState(0);
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
+
+  return (
+    <div className="relative w-full">
+      <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="carousel-nav-button pointer-events-auto"
+          onClick={() => {
+            setDirection(-1);
+            setActiveProject((prev) => (prev - 1 + projects.length) % projects.length);
+          }}
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="carousel-nav-button pointer-events-auto"
+          onClick={() => {
+            setDirection(1);
+            setActiveProject((prev) => (prev + 1) % projects.length);
+          }}
+        >
+          <ChevronRight className="h-6 w-6" />
+        </Button>
+      </div>
+
+      <Card 
+        variant="default"
+        className="w-full max-w-5xl mx-auto"
+      >
+        <CardContent className="p-6">
+          <motion.div
+            key={activeProject}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            className="grid md:grid-cols-2 gap-8"
+          >
+            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
+              {projects[activeProject].paperLink ? (
+                <a 
+                  href={projects[activeProject].paperLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 group cursor-pointer"
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    {projects[activeProject].paperThumbnail && (
+                      <Image
+                        src={projects[activeProject].paperThumbnail}
+                        alt={projects[activeProject].paperTitle || projects[activeProject].title}
+                        fill
+                        className="object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                        style={{ objectPosition: 'center' }}
+                      />
+                    )}
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/5">
+                    <div className="bg-background/90 px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
+                      <span className="text-sm font-medium">Read Publication</span>
+                      <ExternalLink className="h-4 w-4" />
+                    </div>
+                  </div>
+                </a>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {projects[activeProject].paperThumbnail && (
+                    <Image
+                      src={projects[activeProject].paperThumbnail}
+                      alt={projects[activeProject].paperTitle || projects[activeProject].title}
+                      fill
+                      className="object-contain"
+                      style={{ objectPosition: 'center' }}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-2xl font-bold mb-1">{projects[activeProject].title}</h3>
+                <p className="text-sm text-primary font-medium">{projects[activeProject].period}</p>
+              </div>
+              
+              <p className="text-muted-foreground">{projects[activeProject].description}</p>
+              
+              <div className="space-y-2">
+                <p className="text-sm">{projects[activeProject].expandedDescription}</p>
+                
+                {projects[activeProject].paperTitle && (
+                  <div className="mt-4 p-4 bg-muted/5 rounded-lg border border-primary/10">
+                    <h4 className="font-medium mb-2">Key Publication</h4>
+                    <p className="text-sm font-medium">{projects[activeProject].paperTitle}</p>
+                    {projects[activeProject].journal && (
+                      <p className="text-sm text-primary mt-1">{projects[activeProject].journal}</p>
+                    )}
+                    {projects[activeProject].citationCount && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Citations: {projects[activeProject].citationCount}
+                      </p>
+                    )}
+                  </div>
+                )}
+                
+                <p className="text-sm font-medium mt-4">Impact: {projects[activeProject].impact}</p>
+              </div>
+
+              {projects[activeProject].paperLink && (
+                <Button asChild variant="outline" size="sm">
+                  <a 
+                    href={projects[activeProject].paperLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    Read Publication
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </Button>
+              )}
+            </div>
+          </motion.div>
+        </CardContent>
+      </Card>
+
+      <div className="flex justify-center mt-6 gap-2">
+        {projects.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setDirection(index > activeProject ? 1 : -1);
+              setActiveProject(index);
+            }}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              index === activeProject ? 'bg-primary' : 'bg-primary/20'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/project-carousel.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/tabs.tsx (Timestamp: 2025-02-09 14:11:11) ---
+'use client';
+
+import * as React from 'react';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { cn } from '@/lib/utils';
+
+const Tabs = TabsPrimitive.Root;
+
+const TabsList = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.List
+    ref={ref}
+    className={cn(
+      'inline-flex h-10 items-center justify-center rounded-lg bg-white/50 p-1 text-foreground',
+      className
+    )}
+    {...props}
+  />
+));
+TabsList.displayName = TabsPrimitive.List.displayName;
+
+const TabsTrigger = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-sm',
+      className
+    )}
+    {...props}
+  />
+));
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+
+const TabsContent = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn(
+      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      className
+    )}
+    {...props}
+  />
+));
+TabsContent.displayName = TabsPrimitive.Content.displayName;
+
+export { Tabs, TabsList, TabsTrigger, TabsContent };
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/tabs.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/card.tsx (Timestamp: 2025-02-09 00:30:30) ---
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'interactive'
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = 'default', ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "rounded-lg border border-foreground/10 bg-white/90 text-foreground shadow-sm backdrop-blur-sm",
+        variant === 'interactive' && "hover:shadow-lg transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 cursor-pointer hover:border-foreground/30",
+        className
+      )}
+      {...props}
+    />
+  )
+)
+Card.displayName = "Card"
+
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props}
+  />
+))
+CardHeader.displayName = "CardHeader"
+
+const CardTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn(
+      "text-2xl font-semibold leading-none tracking-tight text-primary",
+      className
+    )}
+    {...props}
+  />
+))
+CardTitle.displayName = "CardTitle"
+
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn("text-sm text-foreground/70", className)}
+    {...props}
+  />
+))
+CardDescription.displayName = "CardDescription"
+
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
+
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/card.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-card.tsx (Timestamp: 2025-02-06 15:15:10) ---
+'use client';
+
+import { motion } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+import { cn } from '@/lib/utils';
+
+interface AnimatedCardProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  hover?: boolean;
+}
+
+export function AnimatedCard({ children, className, delay = 0, hover = true }: AnimatedCardProps) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay }}
+      whileHover={hover ? { y: -5, transition: { duration: 0.2 } } : undefined}
+    >
+      <Card 
+        className={cn(
+          "bg-surface-elevated/95 backdrop-blur transition-all duration-300",
+          hover && "hover:elevation-3",
+          className
+        )}
+      >
+        {children}
+      </Card>
+    </motion.div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-card.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx (Timestamp: 2025-02-16 15:38:05) ---
+'use client';
+
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Only show progress after scrolling down a bit
+      setIsVisible(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-1 bg-primary/30 z-50"
+      style={{ scaleX, transformOrigin: "0%" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-r from-transparent to-background" />
+    </motion.div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/publication-card.tsx (Timestamp: 2025-02-06 16:59:42) ---
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ExternalLink, Book, Award, Calendar } from 'lucide-react';
+
+interface PublicationCardProps {
+  title: string;
+  journal: string;
+  year: string;
+  impact: number;
+  citation: string;
+  doi?: string;
+  abstract?: string;
+}
+
+export function PublicationCard({
+  title,
+  journal,
+  year,
+  impact,
+  citation,
+  doi,
+  abstract
+}: PublicationCardProps) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div className="relative h-[300px] w-full perspective">
+      <motion.div
+        className="w-full h-full relative preserve-3d"
+        initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 30 }}
+      >
+        {/* Front of card */}
+        <Card className="absolute inset-0 backface-hidden p-6 flex flex-col bg-surface-elevated/95 backdrop-blur hover:elevation-3 transition-shadow duration-300">
+          <div className="flex justify-between items-start mb-4">
+            <div className="flex items-center gap-2 text-primary">
+              <Book className="h-4 w-4" />
+              <span className="text-sm">{year}</span>
+            </div>
+            {impact && (
+              <div className="flex items-center gap-2 text-primary">
+                <Award className="h-4 w-4" />
+                <span className="text-sm">Impact: {impact}</span>
+              </div>
+            )}
+          </div>
+
+          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
+          <p className="text-content-muted text-sm mb-4 italic">{journal}</p>
+
+          <div className="mt-auto flex justify-between items-center">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsFlipped(true)}
+            >
+              View Details
+            </Button>
+            {doi && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-2"
+                asChild
+              >
+                <a 
+                  href={`https://doi.org/${doi}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  DOI
+                </a>
+              </Button>
+            )}
+          </div>
+        </Card>
+
+        {/* Back of card */}
+        <Card className="absolute inset-0 backface-hidden p-6 flex flex-col bg-surface-elevated/95 backdrop-blur rotate-y-180">
+          <div className="flex-1 overflow-y-auto">
+            <div className="text-sm text-content-muted mb-4">
+              <h4 className="font-medium text-content mb-2">Citation</h4>
+              <p>{citation}</p>
+            </div>
+            
+            {abstract && (
+              <div className="text-sm text-content-muted">
+                <h4 className="font-medium text-content mb-2">Abstract</h4>
+                <p>{abstract}</p>
+              </div>
+            )}
+          </div>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="mt-4"
+            onClick={() => setIsFlipped(false)}
+          >
+            Back to Overview
+          </Button>
+        </Card>
+      </motion.div>
+    </div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/publication-card.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/smooth-scroll.tsx (Timestamp: 2025-02-16 15:38:13) ---
+'use client';
+
+import { useEffect } from 'react';
+
+export function SmoothScroll() {
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      
+      if (link?.hash && link.origin + link.pathname === window.location.origin + window.location.pathname) {
+        e.preventDefault();
+        const targetElement = document.querySelector(link.hash);
+        
+        if (targetElement) {
+          const offset = 80; // Adjust based on your header height
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+
+          // Update URL without scroll
+          history.pushState(null, '', link.hash);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  return null;
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/smooth-scroll.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-area.tsx (Timestamp: 2025-02-08 03:36:06) ---
+"use client"
+
+import * as React from "react"
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
+
+import { cn } from "@/lib/utils"
+
+const ScrollArea = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ className, children, ...props }, ref) => (
+  <ScrollAreaPrimitive.Root
+    ref={ref}
+    className={cn("relative overflow-hidden", className)}
+    {...props}
+  >
+    <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
+      {children}
+    </ScrollAreaPrimitive.Viewport>
+    <ScrollBar />
+    <ScrollAreaPrimitive.Corner />
+  </ScrollAreaPrimitive.Root>
+))
+ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
+
+const ScrollBar = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
+>(({ className, orientation = "vertical", ...props }, ref) => (
+  <ScrollAreaPrimitive.ScrollAreaScrollbar
+    ref={ref}
+    orientation={orientation}
+    className={cn(
+      "flex touch-none select-none transition-colors",
+      orientation === "vertical" &&
+        "h-full w-2.5 border-l border-l-transparent p-[1px]",
+      orientation === "horizontal" &&
+        "h-2.5 flex-col border-t border-t-transparent p-[1px]",
+      className
+    )}
+    {...props}
+  >
+    <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" />
+  </ScrollAreaPrimitive.ScrollAreaScrollbar>
+))
+ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName
+
+export { ScrollArea, ScrollBar }
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-area.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/label.tsx (Timestamp: 2025-02-09 08:01:22) ---
+"use client"
+
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
+import { cn } from "@/lib/utils"
+
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(
+      "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+      className
+    )}
+    {...props}
+  />
+))
+Label.displayName = LabelPrimitive.Root.displayName
+
+export { Label }
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/label.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/parallax-background.tsx (Timestamp: 2025-02-16 16:25:31) ---
+'use client';
+
+import { useScroll, useTransform, motion, useSpring } from "framer-motion";
+import { useRef } from "react";
+
+export function ParallaxBackground() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  
+  const y1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, -200]),
+    springConfig
+  );
+  const y2 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, -400]),
+    springConfig
+  );
+  const y3 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, -600]),
+    springConfig
+  );
+
+  const rotate1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, 45]),
+    springConfig
+  );
+  const rotate2 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, -45]),
+    springConfig
+  );
+
+  return (
+    <div ref={ref} className="fixed inset-0 -z-10 overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-background/50" />
+
+      {/* Animated Shapes */}
+      <motion.div
+        style={{ y: y1, rotate: rotate1 }}
+        className="absolute top-[20%] left-[10%] w-64 h-64 rounded-full bg-primary/5"
+      />
+      <motion.div
+        style={{ y: y2, rotate: rotate2 }}
+        className="absolute top-[30%] right-[15%] w-96 h-96 rounded-full bg-primary/10"
+      />
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[50%] left-[30%] w-48 h-48 rounded-full bg-accent/5"
+      />
+
+      {/* Floating Particles */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="20" cy="20" r="1" fill="currentColor" className="text-primary/20" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+
+      {/* Animated Lines */}
+      <div className="absolute inset-0">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            style={{
+              y: useSpring(
+                useTransform(scrollYProgress, [0, 1], [0, -100 * (i + 1)]),
+                springConfig
+              ),
+              top: `${20 + i * 15}%`
+            }}
+            className="absolute left-0 right-0 h-px bg-primary/10"
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/parallax-background.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/tooltip.tsx (Timestamp: 2025-02-16 14:36:39) ---
+"use client"
+
+import * as React from "react"
+import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+
+import { cn } from "@/lib/utils"
+
+const TooltipProvider = TooltipPrimitive.Provider
+
+const Tooltip = TooltipPrimitive.Root
+
+const TooltipTrigger = TooltipPrimitive.Trigger
+
+const TooltipContent = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
+>(({ className, sideOffset = 4, ...props }, ref) => (
+  <TooltipPrimitive.Content
+    ref={ref}
+    sideOffset={sideOffset}
+    className={cn(
+      "z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      className
+    )}
+    {...props}
+  />
+))
+TooltipContent.displayName = TooltipPrimitive.Content.displayName
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/tooltip.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/alert.tsx (Timestamp: 2025-02-09 18:08:44) ---
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+
+const alertVariants = cva(
+  "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  {
+    variants: {
+      variant: {
+        default: "bg-background text-foreground",
+        destructive:
+          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+const Alert = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
+>(({ className, variant, ...props }, ref) => (
+  <div
+    ref={ref}
+    role="alert"
+    className={cn(alertVariants({ variant }), className)}
+    {...props}
+  />
+))
+Alert.displayName = "Alert"
+
+const AlertTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h5
+    ref={ref}
+    className={cn("mb-1 font-medium leading-none tracking-tight", className)}
+    {...props}
+  />
+))
+AlertTitle.displayName = "AlertTitle"
+
+const AlertDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm [&_p]:leading-relaxed", className)}
+    {...props}
+  />
+))
+AlertDescription.displayName = "AlertDescription"
+
+export { Alert, AlertTitle, AlertDescription }
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/alert.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/optimized-image.tsx (Timestamp: 2025-02-06 19:35:32) ---
+'use client';
+
+import Image from 'next/image';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
+
+interface OptimizedImageProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className?: string;
+}
+
+export function OptimizedImage({
+  src,
+  alt,
+  width,
+  height,
+  className
+}: OptimizedImageProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <div className={cn(
+      'overflow-hidden',
+      isLoading ? 'animate-pulse bg-muted' : '',
+      className
+    )}>
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={cn(
+          'duration-700 ease-in-out',
+          isLoading ? 'scale-110 blur-lg' : 'scale-100 blur-0'
+        )}
+        onLoad={() => setIsLoading(false)}
+      />
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/optimized-image.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/switch.tsx (Timestamp: 2025-02-09 08:01:16) ---
+"use client"
+
+import * as React from "react"
+import * as SwitchPrimitives from "@radix-ui/react-switch"
+import { cn } from "@/lib/utils"
+
+const Switch = React.forwardRef<
+  React.ElementRef<typeof SwitchPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
+>(({ className, ...props }, ref) => (
+  <SwitchPrimitives.Root
+    className={cn(
+      "peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-primary/20",
+      className
+    )}
+    {...props}
+    ref={ref}
+  >
+    <SwitchPrimitives.Thumb
+      className={cn(
+        "pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"
+      )}
+    />
+  </SwitchPrimitives.Root>
+))
+Switch.displayName = SwitchPrimitives.Root.displayName
+
+export { Switch }
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/switch.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/skill-badge.tsx (Timestamp: 2025-02-06 15:15:02) ---
+'use client';
+
+import { motion } from 'framer-motion';
+
+interface SkillBadgeProps {
+  skill: string;
+  index: number;
+}
+
+export function SkillBadge({ skill, index }: SkillBadgeProps) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.3,
+        delay: index * 0.1,
+        type: "spring",
+        stiffness: 200,
+        damping: 15
+      }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm inline-flex items-center gap-2 hover:bg-primary/20 transition-colors"
+    >
+      {skill}
+    </motion.span>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/skill-badge.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/enhanced-tooltip.tsx (Timestamp: 2025-02-07 09:55:20) ---
+interface EnhancedTooltipProps {
+  active?: boolean;
+  payload?: any[];
+  label?: string;
+  solutions?: Record<string, string>;
+  formatter?: (value: number, name: string, props: any) => string | [string, string];
+}
+
+export function EnhancedTooltip({ 
+  active, 
+  payload, 
+  label,
+  solutions = {},
+  formatter
+}: EnhancedTooltipProps) {
+  if (!active || !payload) return null;
+
+  return (
+    <div className="bg-background border border-foreground/10 rounded-lg shadow-lg p-4">
+      <p className="text-sm font-semibold mb-2">{label}</p>
+      {payload.map((entry, index) => {
+        const formattedValue = formatter 
+          ? formatter(entry.value, entry.name, entry.payload)
+          : entry.value;
+        
+        const [value, description] = Array.isArray(formattedValue) 
+          ? formattedValue 
+          : [formattedValue, solutions[entry.dataKey] || entry.name];
+
+        return (
+          <div key={index} className="text-sm">
+            <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: entry.color }}></span>
+            <span className="font-medium">{value}</span>
+            <span className="text-muted-foreground ml-2">{description}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/enhanced-tooltip.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/page-transition.tsx (Timestamp: 2025-02-06 15:15:15) ---
+'use client';
+
+import { motion } from 'framer-motion';
+
+interface PageTransitionProps {
+  children: React.ReactNode;
+}
+
+const variants = {
+  hidden: { opacity: 0, x: 0, y: 20 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: 20 }
+};
+
+export function PageTransition({ children }: PageTransitionProps) {
+  return (
+    <motion.main
+      variants={variants}
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      transition={{ type: "linear", duration: 0.5 }}
+    >
+      {children}
+    </motion.main>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/page-transition.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-heading.tsx (Timestamp: 2025-02-06 15:14:56) ---
+'use client';
+
+import { motion } from 'framer-motion';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+
+interface SectionHeadingProps {
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center' | 'right';
+}
+
+export function SectionHeading({ title, subtitle, align = 'left' }: SectionHeadingProps) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  const alignmentClasses = {
+    left: 'text-left',
+    center: 'text-center',
+    right: 'text-right',
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`${alignmentClasses[align]} mb-12`}
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+        className="text-3xl font-bold mb-4"
+      >
+        {title}
+      </motion.h2>
+      {subtitle && (
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-content-muted max-w-2xl mx-auto"
+        >
+          {subtitle}
+        </motion.p>
+      )}
+    </motion.div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-heading.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-indicator.tsx (Timestamp: 2025-02-16 15:21:11) ---
+'use client';
+
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+
+export function ScrollIndicator() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  
+  const [sections, setSections] = useState<string[]>([]);
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    // Get all section IDs
+    const sectionElements = document.querySelectorAll('section[id]');
+    setSections(Array.from(sectionElements).map(section => section.id));
+
+    // Create intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    // Observe all sections
+    sectionElements.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <>
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
+        style={{ scaleX }}
+      />
+
+      {/* Navigation Dots */}
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+        <div className="space-y-4">
+          {sections.map((section) => (
+            <motion.button
+              key={section}
+              className="group relative flex items-center"
+              onClick={() => scrollTo(section)}
+              whileHover={{ x: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className={`w-3 h-3 rounded-full border-2 border-primary transition-all duration-200
+                          ${activeSection === section ? 'bg-primary scale-125' : 'bg-white'}`}
+              />
+              <span className="absolute left-0 transform -translate-x-full px-4 py-1 
+                             text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                {section.replace(/-/g, ' ')}
+              </span>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Quick Nav */}
+      <motion.button
+        className="fixed bottom-8 right-8 p-4 rounded-full bg-primary text-white shadow-lg lg:hidden
+                   hover:scale-110 active:scale-95 transition-transform"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => scrollTo(sections[sections.indexOf(activeSection) + 1] || sections[0])}
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="h-6 w-6" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M19 9l-7 7-7-7" 
+          />
+        </svg>
+      </motion.button>
+    </>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-indicator.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/cursor-effect.tsx (Timestamp: 2025-02-16 15:21:34) ---
+'use client';
+
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect } from "react";
+
+export function CursorEffect() {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  
+  const springConfig = { damping: 25, stiffness: 700 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX - 16);
+      cursorY.set(e.clientY - 16);
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+    };
+  }, []);
+
+  return (
+    <>
+      <motion.div
+        className="hidden lg:block fixed w-8 h-8 pointer-events-none z-50 rounded-full 
+                   border-2 border-primary mix-blend-difference"
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+        }}
+      />
+      <motion.div
+        className="hidden lg:block fixed w-2 h-2 pointer-events-none z-50 rounded-full 
+                   bg-primary mix-blend-difference"
+        style={{
+          x: cursorX,
+          y: cursorY,
+        }}
+      />
+    </>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/cursor-effect.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx (Timestamp: 2025-02-09 19:27:55) ---
+'use client';
+
+import * as React from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
+  {
+    variants: {
+      variant: {
+        default: [
+          'bg-primary',
+          'text-background',
+          'hover:bg-primary/90',
+          'hover:text-background',
+        ].join(' '),
+        white: [
+          'bg-primary',
+          '[&_*]:text-white',
+          'hover:bg-primary/90',
+          '[&_*]:hover:text-white',
+        ].join(' '),
+        outline: [
+          'border',
+          'border-primary',
+          'text-primary',
+          'hover:bg-primary/10',
+          'hover:text-primary',
+        ].join(' '),
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 px-3',
+        lg: 'h-11 px-8',
+        icon: 'h-10 w-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+);
+
+interface ButtonProps
+  extends HTMLMotionProps<'button'>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  children?: React.ReactNode;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+    return (
+      <motion.button
+        className={buttonVariants({ variant, size, className })}
+        ref={ref as any}
+        whileTap={{ scale: 0.98 }}
+        whileHover={{ scale: 1.02 }}
+        {...props}
+      >
+        {children}
+      </motion.button>
+    );
+  }
+);
+Button.displayName = 'Button';
+
+export { Button, buttonVariants };
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/toggle.tsx (Timestamp: 2025-02-16 16:24:16) ---
+"use client"
+
+import * as React from "react"
+import * as TogglePrimitive from "@radix-ui/react-toggle"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const toggleVariants = cva(
+  "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
+  {
+    variants: {
+      variant: {
+        default: "bg-transparent",
+        outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+      },
+      size: {
+        default: "h-10 px-3",
+        sm: "h-9 px-2.5",
+        lg: "h-11 px-5",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+const Toggle = React.forwardRef<
+  React.ElementRef<typeof TogglePrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
+    VariantProps<typeof toggleVariants>
+>(({ className, variant, size, ...props }, ref) => (
+  <TogglePrimitive.Root
+    ref={ref}
+    className={cn(toggleVariants({ variant, size, className }))}
+    {...props}
+  />
+))
+
+Toggle.displayName = TogglePrimitive.Root.displayName
+
+export { Toggle, toggleVariants } 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/toggle.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx (Timestamp: 2025-02-07 10:59:36) ---
+import { cn } from "@/lib/utils";
+
+interface SectionTitleProps {
+  children: React.ReactNode;
+  className?: string;
+  description?: string;
+}
+
+export function SectionTitle({ children, className, description }: SectionTitleProps) {
+  return (
+    <div className={cn("text-center mb-12", className)}>
+      <h2 className="text-3xl font-bold tracking-tight mb-4">
+        {children}
+      </h2>
+      <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+      {description && (
+        <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+} 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/textarea.tsx (Timestamp: 2025-02-06 18:19:46) ---
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <textarea
+        className={cn(
+          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2",
+          "text-sm ring-offset-background placeholder:text-muted-foreground",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Textarea.displayName = "Textarea"
+
+export { Textarea } 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/textarea.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/input.tsx (Timestamp: 2025-02-09 00:38:56) ---
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-10 w-full rounded-md border border-foreground/10 bg-background px-3 py-2 text-sm",
+          "ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium",
+          "placeholder:text-muted-foreground focus-visible:outline-none",
+          "focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/input.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/interactive-timeline.tsx (Timestamp: 2025-02-13 06:19:46) ---
+'use client';
+
+import { motion, AnimatePresence } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { useState } from 'react';
+import { Calendar, Award, ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+interface TimelineEvent {
+  year: number;
+  title: string;
+  description: string;
+  type: 'publication' | 'award' | 'milestone';
+  impact?: string;
+}
+
+interface InteractiveTimelineProps {
+  events: TimelineEvent[];
+}
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+export function InteractiveTimeline({ events }: InteractiveTimelineProps) {
+  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
+  const sortedEvents = [...events].sort((a, b) => b.year - a.year);
+
+  return (
+    <div className="relative">
+      {/* Timeline line - hidden on mobile */}
+      <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 transform -translate-x-1/2" />
+
+      <div className="space-y-6 relative">
+        {sortedEvents.map((event, index) => (
+          <motion.div
+            key={event.year}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="relative"
+          >
+            {/* Mobile-optimized layout */}
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              {/* Date marker - Adjusted for mobile */}
+              <div className="flex md:justify-end items-center mb-4 md:mb-0">
+                <div className="flex items-center gap-2 md:gap-4">
+                  <span className="text-sm md:text-base font-medium text-primary">
+                    {event.year}
+                  </span>
+                  {/* Circle marker - Hidden on mobile */}
+                  <div className="hidden md:block w-4 h-4 rounded-full bg-primary relative z-10">
+                    <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content card */}
+              <div className="md:pl-4">
+                <button
+                  className="w-full text-left"
+                  onClick={() => setSelectedEvent(selectedEvent?.year === event.year ? null : event)}
+                >
+                  <Card
+                    variant="interactive"
+                    className={cn(
+                      "p-4 md:p-6 transition-all duration-300",
+                      selectedEvent?.year === event.year 
+                        ? 'ring-2 ring-primary/20 shadow-lg' 
+                        : 'hover:shadow-md'
+                    )}
+                  >
+                    <div className="flex flex-col space-y-2">
+                      <div className="flex justify-between items-start gap-4">
+                        <div className="flex items-center gap-2 text-primary">
+                          {event.type === 'award' ? (
+                            <Award className="h-4 w-4 flex-shrink-0" />
+                          ) : (
+                            <Calendar className="h-4 w-4 flex-shrink-0" />
+                          )}
+                          <h3 className="text-base md:text-lg font-semibold break-words">
+                            {event.title}
+                          </h3>
+                        </div>
+                        
+                        {event.type === 'milestone' && (
+                          <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary whitespace-nowrap">
+                            Milestone
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Description - Collapsible on mobile */}
+                      <AnimatePresence>
+                        {selectedEvent?.year === event.year && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-sm text-foreground/70 mt-2">
+                              {event.description}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </Card>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/interactive-timeline.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-container.tsx (Timestamp: 2025-02-06 15:13:34) ---
+'use client';
+
+import { motion } from 'framer-motion';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+import { cn } from '@/lib/utils';
+
+interface AnimatedContainerProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+export function AnimatedContainer({ children, className, delay = 0 }: AnimatedContainerProps) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay }}
+      className={cn(className)}
+    >
+      {children}
+    </motion.div>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-container.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/skeleton.tsx (Timestamp: 2025-02-16 14:31:02) ---
+import { cn } from "@/lib/utils"
+
+function Skeleton({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn("animate-pulse rounded-md bg-muted", className)}
+      {...props}
+    />
+  )
+}
+
+export { Skeleton }
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/skeleton.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/footer.tsx (Timestamp: 2025-02-13 06:48:42) ---
+'use client';
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { LineChart, ExternalLink } from 'lucide-react';
+
+export function Footer() {
+  return (
+    <footer className="bg-background border-t border-foreground/10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="py-8">
+          {/* Logo and Description */}
+          <div className="flex flex-col items-center text-center space-y-4">
+            <motion.div 
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="p-2 rounded-lg bg-primary/10">
+                <LineChart className="w-5 h-5 text-primary" />
+              </div>
+              <span className="text-lg font-semibold text-foreground">
+                Apps by Dr. Jamie I. Forrest
+              </span>
+            </motion.div>
+            <p className="text-foreground/70 max-w-md">
+              Data visualization and analysis tools for global health research
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="mt-8 flex justify-center gap-6">
+            <FooterLink href="https://drjforrest.com" label="Main Site" />
+            <FooterLink href="https://blog.drjforrest.com" label="Blog" />
+            <FooterLink href="mailto:jamie@drjforrest.com" label="Contact" />
+          </div>
+
+          {/* Copyright */}
+          <div className="mt-8 text-center text-sm text-foreground/70">
+            <p>© {new Date().getFullYear()} Dr. Jamie I. Forrest. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link 
+      href={href}
+      className="flex items-center gap-1 text-foreground/70 hover:text-primary transition-colors"
+      target={href.startsWith('http') ? '_blank' : undefined}
+      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+    >
+      {label}
+      {href.startsWith('http') && <ExternalLink className="w-3 h-3" />}
+    </Link>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/footer.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/Navigation.tsx (Timestamp: 2025-02-13 06:50:04) ---
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from "next/link";
+import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeToggle } from '../theme/theme-toggle';
+import { FileText, LayoutGrid, Menu, X, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function Navigation() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: 'https://drjforrest.com', icon: Home, label: 'Main Site', external: true },
+    { href: 'https://blog.drjforrest.com', icon: FileText, label: 'Blog', external: true },
+    { href: '/apps', icon: LayoutGrid, label: 'Apps', external: false }
+  ];
+
+  return (
+    <header className={`fixed top-0 w-full z-50 transition-all duration-200 ${
+      isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : ''
+    }`}>
+      <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 text-foreground hover:text-foreground">
+          <span className="font-semibold text-lg">Apps</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+              className="nav-link"
+            >
+              <span className="flex items-center gap-2">
+                <link.icon className="h-4 w-4" />
+                {link.label}
+              </span>
+            </Link>
+          ))}
+          <ThemeToggle />
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background border-t border-foreground/10"
+          >
+            <div className="container mx-auto px-4 py-4 space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  className="flex items-center gap-2 p-2 rounded-md hover:bg-foreground/5"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <link.icon className="h-5 w-5" />
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/Navigation.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/providers/ThemeProvider.tsx (Timestamp: 2025-02-13 06:19:17) ---
+"use client";
+
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+      disableTransitionOnChange
+    >
+      {children}
+    </NextThemesProvider>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/providers/ThemeProvider.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/theme/theme-toggle.tsx (Timestamp: 2025-02-07 09:43:19) ---
+"use client";
+
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+
+export function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <button
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="relative rounded-lg p-2 bg-primary/10 hover:bg-primary/15 text-primary transition-all duration-200"
+      aria-label="Toggle theme"
+    >
+      <div className="relative w-5 h-5">
+        <Sun className="absolute inset-0 transform transition-transform duration-300" 
+             style={{ opacity: theme === 'dark' ? 0 : 1, transform: theme === 'dark' ? 'scale(0.5)' : 'scale(1)' }} />
+        <Moon className="absolute inset-0 transform transition-transform duration-300" 
+              style={{ opacity: theme === 'dark' ? 1 : 0, transform: theme === 'dark' ? 'scale(1)' : 'scale(0.5)' }} />
+      </div>
+    </button>
+  );
+}
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/theme/theme-toggle.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/index.tsx (Timestamp: 2025-02-16 15:35:09) ---
+'use client';
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Timeline } from './Timeline';
+import { Impact } from './Impact';
+import { Focus } from './Focus';
+import { 
+  BookOpen, 
+  Globe, 
+  Network,
+  FileText,
+  Award 
+} from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Card } from '@/components/ui/card';
+
+const researchAreas = [
+  {
+    title: "Clinical Research",
+    icon: Network,
+    description: "Platform trials and clinical research innovation",
+  },
+  {
+    title: "Digital Health",
+    icon: Globe,
+    description: "Health analytics and digital solutions",
+  },
+  {
+    title: "Policy Impact",
+    icon: Award,
+    description: "Evidence-based policy development",
+  }
+];
+
+export function PublicationDashboard() {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  return (
+    <div className="w-full max-w-6xl mx-auto px-4">
+      {/* Research Areas Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {researchAreas.map((area, index) => (
+          <motion.div
+            key={area.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <Card className="p-6 bg-white/90 backdrop-blur-sm border border-primary/10 
+                         shadow-lg hover:shadow-xl transition-all duration-300 
+                         transform hover:-translate-y-1">
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="p-3 rounded-xl bg-primary/5">
+                  <area.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-primary text-lg mb-2">{area.title}</h3>
+                  <p className="text-sm text-foreground/70">{area.description}</p>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Research Visualizations */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <Tabs 
+          value={activeTab} 
+          onValueChange={setActiveTab} 
+          className="w-full"
+        >
+          <div className="flex justify-center mb-8">
+            <TabsList className="bg-white/50 backdrop-blur-sm border border-primary/10 shadow-lg">
+              <TabsTrigger value="overview">Research Timeline</TabsTrigger>
+              <TabsTrigger value="impact">Journal Impact</TabsTrigger>
+              <TabsTrigger value="focus">Research Focus</TabsTrigger>
+            </TabsList>
+          </div>
+
+          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 border border-primary/10 shadow-lg">
+            <TabsContent value="overview" className="mt-0">
+              <Timeline />
+            </TabsContent>
+            <TabsContent value="impact" className="mt-0">
+              <Impact />
+            </TabsContent>
+            <TabsContent value="focus" className="mt-0">
+              <Focus />
+            </TabsContent>
+          </div>
+        </Tabs>
+      </motion.div>
+
+      {/* Key Publications Highlight */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="mt-12 text-center"
+      >
+        <p className="text-foreground/70">
+          Published in leading journals including The Lancet, NEJM, and other top-tier publications
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/index.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Focus.tsx (Timestamp: 2025-02-16 14:46:40) ---
+'use client';
+
+import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { motion } from 'framer-motion';
+
+const focusData = [
+  { name: 'Clinical Trials', papers: 15, color: '#26385C' },  // Deep navy
+  { name: 'Global Health', papers: 12, color: '#E63946' },    // Red
+  { name: 'Health Systems', papers: 10, color: '#2A9D8F' },   // Teal
+  { name: 'Digital Health', papers: 8, color: '#457B9D' },    // Blue
+  { name: 'Public Health', papers: 5, color: '#1D3557' }      // Dark blue
+];
+
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-primary/10">
+        <p className="font-medium text-primary">{data.name}</p>
+        <p className="text-sm text-foreground/70">
+          <span className="font-medium">{data.papers}</span> publications
+        </p>
+        <p className="text-sm text-foreground/70">
+          {((data.papers / focusData.reduce((acc, curr) => acc + curr.papers, 0)) * 100).toFixed(1)}% of total
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
+export function Focus() {
+  return (
+    <div className="space-y-8">
+      {/* Summary Text */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-4"
+      >
+        <h3 className="text-xl font-semibold text-primary">Research Focus Areas</h3>
+        <p className="text-foreground/70 max-w-2xl mx-auto">
+          Distribution of research publications across key areas of expertise,
+          highlighting a balanced approach to global health challenges.
+        </p>
+      </motion.div>
+
+      {/* Legend */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="flex flex-wrap justify-center gap-6"
+      >
+        {focusData.map((item, index) => (
+          <motion.div
+            key={item.name}
+            className="flex items-center gap-2"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <div 
+              className="w-3 h-3 rounded-full" 
+              style={{ backgroundColor: item.color }} 
+            />
+            <span className="text-sm text-foreground/70">
+              {item.name} ({item.papers})
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Chart */}
+      <div className="h-[400px] relative">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={focusData}
+              cx="50%"
+              cy="50%"
+              innerRadius={80}
+              outerRadius={160}
+              paddingAngle={2}
+              dataKey="papers"
+            >
+              {focusData.map((entry, index) => (
+                <Cell 
+                  key={entry.name}
+                  fill={entry.color}
+                  stroke="rgba(255,255,255,0.2)"
+                  strokeWidth={2}
+                />
+              ))}
+            </Pie>
+            <Tooltip content={<CustomTooltip />} />
+          </PieChart>
+        </ResponsiveContainer>
+
+        {/* Center Content */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <div className="text-3xl font-bold text-primary">
+            {focusData.reduce((acc, curr) => acc + curr.papers, 0)}
+          </div>
+          <div className="text-sm text-foreground/70">
+            Total Publications
+          </div>
+        </div>
+      </div>
+
+      {/* Key Insights */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        {[
+          {
+            title: "Clinical Focus",
+            description: "Strong emphasis on clinical trials and evidence generation"
+          },
+          {
+            title: "Global Reach",
+            description: "Significant contributions to global health initiatives"
+          },
+          {
+            title: "Digital Innovation",
+            description: "Growing focus on digital health solutions"
+          }
+        ].map((insight, index) => (
+          <motion.div
+            key={insight.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 + (index * 0.1) }}
+            className="p-4 bg-white/50 backdrop-blur-sm rounded-lg border border-primary/10"
+          >
+            <h4 className="font-medium text-primary mb-2">{insight.title}</h4>
+            <p className="text-sm text-foreground/70">{insight.description}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Focus.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Impact.tsx (Timestamp: 2025-02-16 14:44:59) ---
+'use client';
+
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { motion } from 'framer-motion';
+
+const journalData = [
+  { 
+    name: 'N Engl J Med',
+    count: 2,
+    tier: 'Highest Impact',
+    color: '#26385C'  // Deep navy
+  },
+  { 
+    name: 'Lancet Global Health',
+    count: 2,
+    tier: 'Highest Impact',
+    color: '#26385C'
+  },
+  { 
+    name: 'Lancet HIV',
+    count: 5,
+    tier: 'High Impact',
+    color: '#E63946'  // Red
+  },
+  { 
+    name: 'Am J Trop Med Hyg',
+    count: 5,
+    tier: 'High Impact',
+    color: '#E63946'
+  },
+  { 
+    name: 'JAMA Netw Open',
+    count: 2,
+    tier: 'High Impact',
+    color: '#2A9D8F'  // Teal
+  }
+];
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white/90 backdrop-blur-sm p-4 border border-primary/10 rounded-lg shadow-lg">
+        <p className="font-medium text-primary">{label}</p>
+        <p className="text-sm text-foreground/70">
+          <span className="font-medium">{payload[0].value}</span> publications
+        </p>
+        <p className="text-sm text-foreground/70">
+          Impact Tier: <span className="font-medium">{payload[0].payload.tier}</span>
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
+export function Impact() {
+  return (
+    <div className="space-y-8">
+      {/* Legend */}
+      <div className="flex flex-wrap justify-center gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex items-center gap-2"
+        >
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#26385C' }} />
+          <span className="text-sm text-foreground/70">Highest Impact (IF &gt; 70)</span>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex items-center gap-2"
+        >
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#E63946' }} />
+          <span className="text-sm text-foreground/70">High Impact (IF 20-70)</span>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex items-center gap-2"
+        >
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#2A9D8F' }} />
+          <span className="text-sm text-foreground/70">Impact Factor &lt; 20</span>
+        </motion.div>
+      </div>
+
+      {/* Chart */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="h-[400px] w-full"
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={journalData}
+            margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+            barSize={40}
+          >
+            <CartesianGrid 
+              strokeDasharray="3 3" 
+              vertical={false} 
+              stroke="#26385C" 
+              opacity={0.1} 
+            />
+            <XAxis
+              dataKey="name"
+              stroke="#26385C"
+              fontSize={12}
+              tickLine={false}
+              angle={-45}
+              textAnchor="end"
+              interval={0}
+              height={60}
+            />
+            <YAxis
+              stroke="#26385C"
+              fontSize={12}
+              tickLine={false}
+              axisLine={{ strokeWidth: 1, stroke: '#26385C', opacity: 0.2 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Bar 
+              dataKey="count" 
+              radius={[4, 4, 0, 0]}
+              fill="#26385C"
+            >
+              {journalData.map((entry, index) => (
+                <motion.rect
+                  key={`bar-${index}`}
+                  fill={entry.color}
+                  initial={{ y: 400, height: 0 }}
+                  animate={{ 
+                    y: undefined,
+                    height: undefined 
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1
+                  }}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </motion.div>
+
+      {/* Summary Text */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.7 }}
+        className="text-center text-foreground/70 text-sm"
+      >
+        Publications across leading medical and scientific journals, 
+        with significant contributions to high-impact factor publications
+      </motion.p>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Impact.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Timeline.tsx (Timestamp: 2025-02-16 15:18:02) ---
+'use client';
+
+import React, { useState } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, ComposedChart } from 'recharts';
+import { motion } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { Toggle } from '@/components/ui/toggle';
+
+const yearlyData = [
+  { year: '2009', papers: 1 },
+  { year: '2010', papers: 0 },
+  { year: '2011', papers: 1 },
+  { year: '2012', papers: 2 },
+  { year: '2013', papers: 2 },
+  { year: '2014', papers: 7 },
+  { year: '2015', papers: 6 },
+  { year: '2016', papers: 5 },
+  { year: '2017', papers: 4 },
+  { year: '2018', papers: 3 },
+  { year: '2019', papers: 1 },
+  { year: '2020', papers: 3 },
+  { year: '2021', papers: 5 },
+  { year: '2022', papers: 9 },
+  { year: '2023', papers: 2 },
+  { year: '2024', papers: 2 }
+].map((item, index, array) => ({
+  ...item,
+  total: array.slice(0, index + 1).reduce((sum, curr) => sum + curr.papers, 0)
+}));
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-primary/10">
+        <p className="font-medium text-primary">{label}</p>
+        <div className="mt-2 space-y-1">
+          <p className="text-sm text-foreground/70">
+            Publications: <span className="font-medium">{payload[0].payload.papers}</span>
+          </p>
+          <p className="text-sm text-foreground/70">
+            Total: <span className="font-medium">{payload[0].payload.total}</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
+export function Timeline() {
+  const [showAnnual, setShowAnnual] = useState(true);
+  
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-4"
+      >
+        <h3 className="text-xl font-semibold text-primary">Publication Timeline</h3>
+        <p className="text-foreground/70">
+          Track the growth and evolution of research contributions from 2009 to present
+        </p>
+      </motion.div>
+
+      {/* Legend & Controls */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="flex flex-col items-center gap-4"
+      >
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#26385C' }} />
+            <span className="text-sm text-foreground/70">Cumulative Total</span>
+          </div>
+          {showAnnual && (
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#E63946' }} />
+              <span className="text-sm text-foreground/70">Annual Publications</span>
+            </div>
+          )}
+        </div>
+        
+        <button
+          onClick={() => setShowAnnual(!showAnnual)}
+          className="px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm border border-primary/10
+                     text-sm text-primary hover:bg-primary/5 transition-colors"
+        >
+          {showAnnual ? 'Hide' : 'Show'} Annual Count
+        </button>
+      </motion.div>
+
+      {/* Chart */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="h-[400px] w-full"
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <ComposedChart data={yearlyData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+            <defs>
+              <linearGradient id="totalGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#26385C" stopOpacity={0.2}/>
+                <stop offset="95%" stopColor="#26385C" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            
+            <CartesianGrid 
+              strokeDasharray="3 3" 
+              vertical={false} 
+              stroke="#26385C" 
+              opacity={0.1} 
+            />
+            
+            <XAxis 
+              dataKey="year" 
+              stroke="#26385C"
+              fontSize={12}
+              tickLine={false}
+              axisLine={{ strokeWidth: 1, stroke: '#26385C', opacity: 0.2 }}
+            />
+            
+            <YAxis 
+              yAxisId="total"
+              orientation="right"
+              stroke="#26385C"
+              fontSize={12}
+              tickLine={false}
+              axisLine={{ strokeWidth: 1, stroke: '#26385C', opacity: 0.2 }}
+              domain={[0, 'dataMax + 5']}
+            />
+            
+            {showAnnual && (
+              <YAxis 
+                yAxisId="annual"
+                orientation="left"
+                stroke="#E63946"
+                fontSize={12}
+                tickLine={false}
+                axisLine={{ strokeWidth: 1, stroke: '#E63946', opacity: 0.2 }}
+                domain={[0, 'dataMax + 2']}
+              />
+            )}
+            
+            <Tooltip content={<CustomTooltip />} />
+            
+            {/* Area for cumulative total */}
+            <Area
+              yAxisId="total"
+              type="monotone"
+              dataKey="total"
+              stroke="#26385C"
+              strokeWidth={2}
+              fill="url(#totalGradient)"
+              dot={{ fill: "#26385C", r: 4 }}
+              activeDot={{ r: 6, fill: "#26385C" }}
+            />
+            
+            {/* Line for annual papers */}
+            {showAnnual && (
+              <Line
+                yAxisId="annual"
+                type="monotone"
+                dataKey="papers"
+                stroke="#E63946"
+                strokeWidth={2}
+                dot={{ fill: "#E63946", r: 4 }}
+                activeDot={{ r: 6, fill: "#E63946" }}
+              />
+            )}
+          </ComposedChart>
+        </ResponsiveContainer>
+      </motion.div>
+
+      {/* Key Highlights */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        {[
+          {
+            metric: "Peak Year",
+            value: "2022",
+            detail: "9 publications"
+          },
+          {
+            metric: "Total Output",
+            value: `${yearlyData[yearlyData.length - 1].total}`,
+            detail: "publications to date"
+          },
+          {
+            metric: "Growth Rate",
+            value: "15%",
+            detail: "year-over-year avg"
+          }
+        ].map((stat, index) => (
+          <motion.div
+            key={stat.metric}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 + (index * 0.1) }}
+            className="p-4 bg-white/50 backdrop-blur-sm rounded-lg border border-primary/10"
+          >
+            <div className="text-sm text-foreground/70">{stat.metric}</div>
+            <div className="text-2xl font-bold text-primary">{stat.value}</div>
+            <div className="text-sm text-foreground/70">{stat.detail}</div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Timeline.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/hooks/use-scroll-animation.ts (Timestamp: 2025-02-06 15:13:28) ---
+'use client';
+
+import { useEffect, useState, useRef } from 'react';
+
+export const useScrollAnimation = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return { ref, isVisible };
+};
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/hooks/use-scroll-animation.ts ---
+
+--- End Project Code ---

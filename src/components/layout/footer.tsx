@@ -19,11 +19,11 @@ export function Footer() {
                 <LineChart className="w-5 h-5 text-primary" />
               </div>
               <span className="text-lg font-semibold text-foreground">
-                Apps by Dr. Jamie I. Forrest
+                Dr. Jamie I. Forrest
               </span>
             </motion.div>
             <p className="text-foreground/70 max-w-md">
-              Data visualization and analysis tools for global health research
+             Innovative solutions in global health programming, research, and evaluation
             </p>
           </div>
 

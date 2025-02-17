@@ -34,7 +34,7 @@ export function Navigation() {
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-foreground hover:text-foreground">
-          <span className="font-semibold text-lg">Apps</span>
+          <span className="font-semibold text-lg">Dr. Jamie I. Forrest</span>
         </Link>
 
         {/* Desktop Navigation */}

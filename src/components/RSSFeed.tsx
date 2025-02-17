@@ -6,6 +6,7 @@ import { Rss, AlertCircle, ExternalLink } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { rssFeed } from "@/lib/rss";
 
 interface FeedItem {
   title: string;
@@ -108,8 +109,9 @@ export default function RSSFeed() {
           ))}
         </div>
         
+
         {/* Feed Items */}
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {loading ? (
             // Loading skeletons
             Array(3).fill(0).map((_, index) => (
