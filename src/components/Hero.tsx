@@ -1,175 +1,142 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { PenLine, BarChart2, Globe } from "lucide-react";
+import { 
+  BookOpen, 
+  Globe, 
+  Network,
+  FileText,
+  ArrowRight 
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-function IconSquare({ 
-  children, 
-  color = "primary" 
+function IconFeature({ 
+  icon: Icon,
+  title,
+  description,
 }: { 
-  children: React.ReactNode;
-  color?: "primary" | "accent" | "success";
+  icon: any;
+  title: string;
+  description: string;
 }) {
-  const bgColorMap = {
-    primary: "bg-primary/10",
-    accent: "bg-accent/10",
-    success: "bg-success/10"
-  };
-
   return (
-    <motion.div
-      whileHover={{ y: -2, scale: 1.05 }}
-      className={`p-3 ${bgColorMap[color]} rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200`}
+    <motion.div 
+      className="flex flex-col items-center gap-3 w-full sm:w-auto px-4"
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300, damping: 10 }}
     >
-      {children}
+      <div className="p-4 rounded-lg bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl 
+                    transition-all duration-300 border border-primary/10 w-full sm:w-auto">
+        <div className="flex items-center sm:flex-col gap-4 sm:gap-2">
+          <Icon className="w-8 h-8 text-primary flex-shrink-0" />
+          <div className="text-left sm:text-center">
+            <h3 className="font-medium text-primary">{title}</h3>
+            <p className="text-sm text-foreground/70 mt-1 sm:max-w-[250px]">
+              {description}
+            </p>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
 
 export function Hero() {
   return (
-    <div className="bg-background pt-16 relative min-h-screen">
-      <div className="container mx-auto px-4 py-24 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
-            Innovative Global Health Solutions
-          </h1>
-          
-          <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-3 justify-items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-col items-center gap-4"
-            >
-              <IconSquare color="primary">
-                <PenLine className="w-8 h-8 text-primary" strokeWidth={1.5} />
-              </IconSquare>
-              <h2 className="text-lg font-medium text-foreground">
-                Technical Writing & Communication
-              </h2>
-            </motion.div>
+    <div className="relative overflow-hidden">
+      <div className="container mx-auto px-4 py-12 sm:py-24">
+        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }} 
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight"
+          >
+            Transforming Global Health Through Strategic Innovation
+          </motion.h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col items-center gap-4"
-            >
-              <IconSquare color="accent">
-                <BarChart2 className="w-8 h-8 text-accent" strokeWidth={1.5} />
-              </IconSquare>
-              <h2 className="text-lg font-medium text-foreground">
-                Data-driven Monitoring & Evaluation
-              </h2>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col items-center gap-4"
-            >
-              <IconSquare color="success">
-                <Globe className="w-8 h-8 text-success" strokeWidth={1.5} />
-              </IconSquare>
-              <h2 className="text-lg font-medium text-foreground">
-                Global Collaboration with Local Impact
-              </h2>
-            </motion.div>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-lg sm:text-xl text-foreground/80 px-4 sm:px-0"
+          >
+            Strategic global health leader with 15+ years of experience driving clinical research 
+            innovation and health system strengthening
+          </motion.p>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-12 space-y-6 text-xl font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-6 sm:gap-16 mt-8 sm:mt-12"
           >
-            <p className="text-foreground/90 leading-relaxed">
-              Bridging health research and real-world impact through clear, compelling communication
-            </p>
-            <p className="text-foreground/90 leading-relaxed">
-              Driving evidence-based decisions through data analytics
-            </p>
-            <p className="text-foreground/90 leading-relaxed">
-              Building sustainable partnerships across global health ecosystems
-            </p>
+            <IconFeature
+              icon={Network}
+              title="Clinical Trial Innovation"
+              description="Leading platform trials and research initiatives"
+            />
+            <IconFeature
+              icon={FileText}
+              title="Research Impact"
+              description="Publications in leading medical journals"
+            />
+            <IconFeature
+              icon={Globe}
+              title="Global Implementation"
+              description="Building sustainable health solutions"
+            />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="mt-16 flex flex-col items-center gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex flex-col sm:flex-row justify-center gap-4 mt-8 px-4 sm:px-0"
           >
-            <motion.div 
-              className="flex flex-col items-center gap-3 text-primary"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ 
-                opacity: 1, 
-                y: [0, 10, 0]
-              }}
-              transition={{
-                y: {
-                  repeat: Infinity,
-                  duration: 2,
-                  ease: "easeInOut"
-                }
-              }}
+            <Button 
+              size="lg"
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white gap-2"
+              asChild
             >
-              <span className="text-lg font-medium">Discover My Journey</span>
-              <p className="text-sm text-muted-foreground max-w-md">
-                Learn about my experience, research impact, and global health initiatives
-              </p>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="28" 
-                height="28" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className="mt-2"
-              >
-                <path d="M12 5v14" />
-                <path d="m19 12-7 7-7-7" />
-              </svg>
-            </motion.div>
-
-            <div className="flex flex-col items-center gap-4 mt-8 pt-8 border-t border-muted">
-              <span className="text-sm text-muted-foreground">Also available</span>
-              <div className="flex justify-center gap-4">
-                <Link href="/apps" passHref>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-muted-foreground"
-                  >
-                    Apps
-                  </Button>
-                </Link>
-                <Link href="https://blog.drjforrest.com" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-muted-foreground"
-                  >
-                    Blog
-                  </Button>
-                </Link>
-              </div>
-            </div>
+              <Link href="#publications">
+                View Research Impact
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button 
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto gap-2"
+              asChild
+            >
+              <Link href="/contact">
+                <Globe className="w-4 h-4" />
+                Connect & Collaborate
+              </Link>
+            </Button>
           </motion.div>
-        </motion.div>
+        </div>
+      </div>
+
+      {/* Mobile-optimized background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-background to-background/50" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20">
+          <svg viewBox="0 0 800 800" className="w-full h-full">
+            <motion.circle 
+              cx="400" 
+              cy="400" 
+              r="300" 
+              className="stroke-primary fill-none" 
+              strokeWidth="2"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );
