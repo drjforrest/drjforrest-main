@@ -1,6 +1,6 @@
-PROJECT INVENTORY 2025-02-16
+PROJECT INVENTORY 2025-02-17
 Project: 
-Timestamp: 2025-02-16 22:45:10
+Timestamp: 2025-02-17 01:41:36
 Root Directory: /Users/drjforrest/Development/DevProjects/WebDev/new-main/
 
 --- README.md Contents ---
@@ -48,6 +48,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 --- File: (Project Directory Structure) ---
 ├── README.md 
 ├── all-project-code_2025-02-16.txt 
+├── all-project-code_2025-02-17.txt 
 ├── next-env.d.ts 
 ├── next.config.js 
 ├── package-lock.json 
@@ -90,6 +91,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 │   │   ├── CareerTimeline.tsx 
 │   │   ├── ContactForm.tsx 
 │   │   ├── EducationCards.tsx 
+│   │   ├── Footer.tsx 
 │   │   ├── Hero.tsx 
 │   │   ├── RSSFeed.tsx 
 │   │   ├── ResearchImpactDashboard.tsx 
@@ -438,7 +440,7 @@ export interface Certification {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/publications.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx (Timestamp: 2025-02-16 15:38:21) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx (Timestamp: 2025-02-17 01:02:30) ---
 import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
@@ -446,6 +448,7 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { SmoothScroll } from '@/components/ui/smooth-scroll';
 import '@/app/globals.css';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Dr. Jamie Forrest - Global Health Research, Technical Writing & Analytics',
@@ -459,6 +462,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -466,6 +476,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <head>
+        <link 
+          rel="stylesheet" 
+          href="/_next/static/css/app/layout.css" 
+          as="style"
+          precedence="high"
+        />
+      </head>
       <body className="overflow-x-hidden">
         <ThemeProvider>
           <ScrollProgress />
@@ -475,6 +493,7 @@ export default function RootLayout({
             {children}
           </div>
         </ThemeProvider>
+        <Footer />
         <Analytics />
       </body>
     </html>
@@ -483,7 +502,7 @@ export default function RootLayout({
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-16 22:32:07) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-17 00:57:44) ---
 'use client';
 
 import { motion } from "framer-motion";
@@ -537,9 +556,6 @@ export default function HomeContent() {
         className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
       >
         <SectionTitle>Education & Achievements</SectionTitle>
-        <div className="mt-8">
-          <EducationCards />
-        </div>
         <div className="mt-8 flex justify-center">
           <Button
             asChild
@@ -570,6 +586,9 @@ export default function HomeContent() {
               Download CV
             </a>
           </Button>
+        </div>
+        <div className="mt-8">
+          <EducationCards />
         </div>
       </motion.section>
 
@@ -903,172 +922,181 @@ export async function POST(request: Request) {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/contact/route.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts (Timestamp: 2025-02-09 18:38:43) ---
-import { NextResponse } from "next/server";
-import RSSParser from 'rss-parser';
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts (Timestamp: 2025-02-17 00:26:43) ---
+import { NextResponse } from 'next/server';
+import Parser from 'rss-parser';
 
-const INOREADER_FEED_URL = "https://www.inoreader.com/stream/user/1005214099/tag/drjforrest.com";
-
-const parser = new RSSParser();
+const parser = new Parser();
 
 export async function GET(request: Request) {
   try {
-    const url = new URL(request.url);
-    const format = url.searchParams.get("format");
+    const { searchParams } = new URL(request.url);
+    const url = searchParams.get('url');
 
-    // Fetch the RSS feed
-    const response = await fetch(INOREADER_FEED_URL);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch RSS feed: ${response.statusText}`);
+    if (!url) {
+      return NextResponse.json({ error: 'URL parameter is required' }, { status: 400 });
     }
 
-    const xmlText = await response.text();
-    const feed = await parser.parseString(xmlText);
+    // Fetch and parse the RSS feed
+    const feed = await parser.parseURL(url);
 
-    if (format === "json") {
-      return NextResponse.json(feed.items.map(item => ({
-        title: item.title,
-        link: item.link,
-        description: item.contentSnippet || item.description,
-        pubDate: item.pubDate,
-      })));
-    }
+    // Transform the feed items into our desired format
+    const items = feed.items.map(item => ({
+      title: item.title || '',
+      link: item.link || '',
+      date: item.pubDate || item.isoDate || new Date().toISOString(),
+      source: feed.title || 'Unknown Source'
+    }));
 
-    // Return the raw XML for RSS feed subscribers
-    return new NextResponse(xmlText, {
-      headers: {
-        "Content-Type": "application/xml",
-        "Cache-Control": "s-maxage=3600, stale-while-revalidate"
-      }
-    });
+    return NextResponse.json(items);
   } catch (error) {
-    console.error('RSS Error:', error);
+    console.error('RSS feed error:', error);
     return NextResponse.json(
-      { error: 'Failed to load RSS feed' },
+      { error: 'Failed to fetch RSS feed' }, 
       { status: 500 }
     );
   }
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-16 18:36:14) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-17 01:37:48) ---
 'use client';
 
-import { Button } from "@/components/ui/button";
-import { 
-  BookOpen, 
-  Globe, 
-  Network,
-  FileText,
-  ArrowRight 
-} from "lucide-react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Network, FileText, Globe } from "lucide-react";
+import { LineChart, PenTool, Globe2 } from 'lucide-react';
+
+interface IconFeatureProps {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  sectionId: string;
+}
 
 function IconFeature({ 
   icon: Icon,
   title,
   description,
-}: { 
-  icon: any;
-  title: string;
-  description: string;
-}) {
+  sectionId,
+}: IconFeatureProps) {
+  const scrollToSection = () => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <motion.div 
-      className="flex flex-col items-center gap-3 w-full sm:w-auto px-4"
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 300, damping: 10 }}
+    <motion.button 
+      onClick={scrollToSection}
+      className="bg-white rounded-lg shadow-lg w-[280px]"
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
     >
-      <div className="p-4 rounded-lg bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl 
-                    transition-all duration-300 border border-primary/10 w-full sm:w-auto">
-        <div className="flex items-center sm:flex-col gap-4 sm:gap-2">
-          <Icon className="w-8 h-8 text-primary flex-shrink-0" />
-          <div className="text-left sm:text-center">
-            <h3 className="font-medium text-primary">{title}</h3>
-            <p className="text-sm text-foreground/70 mt-1 sm:max-w-[250px]">
-              {description}
-            </p>
-          </div>
+      <div className="p-8 flex flex-col items-center text-center">
+        <div className="p-3 rounded-xl bg-primary/5 mb-4">
+          <Icon className="w-8 h-8 text-primary/70" />
         </div>
+        <h3 className="text-xl font-medium text-[#26385C] mb-2">{title}</h3>
+        <p className="text-sm text-[#26385C]/70">
+          {description}
+        </p>
       </div>
-    </motion.div>
+    </motion.button>
   );
 }
 
 export function Hero() {
   return (
-    <div className="relative overflow-hidden">
-      <div className="container mx-auto px-4 py-12 sm:py-24">
-        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
-          <motion.h1 
-            initial={{ y: 20, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight"
-          >
-            Transforming Global Health Through Innovation
-          </motion.h1>
+    <div className="w-full h-[calc(100vh-80px)] flex items-center justify-center relative">
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                  w-[840px] h-[840px] border-[2px] 
+                  border-[#2A9D8F]/20 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, transparent 30%, rgba(42, 157, 143, 0.03) 70%)'
+        }}
+      />
+      <div className="max-w-5xl mx-auto">
+        {/* Hero Icons */}
+        <motion.div 
+          className="flex items-center justify-center gap-4 mb-12"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="p-4 bg-primary/10 rounded-2xl">
+            <LineChart className="w-10 h-10 text-primary" />
+          </div>
+          <div className="p-4 bg-accent/10 rounded-2xl">
+            <PenTool className="w-10 h-10 text-accent" />
+          </div>
+          <div className="p-4 bg-success/10 rounded-2xl">
+            <Globe2 className="w-10 h-10 text-success" />
+          </div>
+        </motion.div>
+        <div className="w-full max-w-[1200px] mx-auto px-8 flex flex-col items-center relative">
+          <div className="text-center mb-16">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-[#26385C] text-6xl font-bold mb-6"
+            >
+              Innovating Global Health Solutions
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-lg sm:text-xl text-foreground/80 px-4 sm:px-0"
-          >
-            Strategic partnerships, effective technical & scientific communication, evidence-based approaches to resuults monitoring and evaluation
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-[#26385C]/80 text-xl max-w-3xl mx-auto"
+            >
+              Strategic partnerships, effective technical & scientific communication, evidence-based
+              approaches to results monitoring and evaluation
+            </motion.p>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-6 sm:gap-16 mt-8 sm:mt-12"
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex gap-8 justify-center"
           >
             <IconFeature
               icon={Network}
-              title="Research Innovation"
-              description="Clinical research partnerships"
+              title="Experienced Professional"
+              description="15+ years leading global health initiatives and clinical research"
+              sectionId="career"
             />
             <IconFeature
               icon={FileText}
-              title="Research Impact"
-              description="Published in leading scientific journals"
+              title="Writing & Research"
+              description="Published in leading scientific journals with high-impact contributions"
+              sectionId="publications"
             />
             <IconFeature
               icon={Globe}
-              title="Global Implementation"
-              description="Building sustainable health solutions"
+              title="Strategic Partnerships"
+              description="Building sustainable collaborations across sectors and regions"
+              sectionId="education"
             />
           </motion.div>
-        </div>
-      </div>
-
-      {/* Mobile-optimized background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-background to-background/50" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20">
-          <svg viewBox="0 0 800 800" className="w-full h-full">
-            <motion.circle 
-              cx="400" 
-              cy="400" 
-              r="300" 
-              className="stroke-primary fill-none" 
-              strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </svg>
         </div>
       </div>
     </div>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx (Timestamp: 2025-02-16 14:41:42) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx (Timestamp: 2025-02-17 00:50:11) ---
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -1240,7 +1268,7 @@ export function CareerTimeline() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx (Timestamp: 2025-02-13 06:19:17) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx (Timestamp: 2025-02-17 00:47:44) ---
 'use client';
 
 import React from 'react';
@@ -1413,183 +1441,223 @@ export function EducationCards() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-16 22:24:40) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-17 01:02:30) ---
 'use client';
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Rss, AlertCircle, ExternalLink } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { rssFeed } from "@/lib/rss";
+import { Button } from "@/components/ui/button";
+import { Rss, ExternalLink, Clock, Hash } from "lucide-react";
 
 interface FeedItem {
   title: string;
   link: string;
-  description?: string;
-  pubDate: string;
+  date: string;
+  source: string;
 }
 
-const defaultInterests = [
-  "#Automation",
-  "#AI",
-  "#Photography",
-  "#Travel",
-  "#CanadianPolitics"
+interface TopicFeed {
+  id: string;
+  label: string;
+  feedUrl: string;
+  color: string;
+}
+
+const topics: TopicFeed[] = [
+  { 
+    id: 'automation', 
+    label: '#Automation', 
+    feedUrl: 'https://talk.automators.fm/posts.rss',
+    color: '#2A9D8F'
+  },
+  { 
+    id: 'ai', 
+    label: '#AI', 
+    feedUrl: 'https://medium.com/feed/towards-artificial-intelligence',
+    color: '#E9C46A'
+  },
+  { 
+    id: 'travel', 
+    label: '#Travel', 
+    feedUrl: 'https://www.nomadicmatt.com/feed/',
+    color: '#F4A261'
+  },
+  { 
+    id: 'news', 
+    label: '#CanadianNews', 
+    feedUrl: 'https://rss.cbc.ca/lineup/canada.xml',
+    color: '#E76F51'
+  },
+  { 
+    id: 'ted', 
+    label: '#TEDTalks', 
+    feedUrl: 'https://www.ted.com/feeds/talks.rss',
+    color: '#264653'
+  }
 ];
 
-function processFeedItems(items: FeedItem[]) {
-  return items
-    .filter(item => item.description && item.description.length < 300)
-    .map(item => ({
-      ...item,
-      description: item.description ? item.description.slice(0, 200) : ''
-    }))
-    .slice(0, 5);
-}
-
 export default function RSSFeed() {
+  const [selectedTopic, setSelectedTopic] = useState<string>(topics[0].id);
   const [items, setItems] = useState<FeedItem[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchRSS() {
-      try {
-        setLoading(true);
-        setError(null);
+  const fetchFeedItems = async (topicId: string) => {
+    setIsLoading(true);
+    try {
+      const topic = topics.find(t => t.id === topicId);
+      if (!topic) return;
 
-        const response = await fetch("/api/rss?format=json");
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setItems(processFeedItems(data));
-      } catch (err) {
-        console.error("Error fetching RSS feed:", err);
-        setError("Failed to load the RSS feed.");
-      } finally {
-        setLoading(false);
-      }
+      const response = await fetch(`/api/rss?url=${encodeURIComponent(topic.feedUrl)}`);
+      const data = await response.json();
+      setItems(data.slice(0, 8)); // Limit to 8 items
+    } catch (error) {
+      console.error('Error fetching RSS feed:', error);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    fetchRSS();
+  // Fetch initial feed
+  useEffect(() => {
+    fetchFeedItems(selectedTopic);
   }, []);
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full max-w-6xl mx-auto"
-    >
-      <div className="flex flex-col gap-6">
-        {error && (
-          <Alert variant="destructive" className="w-full">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-
-        {/* Subscribe Button at the top */}
-        <div className="flex flex-col items-center gap-3">
-          <Button
-            variant="outline"
-            size="lg"
-            className="flex items-center gap-2 hover:bg-primary/10"
-            onClick={() => window.open("/api/rss", "_blank")}
+    <div className="w-full max-w-6xl mx-auto">
+      {/* Topic Selection */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {topics.map((topic) => (
+          <motion.button
+            key={topic.id}
+            onClick={() => {
+              setSelectedTopic(topic.id);
+              fetchFeedItems(topic.id);
+            }}
+            className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2
+              ${selectedTopic === topic.id 
+                ? `bg-[${topic.color}] text-white` 
+                : 'bg-primary/10 text-primary hover:bg-primary/20'
+              }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Rss className="w-5 h-5" />
-            Subscribe to RSS Feed
-          </Button>
-          <p className="text-sm text-muted-foreground">
-            Below is a curated RSS Feed of my interests. The feed will refresh with the page or use the feed in your preferred RSS Reader with the link above.
-          </p>
-        </div>
+            <Hash className="w-4 h-4" />
+            <span>{topic.label.replace('#', '')}</span>
+          </motion.button>
+        ))}
+      </div>
 
-        {/* Interest Tags */}
-        <div className="flex flex-wrap justify-center gap-4">
-          {defaultInterests.map((tag, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-default text-lg font-medium"
-            >
-              {tag}
-            </motion.span>
-          ))}
-        </div>
-        
-
-        {/* Feed Items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {loading ? (
+      {/* Feed Items Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <AnimatePresence mode="sync">
+          {isLoading ? (
             // Loading skeletons
-            Array(3).fill(0).map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow p-6">
-                <div className="animate-pulse">
-                  <div className="h-6 bg-primary/10 rounded w-3/4 mb-2" />
-                  <div className="h-4 bg-primary/5 rounded w-1/4 mb-4" />
-                  <div className="h-4 bg-primary/10 rounded w-full" />
-                </div>
-              </div>
+            Array(8).fill(0).map((_, index) => (
+              <motion.div
+                key={`skeleton-${index}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="h-[200px] bg-primary/5 rounded-lg animate-pulse"
+              />
             ))
-          ) : items.length > 0 ? (
+          ) : (
             items.map((item, index) => (
               <motion.div
-                key={item.link}
+                key={`${selectedTopic}-${item.link}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-all duration-200">
+                <Card className="h-full group hover:shadow-lg transition-all duration-300">
                   <a 
                     href={item.link}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
+                    rel="noopener noreferrer" 
+                    className="p-4 flex flex-col h-full"
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary mb-1 group-hover:text-primary">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {new Date(item.pubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </p>
-                        <p className="text-sm text-card-foreground">
-                          {item.description}
-                        </p>
-                      </div>
-                      <ExternalLink className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-base font-medium text-primary group-hover:text-primary/80 line-clamp-2">
+                        {item.title}
+                      </h3>
+                      <ExternalLink className="w-4 h-4 flex-shrink-0 text-primary/60 group-hover:text-primary" />
+                    </div>
+                    <div className="mt-auto pt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                      <Clock className="w-4 h-4" />
+                      <span>
+                        {new Date(item.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </span>
                     </div>
                   </a>
-                </div>
+                </Card>
               </motion.div>
             ))
-          ) : (
-            <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-center text-muted-foreground">No items to display</p>
-            </div>
           )}
-        </div>
+        </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx (Timestamp: 2025-02-09 14:54:34) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Footer.tsx (Timestamp: 2025-02-17 01:03:59) ---
+'use client';
+
+import { motion } from 'framer-motion';
+
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <motion.footer 
+      className="w-full bg-white/50 backdrop-blur-sm border-t border-[#2A9D8F]/10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-center md:text-left">
+            <p className="text-sm text-foreground/70">
+              © {currentYear} Dr. Jamie I. Forrest. All rights reserved.
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-6">
+            <a 
+              href="/privacy"
+              className="text-sm text-foreground/70 hover:text-[#2A9D8F] transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a 
+              href="/terms"
+              className="text-sm text-foreground/70 hover:text-[#2A9D8F] transition-colors"
+            >
+              Terms of Use
+            </a>
+            <a 
+              href="mailto:jamie@drjforrest.com"
+              className="text-sm text-foreground/70 hover:text-[#2A9D8F] transition-colors"
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </motion.footer>
+  );
+} 
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Footer.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx (Timestamp: 2025-02-17 01:02:30) ---
 "use client";
 
 import { useState } from "react";
@@ -1653,150 +1721,150 @@ export function ContactForm() {
   };
 
   return (
-    <section className="py-20">
-      <div className="container px-4">
-        <motion.div 
-          className="max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="text-center mb-12">
-            <p className="text-lg text-foreground/80">
-              I'm always interested in connecting with colleagues and exploring new opportunities
-              in global health, clinical research, and data science.
-            </p>
-          </div>
+    <div className="container px-4">
+      <motion.div 
+        className="max-w-5xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="text-center mb-12">
+          <p className="text-lg text-foreground/80">
+            I'm always interested in connecting with colleagues and exploring new opportunities
+            in <span className="text-[#2A9D8F] font-medium">global health</span>, 
+            <span className="text-[#2A9D8F] font-medium"> clinical research</span>, and 
+            <span className="text-[#2A9D8F] font-medium"> data science</span>.
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-[1.5fr,1fr] gap-8">
-            {/* Contact Form */}
-            <Card className="p-8 bg-white/90 backdrop-blur-sm border border-primary/10 shadow-lg transition-all duration-300">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-4">
-                  {[
-                    { id: 'name', label: 'Name', type: 'text', icon: 'user' },
-                    { id: 'email', label: 'Email', type: 'email', icon: 'mail' },
-                    { id: 'subject', label: 'Subject', type: 'text', icon: 'message' }
-                  ].map(({ id, label, type }) => (
-                    <motion.div 
-                      key={id}
-                      whileTap={{ scale: 0.995 }}
-                    >
-                      <label htmlFor={id} className="block text-sm font-medium mb-2 text-foreground/80">
-                        {label}
-                      </label>
-                      <div className="relative">
-                        <Input
-                          id={id}
-                          type={type}
-                          value={formData[id]}
-                          onChange={(e) => setFormData(prev => ({ ...prev, [id]: e.target.value }))}
-                          onFocus={() => setFocusedField(id)}
-                          onBlur={() => setFocusedField(null)}
-                          required
-                          className={`bg-background/50 border-primary/10 focus:border-primary/20 h-12 px-4 transition-all duration-300
-                            ${focusedField === id ? 'shadow-lg' : 'shadow-sm'}`}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                  
-                  <motion.div whileTap={{ scale: 0.995 }}>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground/80">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      rows={6}
-                      value={formData.message}
-                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                      onFocus={() => setFocusedField('message')}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      className={`bg-background/50 border-primary/10 focus:border-primary/20 transition-all duration-300
-                        ${focusedField === 'message' ? 'shadow-lg' : 'shadow-sm'}`}
-                    />
-                  </motion.div>
-                </div>
-
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button 
-                    type="submit"
-                    className="w-full h-12 bg-primary hover:bg-primary/90 text-background shadow-lg"
-                    disabled={isSubmitting}
+        <div className="grid md:grid-cols-[1.5fr,1fr] gap-8">
+          {/* Contact Form */}
+          <Card className="p-8 bg-white/90 backdrop-blur-sm border border-[#2A9D8F]/20 shadow-lg transition-all duration-300">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-4">
+                {[
+                  { id: 'name', label: 'Name', type: 'text', icon: 'user' },
+                  { id: 'email', label: 'Email', type: 'email', icon: 'mail' },
+                  { id: 'subject', label: 'Subject', type: 'text', icon: 'message' }
+                ].map(({ id, label, type }) => (
+                  <motion.div 
+                    key={id}
+                    whileTap={{ scale: 0.995 }}
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
+                    <label htmlFor={id} className="block text-sm font-medium mb-2 text-foreground/80">
+                      {label}
+                    </label>
+                    <div className="relative">
+                      <Input
+                        id={id}
+                        type={type}
+                        value={formData[id]}
+                        onChange={(e) => setFormData(prev => ({ ...prev, [id]: e.target.value }))}
+                        onFocus={() => setFocusedField(id)}
+                        onBlur={() => setFocusedField(null)}
+                        required
+                        className={`bg-background/50 border-primary/10 focus:border-primary/20 h-12 px-4 transition-all duration-300
+                          ${focusedField === id ? 'shadow-lg' : 'shadow-sm'}`}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+                
+                <motion.div whileTap={{ scale: 0.995 }}>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground/80">
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField(null)}
+                    required
+                    className={`bg-background/50 border-primary/10 focus:border-primary/20 transition-all duration-300
+                      ${focusedField === 'message' ? 'shadow-lg' : 'shadow-sm'}`}
+                  />
                 </motion.div>
-              </form>
-            </Card>
+              </div>
 
-            {/* Contact Info */}
-            <Card className="p-8 bg-white/90 backdrop-blur-sm border border-primary/10 shadow-lg">
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 text-primary">Contact Information</h3>
-                  <div className="space-y-3">
-                    {[
-                      { icon: Mail, text: 'jamie@drjforrest.com', action: 'email' },
-                      { icon: Linkedin, text: 'Connect on LinkedIn', action: 'linkedin' },
-                      { icon: Github, text: 'GitHub Profile', action: 'github' }
-                    ].map(({ icon: Icon, text, action }) => (
-                      <motion.button
-                        key={text}
-                        whileHover={{ scale: 1.02, x: 4 }}
-                        onClick={() => handleExternalLink(action, `${action === 'email' ? 'mailto:' : ''}${text}`)}
-                        className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 transition-colors"
-                      >
-                        <div className="p-2 rounded-full bg-primary/10">
-                          <Icon className="h-4 w-4 text-primary" />
-                        </div>
-                        <span className="text-foreground/80">{text}</span>
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button 
+                  type="submit"
+                  className="w-full h-12 bg-primary hover:bg-primary/90 text-background shadow-lg"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-2 h-4 w-4" />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </motion.div>
+            </form>
+          </Card>
 
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 text-primary">Looking to collaborate?</h3>
-                  <p className="text-foreground/70 mb-4">I'm open to discussing opportunities in:</p>
-                  <div className="space-y-3">
-                    {[
-                      'Clinical Research Leadership',
-                      'Global Health Projects',
-                      'Data Science Initiatives',
-                      'Health Systems Strengthening'
-                    ].map((item) => (
-                      <motion.div 
-                        key={item} 
-                        className="flex items-center gap-3 p-2"
-                        whileHover={{ x: 4 }}
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                        <span className="text-foreground/80">{item}</span>
-                      </motion.div>
-                    ))}
-                  </div>
+          {/* Contact Info */}
+          <Card className="p-8 bg-white/90 backdrop-blur-sm border border-[#2A9D8F]/20 shadow-lg">
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-primary">Contact Information</h3>
+                <div className="space-y-3">
+                  {[
+                    { icon: Mail, text: 'jamie@drjforrest.com', action: 'email' },
+                    { icon: Linkedin, text: 'Connect on LinkedIn', action: 'linkedin' },
+                    { icon: Github, text: 'GitHub Profile', action: 'github' }
+                  ].map(({ icon: Icon, text, action }) => (
+                    <motion.button
+                      key={text}
+                      whileHover={{ scale: 1.02, x: 4 }}
+                      onClick={() => handleExternalLink(action, `${action === 'email' ? 'mailto:' : ''}${text}`)}
+                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 transition-colors"
+                    >
+                      <div className="p-2 rounded-full bg-primary/10">
+                        <Icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <span className="text-foreground/80">{text}</span>
+                    </motion.button>
+                  ))}
                 </div>
               </div>
-            </Card>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-primary">Looking to collaborate?</h3>
+                <p className="text-foreground/70 mb-4">I'm open to discussing opportunities in:</p>
+                <div className="space-y-3">
+                  {[
+                    'Clinical Research Leadership',
+                    'Global Health Projects',
+                    'Data Science Initiatives',
+                    'Health Systems Strengthening'
+                  ].map((item) => (
+                    <motion.div 
+                      key={item} 
+                      className="flex items-center gap-3 p-2"
+                      whileHover={{ x: 4 }}
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                      <span className="text-foreground/80">{item}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -2290,11 +2358,11 @@ export function AnimatedCard({ children, className, delay = 0, hover = true }: A
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-card.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx (Timestamp: 2025-02-16 22:32:29) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx (Timestamp: 2025-02-16 22:48:53) ---
 'use client';
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ChevronUp } from 'lucide-react';
 
 const sections = [
@@ -2317,32 +2385,35 @@ export function ScrollProgress() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+
+  const determineActiveSection = useCallback(() => {
+    const sectionElements = sections.map(section => ({
+      id: section.id,
+      element: document.getElementById(section.id)
+    }));
+
+    const currentSection = sectionElements.find(section => {
+      if (!section.element) return false;
+      const rect = section.element.getBoundingClientRect();
+      return rect.top <= 100 && rect.bottom >= 100;
+    });
+
+    if (currentSection) {
+      setActiveSection(currentSection.id);
+    }
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    setIsVisible(window.scrollY > 100);
+    setShowScrollTop(window.scrollY > window.innerHeight);
+    determineActiveSection();
+  }, [determineActiveSection]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 100);
-      setShowScrollTop(window.scrollY > window.innerHeight);
-
-      // Determine active section
-      const sectionElements = sections.map(section => ({
-        id: section.id,
-        element: document.getElementById(section.id)
-      }));
-
-      const currentSection = sectionElements.find(section => {
-        if (!section.element) return false;
-        const rect = section.element.getBoundingClientRect();
-        return rect.top <= 100 && rect.bottom >= 100;
-      });
-
-      if (currentSection) {
-        setActiveSection(currentSection.id);
-      }
-    };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -2354,7 +2425,7 @@ export function ScrollProgress() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // Adjust based on your header height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -2367,19 +2438,41 @@ export function ScrollProgress() {
 
   return (
     <>
-      {/* Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary/30 z-50"
-        style={{ scaleX, transformOrigin: "0%" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-r from-transparent to-background" />
-      </motion.div>
+      {/* Enhanced Progress Bar with Section Markers */}
+      <div className="fixed top-0 left-0 right-0 h-1 z-50">
+        <motion.div
+          className="absolute inset-0 bg-primary/30"
+          style={{ scaleX, transformOrigin: "0%" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isVisible ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+        />
+        
+        {/* Section Markers */}
+        <div className="absolute inset-0 flex">
+          {sections.map((section, index) => (
+            <div
+              key={section.id}
+              className="relative flex-1"
+              onMouseEnter={() => setHoveredSection(section.id)}
+              onMouseLeave={() => setHoveredSection(null)}
+            >
+              {hoveredSection === section.id && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="absolute top-2 left-1/2 transform -translate-x-1/2 
+                           bg-primary text-white px-2 py-1 rounded text-xs whitespace-nowrap"
+                >
+                  {section.label}
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
 
-      {/* Section Navigation Dots */}
+      {/* Enhanced Section Navigation Dots */}
       <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
         <div className="space-y-4">
           {sections.map((section) => (
@@ -2391,32 +2484,53 @@ export function ScrollProgress() {
               transition={{ duration: 0.2 }}
             >
               <motion.div
-                className={`w-3 h-3 rounded-full border-2 border-primary transition-all duration-200
-                          ${activeSection === section.id ? 'bg-primary scale-125' : 'bg-white'}`}
-              />
-              <span className="absolute left-0 transform -translate-x-full px-4 py-1 
-                             text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                className={`w-3 h-3 rounded-full border-2 border-primary transition-all duration-300
+                          ${activeSection === section.id ? 'bg-primary scale-125' : 'bg-background'}
+                          hover:border-primary/80`}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-primary/20"
+                  initial={false}
+                  animate={activeSection === section.id ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                  transition={{ duration: 0.5, repeat: activeSection === section.id ? Infinity : 0 }}
+                />
+              </motion.div>
+              
+              <motion.span
+                className="absolute left-0 transform -translate-x-full px-4 py-1 
+                         bg-background/80 backdrop-blur-sm rounded-md
+                         text-sm text-primary opacity-0 group-hover:opacity-100 
+                         transition-all duration-200"
+                initial={{ x: 20, opacity: 0 }}
+                whileHover={{ x: -8, opacity: 1 }}
+              >
                 {section.label}
-              </span>
+              </motion.span>
             </motion.button>
           ))}
         </div>
       </div>
 
-      {/* Scroll to Top Button */}
+      {/* Enhanced Scroll to Top Button */}
       <motion.button
-        className="fixed bottom-8 right-8 p-4 rounded-full bg-primary text-white shadow-lg lg:block
-                   hover:bg-primary/90 transition-colors"
+        className="fixed bottom-8 right-8 p-4 rounded-full bg-primary text-white shadow-lg
+                   hover:bg-primary/90 transition-all duration-300"
         initial={{ opacity: 0, y: 100 }}
         animate={{ 
           opacity: showScrollTop ? 1 : 0,
-          y: showScrollTop ? 0 : 100
+          y: showScrollTop ? 0 : 100,
+          scale: 1
         }}
-        onClick={scrollToTop}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
+        onClick={scrollToTop}
       >
         <ChevronUp className="w-6 h-6" />
+        <motion.div
+          className="absolute inset-0 rounded-full bg-primary/20"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
       </motion.button>
     </>
   );
@@ -3465,8 +3579,9 @@ Toggle.displayName = TogglePrimitive.Root.displayName
 export { Toggle, toggleVariants } 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/toggle.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx (Timestamp: 2025-02-07 10:59:36) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx (Timestamp: 2025-02-16 23:35:18) ---
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface SectionTitleProps {
   children: React.ReactNode;
@@ -3476,17 +3591,19 @@ interface SectionTitleProps {
 
 export function SectionTitle({ children, className, description }: SectionTitleProps) {
   return (
-    <div className={cn("text-center mb-12", className)}>
-      <h2 className="text-3xl font-bold tracking-tight mb-4">
-        {children}
-      </h2>
-      <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={cn("text-center mb-16", className)}
+    >
+      <h2 className="text-4xl font-bold text-[#26385C] mb-4">{children}</h2>
+      <div className="w-24 h-1 bg-[#2A9D8F] mx-auto rounded-full" />
       {description && (
         <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
           {description}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 } 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx ---
@@ -3787,7 +3904,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/footer.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/Navigation.tsx (Timestamp: 2025-02-16 22:12:48) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/Navigation.tsx (Timestamp: 2025-02-17 01:11:20) ---
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -3949,7 +4066,7 @@ export function ThemeToggle() {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/theme/theme-toggle.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/index.tsx (Timestamp: 2025-02-16 15:35:09) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/index.tsx (Timestamp: 2025-02-17 00:57:44) ---
 'use client';
 
 import React, { useState } from 'react';
@@ -3957,109 +4074,87 @@ import { motion } from 'framer-motion';
 import { Timeline } from './Timeline';
 import { Impact } from './Impact';
 import { Focus } from './Focus';
-import { 
-  BookOpen, 
-  Globe, 
-  Network,
-  FileText,
-  Award 
-} from "lucide-react";
+import { FileText } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Card } from '@/components/ui/card';
-
-const researchAreas = [
-  {
-    title: "Clinical Research",
-    icon: Network,
-    description: "Platform trials and clinical research innovation",
-  },
-  {
-    title: "Digital Health",
-    icon: Globe,
-    description: "Health analytics and digital solutions",
-  },
-  {
-    title: "Policy Impact",
-    icon: Award,
-    description: "Evidence-based policy development",
-  }
-];
+import { SectionTitle } from '@/components/ui/section-title';
 
 export function PublicationDashboard() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('timeline');
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4">
-      {/* Research Areas Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        {researchAreas.map((area, index) => (
-          <motion.div
-            key={area.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <Card className="p-6 bg-white/90 backdrop-blur-sm border border-primary/10 
-                         shadow-lg hover:shadow-xl transition-all duration-300 
-                         transform hover:-translate-y-1">
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="p-3 rounded-xl bg-primary/5">
-                  <area.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-primary text-lg mb-2">{area.title}</h3>
-                  <p className="text-sm text-foreground/70">{area.description}</p>
-                </div>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h4 className="text-xl font-bold text-[#26385C]">53 Publications</h4>
+          <p className="text-sm text-[#26385C]/70">Peer-reviewed articles spanning 15 years</p>
+        </div>
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h4 className="text-xl font-bold text-[#26385C]">15+ High Impact</h4>
+          <p className="text-sm text-[#26385C]/70">Publications in leading medical journals</p>
+        </div>
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h4 className="text-xl font-bold text-[#26385C]">Global Reach</h4>
+          <p className="text-sm text-[#26385C]/70">Research implemented across 20+ countries</p>
+        </div>
       </div>
 
-      {/* Research Visualizations */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        <Tabs 
-          value={activeTab} 
-          onValueChange={setActiveTab} 
-          className="w-full"
-        >
-          <div className="flex justify-center mb-8">
-            <TabsList className="bg-white/50 backdrop-blur-sm border border-primary/10 shadow-lg">
-              <TabsTrigger value="overview">Research Timeline</TabsTrigger>
-              <TabsTrigger value="impact">Journal Impact</TabsTrigger>
-              <TabsTrigger value="focus">Research Focus</TabsTrigger>
-            </TabsList>
-          </div>
+      {/* Visualization Area */}
+      <div className="bg-white rounded-lg shadow-sm p-8 mb-16">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="bg-gray-50 border border-[#26385C]/10 p-1 mb-8">
+            <TabsTrigger value="timeline">Publication Timeline</TabsTrigger>
+            <TabsTrigger value="impact">Journal Impact</TabsTrigger>
+            <TabsTrigger value="focus">Research Focus</TabsTrigger>
+          </TabsList>
 
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 border border-primary/10 shadow-lg">
-            <TabsContent value="overview" className="mt-0">
-              <Timeline />
-            </TabsContent>
-            <TabsContent value="impact" className="mt-0">
-              <Impact />
-            </TabsContent>
-            <TabsContent value="focus" className="mt-0">
-              <Focus />
-            </TabsContent>
-          </div>
+          <TabsContent value="timeline">
+            <Timeline />
+          </TabsContent>
+          <TabsContent value="impact">
+            <Impact />
+          </TabsContent>
+          <TabsContent value="focus">
+            <Focus />
+          </TabsContent>
         </Tabs>
-      </motion.div>
+      </div>
 
-      {/* Key Publications Highlight */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-12 text-center"
-      >
-        <p className="text-foreground/70">
-          Published in leading journals including The Lancet, NEJM, and other top-tier publications
-        </p>
-      </motion.div>
+      {/* Research Areas */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          {
+            title: "Clinical Trial Design",
+            description: "Leading innovative approaches in clinical research methodology",
+            count: 12,
+          },
+          {
+            title: "Global Health Systems",
+            description: "Strengthening healthcare delivery and accessibility",
+            count: 15,
+          },
+          {
+            title: "Health Analytics",
+            description: "Data-driven insights for public health decision making",
+            count: 8,
+          }
+        ].map((area, index) => (
+          <div key={area.title} className="bg-white rounded-lg shadow-sm p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-[#2A9D8F]/10">
+                <FileText className="w-6 h-6 text-[#2A9D8F]" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-[#26385C] mb-2">{area.title}</h4>
+                <p className="text-sm text-[#26385C]/70 mb-2">{area.description}</p>
+                <p className="text-sm font-medium text-[#2A9D8F]">
+                  {area.count} publications
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -4217,7 +4312,7 @@ export function Focus() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Focus.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Impact.tsx (Timestamp: 2025-02-16 14:44:59) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Impact.tsx (Timestamp: 2025-02-17 00:31:47) ---
 'use client';
 
 import React from 'react';
@@ -4241,19 +4336,19 @@ const journalData = [
     name: 'Lancet HIV',
     count: 5,
     tier: 'High Impact',
-    color: '#E63946'  // Red
+    color: '#2A9D8F'  // Teal
   },
   { 
     name: 'Am J Trop Med Hyg',
     count: 5,
     tier: 'High Impact',
-    color: '#E63946'
+    color: '#2A9D8F'
   },
   { 
     name: 'JAMA Netw Open',
     count: 2,
-    tier: 'High Impact',
-    color: '#2A9D8F'  // Teal
+    tier: 'Impact Factor < 20',
+    color: '#2A9D8F'
   }
 ];
 
@@ -4277,37 +4372,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export function Impact() {
   return (
     <div className="space-y-8">
-      {/* Legend */}
-      <div className="flex flex-wrap justify-center gap-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#26385C' }} />
-          <span className="text-sm text-foreground/70">Highest Impact (IF &gt; 70)</span>
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#E63946' }} />
-          <span className="text-sm text-foreground/70">High Impact (IF 20-70)</span>
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#2A9D8F' }} />
-          <span className="text-sm text-foreground/70">Impact Factor &lt; 20</span>
-        </motion.div>
-      </div>
-
       {/* Chart */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -4319,7 +4383,7 @@ export function Impact() {
           <BarChart
             data={journalData}
             margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            barSize={40}
+            barSize={60}
           >
             <CartesianGrid 
               strokeDasharray="3 3" 
@@ -4346,8 +4410,8 @@ export function Impact() {
             <Tooltip content={<CustomTooltip />} />
             <Bar 
               dataKey="count" 
+              fill="#2A9D8F"  // Set default fill to teal
               radius={[4, 4, 0, 0]}
-              fill="#26385C"
             >
               {journalData.map((entry, index) => (
                 <motion.rect
@@ -4385,14 +4449,13 @@ export function Impact() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Impact.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Timeline.tsx (Timestamp: 2025-02-16 15:18:02) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/publication-dashboard/Timeline.tsx (Timestamp: 2025-02-16 23:14:31) ---
 'use client';
 
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, ComposedChart } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
-import { Card } from '@/components/ui/card';
-import { Toggle } from '@/components/ui/toggle';
+import { Button } from '@/components/ui/button';
 
 const yearlyData = [
   { year: '2009', papers: 1 },
@@ -4423,11 +4486,13 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         <p className="font-medium text-primary">{label}</p>
         <div className="mt-2 space-y-1">
           <p className="text-sm text-foreground/70">
-            Publications: <span className="font-medium">{payload[0].payload.papers}</span>
+            Publications: <span className="font-medium">{payload[0].value}</span>
           </p>
-          <p className="text-sm text-foreground/70">
-            Total: <span className="font-medium">{payload[0].payload.total}</span>
-          </p>
+          {payload[1] && (
+            <p className="text-sm text-foreground/70">
+              Cumulative Total: <span className="font-medium">{payload[1].value}</span>
+            </p>
+          )}
         </div>
       </div>
     );
@@ -4436,50 +4501,20 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function Timeline() {
-  const [showAnnual, setShowAnnual] = useState(true);
+  const [showAnnual, setShowAnnual] = useState(false);
   
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center space-y-4"
-      >
-        <h3 className="text-xl font-semibold text-primary">Publication Timeline</h3>
-        <p className="text-foreground/70">
-          Track the growth and evolution of research contributions from 2009 to present
-        </p>
-      </motion.div>
-
-      {/* Legend & Controls */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="flex flex-col items-center gap-4"
-      >
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#26385C' }} />
-            <span className="text-sm text-foreground/70">Cumulative Total</span>
-          </div>
-          {showAnnual && (
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#E63946' }} />
-              <span className="text-sm text-foreground/70">Annual Publications</span>
-            </div>
-          )}
-        </div>
-        
-        <button
+      {/* Graph Controls */}
+      <div className="flex justify-end">
+        <Button
+          variant="outline"
           onClick={() => setShowAnnual(!showAnnual)}
-          className="px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm border border-primary/10
-                     text-sm text-primary hover:bg-primary/5 transition-colors"
+          className="text-sm"
         >
-          {showAnnual ? 'Hide' : 'Show'} Annual Count
-        </button>
-      </motion.div>
+          {showAnnual ? 'Hide' : 'Show'} Annual Chart
+        </Button>
+      </div>
 
       {/* Chart */}
       <motion.div 
@@ -4489,14 +4524,11 @@ export function Timeline() {
         className="h-[400px] w-full"
       >
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={yearlyData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-            <defs>
-              <linearGradient id="totalGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#26385C" stopOpacity={0.2}/>
-                <stop offset="95%" stopColor="#26385C" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
-            
+          <BarChart 
+            data={yearlyData}
+            margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
+            barSize={40}
+          >
             <CartesianGrid 
               strokeDasharray="3 3" 
               vertical={false} 
@@ -4509,97 +4541,36 @@ export function Timeline() {
               stroke="#26385C"
               fontSize={12}
               tickLine={false}
-              axisLine={{ strokeWidth: 1, stroke: '#26385C', opacity: 0.2 }}
+              angle={-45}
+              textAnchor="end"
+              height={60}
             />
             
             <YAxis 
-              yAxisId="total"
-              orientation="right"
               stroke="#26385C"
               fontSize={12}
               tickLine={false}
               axisLine={{ strokeWidth: 1, stroke: '#26385C', opacity: 0.2 }}
-              domain={[0, 'dataMax + 5']}
             />
-            
-            {showAnnual && (
-              <YAxis 
-                yAxisId="annual"
-                orientation="left"
-                stroke="#E63946"
-                fontSize={12}
-                tickLine={false}
-                axisLine={{ strokeWidth: 1, stroke: '#E63946', opacity: 0.2 }}
-                domain={[0, 'dataMax + 2']}
-              />
-            )}
             
             <Tooltip content={<CustomTooltip />} />
             
-            {/* Area for cumulative total */}
-            <Area
-              yAxisId="total"
-              type="monotone"
-              dataKey="total"
-              stroke="#26385C"
-              strokeWidth={2}
-              fill="url(#totalGradient)"
-              dot={{ fill: "#26385C", r: 4 }}
-              activeDot={{ r: 6, fill: "#26385C" }}
-            />
-            
-            {/* Line for annual papers */}
             {showAnnual && (
-              <Line
-                yAxisId="annual"
-                type="monotone"
-                dataKey="papers"
-                stroke="#E63946"
-                strokeWidth={2}
-                dot={{ fill: "#E63946", r: 4 }}
-                activeDot={{ r: 6, fill: "#E63946" }}
+              <Bar 
+                dataKey="papers" 
+                fill="#26385C"
+                radius={[4, 4, 0, 0]}
               />
             )}
-          </ComposedChart>
+            
+            <Bar 
+              dataKey="total" 
+              fill="#26385C"
+              radius={[4, 4, 0, 0]}
+              opacity={showAnnual ? 0.3 : 0.8}
+            />
+          </BarChart>
         </ResponsiveContainer>
-      </motion.div>
-
-      {/* Key Highlights */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6"
-      >
-        {[
-          {
-            metric: "Peak Year",
-            value: "2022",
-            detail: "9 publications"
-          },
-          {
-            metric: "Total Output",
-            value: `${yearlyData[yearlyData.length - 1].total}`,
-            detail: "publications to date"
-          },
-          {
-            metric: "Growth Rate",
-            value: "15%",
-            detail: "year-over-year avg"
-          }
-        ].map((stat, index) => (
-          <motion.div
-            key={stat.metric}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 + (index * 0.1) }}
-            className="p-4 bg-white/50 backdrop-blur-sm rounded-lg border border-primary/10"
-          >
-            <div className="text-sm text-foreground/70">{stat.metric}</div>
-            <div className="text-2xl font-bold text-primary">{stat.value}</div>
-            <div className="text-sm text-foreground/70">{stat.detail}</div>
-          </motion.div>
-        ))}
       </motion.div>
     </div>
   );
