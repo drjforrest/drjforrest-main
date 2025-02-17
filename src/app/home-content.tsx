@@ -13,15 +13,16 @@ import { Button } from "@/components/ui/button";
 export default function HomeContent() {
   return (
     <main className="flex min-h-screen flex-col">
-      <section className="mb-16">
+      <section id="hero" className="mb-16 min-h-screen flex items-center">
         <Hero />
       </section>
       
       <motion.section 
+        id="career"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-16 mb-24"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
       >
         <SectionTitle>Career Journey</SectionTitle>
         <div className="mt-8">
@@ -29,18 +30,27 @@ export default function HomeContent() {
         </div>
       </motion.section>
 
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="publications"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Publications & Research Impact</SectionTitle>
         <div className="mt-8">
           <PublicationDashboard />
         </div>
-      </section>
+      </motion.section>
       
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="education"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Education & Achievements</SectionTitle>
-        <div className="mt-8">
-          <EducationCards />
-        </div>
         <div className="mt-8 flex justify-center">
           <Button
             asChild
@@ -72,21 +82,36 @@ export default function HomeContent() {
             </a>
           </Button>
         </div>
-      </section>
+        <div className="mt-8">
+          <EducationCards />
+        </div>
+      </motion.section>
 
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="interests"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Personal Interests</SectionTitle>
         <div className="mt-8">
           <RSSFeed />
         </div>
-      </section>
+      </motion.section>
       
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="contact"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Get in Touch</SectionTitle>
         <div className="mt-8">
           <ContactForm />
         </div>
-      </section>
+      </motion.section>
     </main>
   );
-} 
+}

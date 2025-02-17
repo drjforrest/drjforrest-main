@@ -22,9 +22,8 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: 'https://drjforrest.com', icon: Home, label: 'Main Site', external: true },
     { href: 'https://blog.drjforrest.com', icon: FileText, label: 'Blog', external: true },
-    { href: '/apps', icon: LayoutGrid, label: 'Apps', external: false }
+    { href: 'https://apps.drjforrest.com', icon: LayoutGrid, label: 'Apps', external: false }
   ];
 
   return (

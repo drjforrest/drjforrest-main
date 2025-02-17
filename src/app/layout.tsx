@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { SmoothScroll } from '@/components/ui/smooth-scroll';
 import '@/app/globals.css';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Dr. Jamie Forrest - Global Health Research, Technical Writing & Analytics',
@@ -18,6 +19,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -25,6 +33,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <head>
+        <link 
+          rel="stylesheet" 
+          href="/_next/static/css/app/layout.css" 
+          as="style"
+          precedence="high"
+        />
+      </head>
       <body className="overflow-x-hidden">
         <ThemeProvider>
           <ScrollProgress />
@@ -34,6 +50,7 @@ export default function RootLayout({
             {children}
           </div>
         </ThemeProvider>
+        <Footer />
         <Analytics />
       </body>
     </html>

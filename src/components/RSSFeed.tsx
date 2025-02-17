@@ -1,172 +1,162 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Rss, AlertCircle, ExternalLink } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { rssFeed } from "@/lib/rss";
+import { Button } from "@/components/ui/button";
+import { Rss, ExternalLink, Clock, Hash } from "lucide-react";
 
 interface FeedItem {
   title: string;
   link: string;
-  description: string;
-  pubDate: string;
+  date: string;
+  source: string;
 }
 
-const defaultInterests = [
-  "#Automation",
-  "#AI",
-  "#Photography",
-  "#Travel",
-  "#CanadianPolitics"
+interface TopicFeed {
+  id: string;
+  label: string;
+  feedUrl: string;
+  color: string;
+}
+
+const topics: TopicFeed[] = [
+  { 
+    id: 'automation', 
+    label: '#Automation', 
+    feedUrl: 'https://talk.automators.fm/posts.rss',
+    color: '#2A9D8F'
+  },
+  { 
+    id: 'ai', 
+    label: '#AI', 
+    feedUrl: 'https://medium.com/feed/towards-artificial-intelligence',
+    color: '#E9C46A'
+  },
+  { 
+    id: 'travel', 
+    label: '#Travel', 
+    feedUrl: 'https://www.nomadicmatt.com/feed/',
+    color: '#F4A261'
+  },
+  { 
+    id: 'news', 
+    label: '#CanadianNews', 
+    feedUrl: 'https://rss.cbc.ca/lineup/canada.xml',
+    color: '#E76F51'
+  },
+  { 
+    id: 'ted', 
+    label: '#TEDTalks', 
+    feedUrl: 'https://www.ted.com/feeds/talks.rss',
+    color: '#264653'
+  }
 ];
 
-function processFeedItems(items: FeedItem[]) {
-  return items
-    .filter(item => item.description.length < 300)
-    .map(item => ({
-      ...item,
-      description: item.description.slice(0, 200)
-    }))
-    .slice(0, 5);
-}
-
 export default function RSSFeed() {
+  const [selectedTopic, setSelectedTopic] = useState<string>(topics[0].id);
   const [items, setItems] = useState<FeedItem[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchRSS() {
-      try {
-        setLoading(true);
-        setError(null);
+  const fetchFeedItems = async (topicId: string) => {
+    setIsLoading(true);
+    try {
+      const topic = topics.find(t => t.id === topicId);
+      if (!topic) return;
 
-        const response = await fetch("/api/rss?format=json");
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setItems(processFeedItems(data));
-      } catch (err) {
-        console.error("Error fetching RSS feed:", err);
-        setError("Failed to load the RSS feed.");
-      } finally {
-        setLoading(false);
-      }
+      const response = await fetch(`/api/rss?url=${encodeURIComponent(topic.feedUrl)}`);
+      const data = await response.json();
+      setItems(data.slice(0, 8)); // Limit to 8 items
+    } catch (error) {
+      console.error('Error fetching RSS feed:', error);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    fetchRSS();
+  // Fetch initial feed
+  useEffect(() => {
+    fetchFeedItems(selectedTopic);
   }, []);
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full max-w-6xl mx-auto"
-    >
-      <div className="flex flex-col gap-6">
-        {error && (
-          <Alert variant="destructive" className="w-full">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-
-        {/* Subscribe Button at the top */}
-        <div className="flex flex-col items-center gap-3">
-          <Button
-            variant="outline"
-            size="lg"
-            className="flex items-center gap-2 hover:bg-primary/10"
-            onClick={() => window.open("/api/rss", "_blank")}
+    <div className="w-full max-w-6xl mx-auto">
+      {/* Topic Selection */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {topics.map((topic) => (
+          <motion.button
+            key={topic.id}
+            onClick={() => {
+              setSelectedTopic(topic.id);
+              fetchFeedItems(topic.id);
+            }}
+            className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2
+              ${selectedTopic === topic.id 
+                ? `bg-[${topic.color}] text-white` 
+                : 'bg-primary/10 text-primary hover:bg-primary/20'
+              }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Rss className="w-5 h-5" />
-            Subscribe to RSS Feed
-          </Button>
-          <p className="text-sm text-muted-foreground">
-            Below is a curated RSS Feed of my interests. The feed will refresh with the page or use the feed in your preferred RSS Reader with the link above.
-          </p>
-        </div>
+            <Hash className="w-4 h-4" />
+            <span>{topic.label.replace('#', '')}</span>
+          </motion.button>
+        ))}
+      </div>
 
-        {/* Interest Tags */}
-        <div className="flex flex-wrap justify-center gap-4">
-          {defaultInterests.map((tag, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-default text-lg font-medium"
-            >
-              {tag}
-            </motion.span>
-          ))}
-        </div>
-        
-
-        {/* Feed Items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {loading ? (
+      {/* Feed Items Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <AnimatePresence mode="sync">
+          {isLoading ? (
             // Loading skeletons
-            Array(3).fill(0).map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow p-6">
-                <div className="animate-pulse">
-                  <div className="h-6 bg-primary/10 rounded w-3/4 mb-2" />
-                  <div className="h-4 bg-primary/5 rounded w-1/4 mb-4" />
-                  <div className="h-4 bg-primary/10 rounded w-full" />
-                </div>
-              </div>
+            Array(8).fill(0).map((_, index) => (
+              <motion.div
+                key={`skeleton-${index}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="h-[200px] bg-primary/5 rounded-lg animate-pulse"
+              />
             ))
-          ) : items.length > 0 ? (
+          ) : (
             items.map((item, index) => (
               <motion.div
-                key={item.link}
+                key={`${selectedTopic}-${item.link}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-all duration-200">
+                <Card className="h-full group hover:shadow-lg transition-all duration-300">
                   <a 
                     href={item.link}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
+                    rel="noopener noreferrer" 
+                    className="p-4 flex flex-col h-full"
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary mb-1 group-hover:text-primary">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {new Date(item.pubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </p>
-                        <p className="text-sm text-card-foreground">
-                          {item.description}
-                        </p>
-                      </div>
-                      <ExternalLink className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-base font-medium text-primary group-hover:text-primary/80 line-clamp-2">
+                        {item.title}
+                      </h3>
+                      <ExternalLink className="w-4 h-4 flex-shrink-0 text-primary/60 group-hover:text-primary" />
+                    </div>
+                    <div className="mt-auto pt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                      <Clock className="w-4 h-4" />
+                      <span>
+                        {new Date(item.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </span>
                     </div>
                   </a>
-                </div>
+                </Card>
               </motion.div>
             ))
-          ) : (
-            <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-center text-muted-foreground">No items to display</p>
-            </div>
           )}
-        </div>
+        </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
   );
 }

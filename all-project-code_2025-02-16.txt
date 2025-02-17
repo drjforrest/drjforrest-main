@@ -1,7 +1,47 @@
 PROJECT INVENTORY 2025-02-16
 Project: 
-Timestamp: 2025-02-16 17:53:24
+Timestamp: 2025-02-16 22:45:10
 Root Directory: /Users/drjforrest/Development/DevProjects/WebDev/new-main/
+
+--- README.md Contents ---
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+--- End of README.md ---
 
 --- Begin Project Code ---
 
@@ -82,7 +122,9 @@ Root Directory: /Users/drjforrest/Development/DevProjects/WebDev/new-main/
 │   │       ├── project-carousel.tsx 
 │   │       ├── publication-card.tsx 
 │   │       ├── scroll-area.tsx 
+│   │       ├── scroll-context.tsx 
 │   │       ├── scroll-indicator.tsx 
+│   │       ├── scroll-navigation.tsx 
 │   │       ├── scroll-progress.tsx 
 │   │       ├── section-heading.tsx 
 │   │       ├── section-title.tsx 
@@ -441,7 +483,7 @@ export default function RootLayout({
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-16 16:32:04) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-16 22:32:07) ---
 'use client';
 
 import { motion } from "framer-motion";
@@ -457,15 +499,16 @@ import { Button } from "@/components/ui/button";
 export default function HomeContent() {
   return (
     <main className="flex min-h-screen flex-col">
-      <section className="mb-16">
+      <section id="hero" className="mb-16 min-h-screen flex items-center">
         <Hero />
       </section>
       
       <motion.section 
+        id="career"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-16 mb-24"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
       >
         <SectionTitle>Career Journey</SectionTitle>
         <div className="mt-8">
@@ -473,14 +516,26 @@ export default function HomeContent() {
         </div>
       </motion.section>
 
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="publications"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Publications & Research Impact</SectionTitle>
         <div className="mt-8">
           <PublicationDashboard />
         </div>
-      </section>
+      </motion.section>
       
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="education"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Education & Achievements</SectionTitle>
         <div className="mt-8">
           <EducationCards />
@@ -516,27 +571,39 @@ export default function HomeContent() {
             </a>
           </Button>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="interests"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Personal Interests</SectionTitle>
         <div className="mt-8">
           <RSSFeed />
         </div>
-      </section>
+      </motion.section>
       
-      <section className="container mx-auto px-4 py-16 mb-24">
+      <motion.section 
+        id="contact"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+      >
         <SectionTitle>Get in Touch</SectionTitle>
         <div className="mt-8">
           <ContactForm />
         </div>
-      </section>
+      </motion.section>
     </main>
   );
-} 
+}
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/page.tsx (Timestamp: 2025-02-16 16:29:48) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/page.tsx (Timestamp: 2025-02-16 18:38:11) ---
 import HomeContent from './home-content';
 
 export const viewport = {
@@ -545,12 +612,6 @@ export const viewport = {
   maximumScale: 1,
   userScalable: false,
 }
-
-export const metadata = {
-  title: 'Dr. Jamie I. Forrest',
-  description: 'Global Health Research & Analytics',
-}
-
 export default function Page() {
   return <HomeContent />;
 }
@@ -722,7 +783,9 @@ export default function Page() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/globals.css ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/not-found.tsx (Timestamp: 2025-02-16 16:27:02) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/not-found.tsx (Timestamp: 2025-02-16 18:40:42) ---
+import Link from 'next/link';
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -735,7 +798,17 @@ export const metadata = {
   description: 'The page you are looking for does not exist.',
 }
 
-// ... rest of your not-found component 
+export default function NotFound() {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
+      <p className="text-gray-600">The page you are looking for does not exist.</p>
+      <Link href="/" className="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+        Go to Home
+      </Link>
+    </div>
+  );
+}
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/not-found.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/providers.tsx (Timestamp: 2025-02-06 03:27:54) ---
@@ -878,7 +951,7 @@ export async function GET(request: Request) {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-16 15:40:29) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-16 18:36:14) ---
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -934,7 +1007,7 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight"
           >
-            Transforming Global Health Through Strategic Innovation
+            Transforming Global Health Through Innovation
           </motion.h1>
 
           <motion.p
@@ -943,8 +1016,7 @@ export function Hero() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-lg sm:text-xl text-foreground/80 px-4 sm:px-0"
           >
-            Strategic global health leader with 15+ years of experience driving clinical research 
-            innovation and health system strengthening
+            Strategic partnerships, effective technical & scientific communication, evidence-based approaches to resuults monitoring and evaluation
           </motion.p>
 
           <motion.div
@@ -955,48 +1027,19 @@ export function Hero() {
           >
             <IconFeature
               icon={Network}
-              title="Clinical Trial Innovation"
-              description="Leading platform trials and research initiatives"
+              title="Research Innovation"
+              description="Clinical research partnerships"
             />
             <IconFeature
               icon={FileText}
               title="Research Impact"
-              description="Publications in leading medical journals"
+              description="Published in leading scientific journals"
             />
             <IconFeature
               icon={Globe}
               title="Global Implementation"
               description="Building sustainable health solutions"
             />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="flex flex-col sm:flex-row justify-center gap-4 mt-8 px-4 sm:px-0"
-          >
-            <Button 
-              size="lg"
-              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white gap-2"
-              asChild
-            >
-              <Link href="#publications">
-                View Research Impact
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto gap-2"
-              asChild
-            >
-              <Link href="/contact">
-                <Globe className="w-4 h-4" />
-                Connect & Collaborate
-              </Link>
-            </Button>
           </motion.div>
         </div>
       </div>
@@ -1370,7 +1413,7 @@ export function EducationCards() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-09 19:33:24) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-16 22:24:40) ---
 'use client';
 
 import { useState, useEffect } from "react";
@@ -1379,11 +1422,12 @@ import { Rss, AlertCircle, ExternalLink } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { rssFeed } from "@/lib/rss";
 
 interface FeedItem {
   title: string;
   link: string;
-  description: string;
+  description?: string;
   pubDate: string;
 }
 
@@ -1397,10 +1441,10 @@ const defaultInterests = [
 
 function processFeedItems(items: FeedItem[]) {
   return items
-    .filter(item => item.description.length < 300)
+    .filter(item => item.description && item.description.length < 300)
     .map(item => ({
       ...item,
-      description: item.description.slice(0, 200)
+      description: item.description ? item.description.slice(0, 200) : ''
     }))
     .slice(0, 5);
 }
@@ -1481,8 +1525,9 @@ export default function RSSFeed() {
           ))}
         </div>
         
+
         {/* Feed Items */}
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {loading ? (
             // Loading skeletons
             Array(3).fill(0).map((_, index) => (
@@ -1541,6 +1586,7 @@ export default function RSSFeed() {
     </motion.div>
   );
 }
+
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx (Timestamp: 2025-02-09 14:54:34) ---
@@ -2244,11 +2290,21 @@ export function AnimatedCard({ children, className, delay = 0, hover = true }: A
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-card.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx (Timestamp: 2025-02-16 15:38:05) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx (Timestamp: 2025-02-16 22:32:29) ---
 'use client';
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import { ChevronUp } from 'lucide-react';
+
+const sections = [
+  { id: 'hero', label: 'Introduction' },
+  { id: 'career', label: 'Career Journey' },
+  { id: 'publications', label: 'Publications' },
+  { id: 'education', label: 'Education' },
+  { id: 'interests', label: 'Interests' },
+  { id: 'contact', label: 'Contact' }
+];
 
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
@@ -2259,33 +2315,112 @@ export function ScrollProgress() {
   });
 
   const [isVisible, setIsVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Only show progress after scrolling down a bit
       setIsVisible(window.scrollY > 100);
+      setShowScrollTop(window.scrollY > window.innerHeight);
+
+      // Determine active section
+      const sectionElements = sections.map(section => ({
+        id: section.id,
+        element: document.getElementById(section.id)
+      }));
+
+      const currentSection = sectionElements.find(section => {
+        if (!section.element) return false;
+        const rect = section.element.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection.id);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!isVisible) return null;
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Adjust based on your header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-primary/30 z-50"
-      style={{ scaleX, transformOrigin: "0%" }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-r from-transparent to-background" />
-    </motion.div>
+    <>
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary/30 z-50"
+        style={{ scaleX, transformOrigin: "0%" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-r from-transparent to-background" />
+      </motion.div>
+
+      {/* Section Navigation Dots */}
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+        <div className="space-y-4">
+          {sections.map((section) => (
+            <motion.button
+              key={section.id}
+              className="group relative flex items-center"
+              onClick={() => scrollToSection(section.id)}
+              whileHover={{ x: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className={`w-3 h-3 rounded-full border-2 border-primary transition-all duration-200
+                          ${activeSection === section.id ? 'bg-primary scale-125' : 'bg-white'}`}
+              />
+              <span className="absolute left-0 transform -translate-x-full px-4 py-1 
+                             text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                {section.label}
+              </span>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+
+      {/* Scroll to Top Button */}
+      <motion.button
+        className="fixed bottom-8 right-8 p-4 rounded-full bg-primary text-white shadow-lg lg:block
+                   hover:bg-primary/90 transition-colors"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ 
+          opacity: showScrollTop ? 1 : 0,
+          y: showScrollTop ? 0 : 100
+        }}
+        onClick={scrollToTop}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <ChevronUp className="w-6 h-6" />
+      </motion.button>
+    </>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/publication-card.tsx (Timestamp: 2025-02-06 16:59:42) ---
@@ -2402,6 +2537,71 @@ export function PublicationCard({
   );
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/publication-card.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-navigation.tsx (Timestamp: 2025-02-16 22:26:32) ---
+'use client';
+
+import { motion } from 'framer-motion';
+import { useScroll } from './scroll-context';
+
+interface Section {
+  id: string;
+  label: string;
+}
+
+interface ScrollNavigationProps {
+  sections: Section[];
+}
+
+export function ScrollNavigation({ sections }: ScrollNavigationProps) {
+  const { scrollProgress, activeSection } = useScroll();
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <>
+      {/* Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-primary/20 z-50">
+        <motion.div
+          className="h-full bg-primary"
+          style={{ width: `${scrollProgress * 100}%` }}
+          transition={{ duration: 0.1 }}
+        />
+      </div>
+
+      {/* Section Navigation */}
+      <nav className="hidden lg:block fixed right-8 top-1/2 transform -translate-y-1/2 z-40">
+        <div className="flex flex-col gap-4">
+          {sections.map((section) => (
+            <div key={section.id} className="group relative">
+              <button
+                onClick={() => scrollToSection(section.id)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  activeSection === section.id
+                    ? 'bg-primary scale-125'
+                    : 'bg-primary/20 hover:bg-primary/40'
+                }`}
+                aria-label={`Scroll to ${section.label}`}
+              />
+              <span className="absolute left-0 transform -translate-x-full px-4 py-1 
+                             text-sm text-primary opacity-0 group-hover:opacity-100 
+                             transition-opacity whitespace-nowrap">
+                {section.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </nav>
+    </>
+  );
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-navigation.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/smooth-scroll.tsx (Timestamp: 2025-02-16 15:38:13) ---
 'use client';
@@ -2605,6 +2805,53 @@ export function ParallaxBackground() {
 }
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/parallax-background.tsx ---
+
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-context.tsx (Timestamp: 2025-02-16 22:26:23) ---
+'use client';
+
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+
+interface ScrollContextType {
+  scrollProgress: number;
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+}
+
+const ScrollContext = createContext<ScrollContextType>({
+  scrollProgress: 0,
+  activeSection: '',
+  setActiveSection: () => {},
+});
+
+export function ScrollProvider({ children }: { children: ReactNode }) {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = window.scrollY;
+      const progress = Math.min(Math.max(scrolled / documentHeight, 0), 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <ScrollContext.Provider value={{ scrollProgress, activeSection, setActiveSection }}>
+      {children}
+    </ScrollContext.Provider>
+  );
+}
+
+export function useScroll() {
+  return useContext(ScrollContext);
+}
+
+--- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-context.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/tooltip.tsx (Timestamp: 2025-02-16 14:36:39) ---
 "use client"
@@ -3093,12 +3340,21 @@ export function CursorEffect() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/cursor-effect.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx (Timestamp: 2025-02-09 19:27:55) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx (Timestamp: 2025-02-16 18:04:40) ---
 'use client';
 
 import * as React from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cva, type VariantProps } from 'class-variance-authority';
+
+// Define the ButtonProps type
+type ButtonProps = {
+  className?: string;
+  variant?: VariantProps<typeof buttonVariants>['variant'];
+  size?: VariantProps<typeof buttonVariants>['size'];
+  asChild?: boolean;
+  children: React.ReactNode;
+} & HTMLMotionProps<'button'>; // Extend with HTML button props
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
@@ -3140,19 +3396,15 @@ const buttonVariants = cva(
   }
 );
 
-interface ButtonProps
-  extends HTMLMotionProps<'button'>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-  children?: React.ReactNode;
-}
-
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+    if (asChild) {
+      return <span className={buttonVariants({ variant, size, className })}>{children}</span>;
+    }
     return (
       <motion.button
         className={buttonVariants({ variant, size, className })}
-        ref={ref as any}
+        ref={ref}
         whileTap={{ scale: 0.98 }}
         whileHover={{ scale: 1.02 }}
         {...props}
@@ -3162,10 +3414,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-Button.displayName = 'Button';
 
 export { Button, buttonVariants };
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/toggle.tsx (Timestamp: 2025-02-16 16:24:16) ---
@@ -3475,7 +3725,7 @@ export { Skeleton }
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/skeleton.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/footer.tsx (Timestamp: 2025-02-13 06:48:42) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/footer.tsx (Timestamp: 2025-02-16 18:42:26) ---
 'use client';
 
 import Link from 'next/link';
@@ -3497,11 +3747,11 @@ export function Footer() {
                 <LineChart className="w-5 h-5 text-primary" />
               </div>
               <span className="text-lg font-semibold text-foreground">
-                Apps by Dr. Jamie I. Forrest
+                Dr. Jamie I. Forrest
               </span>
             </motion.div>
             <p className="text-foreground/70 max-w-md">
-              Data visualization and analysis tools for global health research
+             Innovative solutions in global health programming, research, and evaluation
             </p>
           </div>
 
@@ -3537,7 +3787,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/footer.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/Navigation.tsx (Timestamp: 2025-02-13 06:50:04) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/layout/Navigation.tsx (Timestamp: 2025-02-16 22:12:48) ---
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -3562,9 +3812,8 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: 'https://drjforrest.com', icon: Home, label: 'Main Site', external: true },
     { href: 'https://blog.drjforrest.com', icon: FileText, label: 'Blog', external: true },
-    { href: '/apps', icon: LayoutGrid, label: 'Apps', external: false }
+    { href: 'https://apps.drjforrest.com', icon: LayoutGrid, label: 'Apps', external: false }
   ];
 
   return (
@@ -3574,7 +3823,7 @@ export function Navigation() {
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 text-foreground hover:text-foreground">
-          <span className="font-semibold text-lg">Apps</span>
+          <span className="font-semibold text-lg">Dr. Jamie I. Forrest</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -3666,7 +3915,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/providers/ThemeProvider.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/theme/theme-toggle.tsx (Timestamp: 2025-02-07 09:43:19) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/theme/theme-toggle.tsx (Timestamp: 2025-02-16 18:44:17) ---
 "use client";
 
 import * as React from "react";

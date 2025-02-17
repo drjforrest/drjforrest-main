@@ -21,19 +21,19 @@ const journalData = [
     name: 'Lancet HIV',
     count: 5,
     tier: 'High Impact',
-    color: '#E63946'  // Red
+    color: '#2A9D8F'  // Teal
   },
   { 
     name: 'Am J Trop Med Hyg',
     count: 5,
     tier: 'High Impact',
-    color: '#E63946'
+    color: '#2A9D8F'
   },
   { 
     name: 'JAMA Netw Open',
     count: 2,
-    tier: 'High Impact',
-    color: '#2A9D8F'  // Teal
+    tier: 'Impact Factor < 20',
+    color: '#2A9D8F'
   }
 ];
 
@@ -57,37 +57,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export function Impact() {
   return (
     <div className="space-y-8">
-      {/* Legend */}
-      <div className="flex flex-wrap justify-center gap-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#26385C' }} />
-          <span className="text-sm text-foreground/70">Highest Impact (IF &gt; 70)</span>
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#E63946' }} />
-          <span className="text-sm text-foreground/70">High Impact (IF 20-70)</span>
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="flex items-center gap-2"
-        >
-          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#2A9D8F' }} />
-          <span className="text-sm text-foreground/70">Impact Factor &lt; 20</span>
-        </motion.div>
-      </div>
-
       {/* Chart */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -99,7 +68,7 @@ export function Impact() {
           <BarChart
             data={journalData}
             margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            barSize={40}
+            barSize={60}
           >
             <CartesianGrid 
               strokeDasharray="3 3" 
@@ -126,8 +95,8 @@ export function Impact() {
             <Tooltip content={<CustomTooltip />} />
             <Bar 
               dataKey="count" 
+              fill="#2A9D8F"  // Set default fill to teal
               radius={[4, 4, 0, 0]}
-              fill="#26385C"
             >
               {journalData.map((entry, index) => (
                 <motion.rect

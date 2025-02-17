@@ -1,44 +1,33 @@
-import { NextResponse } from "next/server";
-import RSSParser from 'rss-parser';
+import { NextResponse } from 'next/server';
+import Parser from 'rss-parser';
 
-const INOREADER_FEED_URL = "https://www.inoreader.com/stream/user/1005214099/tag/drjforrest.com";
-
-const parser = new RSSParser();
+const parser = new Parser();
 
 export async function GET(request: Request) {
   try {
-    const url = new URL(request.url);
-    const format = url.searchParams.get("format");
+    const { searchParams } = new URL(request.url);
+    const url = searchParams.get('url');
 
-    // Fetch the RSS feed
-    const response = await fetch(INOREADER_FEED_URL);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch RSS feed: ${response.statusText}`);
+    if (!url) {
+      return NextResponse.json({ error: 'URL parameter is required' }, { status: 400 });
     }
 
-    const xmlText = await response.text();
-    const feed = await parser.parseString(xmlText);
+    // Fetch and parse the RSS feed
+    const feed = await parser.parseURL(url);
 
-    if (format === "json") {
-      return NextResponse.json(feed.items.map(item => ({
-        title: item.title,
-        link: item.link,
-        description: item.contentSnippet || item.description,
-        pubDate: item.pubDate,
-      })));
-    }
+    // Transform the feed items into our desired format
+    const items = feed.items.map(item => ({
+      title: item.title || '',
+      link: item.link || '',
+      date: item.pubDate || item.isoDate || new Date().toISOString(),
+      source: feed.title || 'Unknown Source'
+    }));
 
-    // Return the raw XML for RSS feed subscribers
-    return new NextResponse(xmlText, {
-      headers: {
-        "Content-Type": "application/xml",
-        "Cache-Control": "s-maxage=3600, stale-while-revalidate"
-      }
-    });
+    return NextResponse.json(items);
   } catch (error) {
-    console.error('RSS Error:', error);
+    console.error('RSS feed error:', error);
     return NextResponse.json(
-      { error: 'Failed to load RSS feed' },
+      { error: 'Failed to fetch RSS feed' }, 
       { status: 500 }
     );
   }
