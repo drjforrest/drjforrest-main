@@ -42,9 +42,9 @@ export function EducationCards() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -4 }}
           >
-            <Card className="p-6">
+            <Card className="p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/5 flex-shrink-0">
                   <GraduationCap className="h-5 w-5 text-primary" />
                 </div>
                 <div className="min-w-0">
@@ -81,9 +81,9 @@ export function EducationCards() {
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
         >
-          <Card className="p-6">
+          <Card className="p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
+              <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/5">
                 <Award className="h-5 w-5 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-primary">Awards</h3>
@@ -100,7 +100,7 @@ export function EducationCards() {
                     <div>
                       <h4 className="font-medium text-primary">{award.title}</h4>
                       <p className="text-foreground/70">{award.organization} | {award.year}</p>
-                      {award.description && <p className="mt-1">{award.description}</p>}
+                      {award.description && <p className="mt-1 text-foreground/80">{award.description}</p>}
                     </div>
                   </div>
                 </motion.div>
@@ -117,9 +117,9 @@ export function EducationCards() {
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
         >
-          <Card className="p-6">
+          <Card className="p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
+              <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/5">
                 <ScrollText className="h-5 w-5 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-primary">Certifications</h3>

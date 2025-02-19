@@ -11,9 +11,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <motion.div
       ref={ref}
       className={cn(
-        "rounded-lg border border-foreground/20 bg-white/95 shadow-md shadow-foreground/10 backdrop-blur-sm",
+        "rounded-lg border border-border bg-surface dark:bg-surface-elevated shadow-sm backdrop-blur-sm",
         variant === "interactive" &&
-          "hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer",
+          "hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer",
         className
       )}
       whileHover={variant === "interactive" ? { y: -4, transition: { duration: 0.2 } } : {}}
@@ -25,4 +25,3 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 Card.displayName = "Card";
 
 export { Card };
-

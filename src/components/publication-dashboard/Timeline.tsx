@@ -30,7 +30,7 @@ const yearlyData = [
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-primary/10">
+      <div className="bg-surface dark:bg-surface-elevated p-4 rounded-lg shadow-lg border border-border">
         <p className="font-medium text-primary">{label}</p>
         <div className="mt-2 space-y-1">
           <p className="text-sm text-foreground/70">
@@ -80,13 +80,13 @@ export function Timeline() {
             <CartesianGrid 
               strokeDasharray="3 3" 
               vertical={false} 
-              stroke="#26385C" 
+              stroke="rgb(var(--foreground))" 
               opacity={0.1} 
             />
             
             <XAxis 
               dataKey="year" 
-              stroke="#26385C"
+              stroke="rgb(var(--foreground))"
               fontSize={12}
               tickLine={false}
               angle={-45}
@@ -95,10 +95,10 @@ export function Timeline() {
             />
             
             <YAxis 
-              stroke="#26385C"
+              stroke="rgb(var(--foreground))"
               fontSize={12}
               tickLine={false}
-              axisLine={{ strokeWidth: 1, stroke: '#26385C', opacity: 0.2 }}
+              axisLine={{ strokeWidth: 1, stroke: 'rgb(var(--foreground))', opacity: 0.2 }}
             />
             
             <Tooltip content={<CustomTooltip />} />
@@ -106,14 +106,14 @@ export function Timeline() {
             {showAnnual && (
               <Bar 
                 dataKey="papers" 
-                fill="#26385C"
+                fill="rgb(var(--primary))"
                 radius={[4, 4, 0, 0]}
               />
             )}
             
             <Bar 
               dataKey="total" 
-              fill="#26385C"
+              fill="rgb(var(--primary))"
               radius={[4, 4, 0, 0]}
               opacity={showAnnual ? 0.3 : 0.8}
             />

@@ -15,7 +15,6 @@ export function ResearchImpactDashboard() {
   return (
     <section className="relative">
       <div className="container mx-auto px-4 py-12 space-y-6">
-
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[
@@ -24,7 +23,10 @@ export function ResearchImpactDashboard() {
             { icon: Globe, value: "15+", label: "Countries Impacted" },
             { icon: Award, value: "2021", label: "Sackett Trial Award" },
           ].map(({ icon: Icon, value, label }, index) => (
-            <Card key={index} className="p-6 bg-white/90 hover:shadow-lg transition-all duration-300">
+            <Card 
+              key={index} 
+              className="p-6 bg-surface dark:bg-surface-elevated hover:shadow-lg transition-all duration-300"
+            >
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
                   <Icon className="h-6 w-6 text-primary" />
@@ -37,9 +39,9 @@ export function ResearchImpactDashboard() {
         </div>
 
         {/* Research Insights */}
-        <Card className="p-6 bg-white/90">
+        <Card className="p-6 bg-surface dark:bg-surface-elevated">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="bg-gray-50 border border-[#26385C]/10 p-1 mb-8">
+            <TabsList className="bg-background/50 dark:bg-background/50 border border-border p-1 mb-8">
               <TabsTrigger value="timeline">Publication Timeline</TabsTrigger>
               <TabsTrigger value="impact">Journal Impact</TabsTrigger>
               <TabsTrigger value="focus">Research Focus</TabsTrigger>

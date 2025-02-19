@@ -1,0 +1,122 @@
+Tree diagram for: /Users/drjforrest/Development/DevProjects/WebDev/new-main/
+Generated on: 2025-02-18 22:00:58
+
+├── README.md
+├── all-project-code_2025-02-18.txt
+├── directory_tree.txt
+├── next-env.d.ts
+├── next.config.js
+├── node_modules [...]
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── public
+│   ├── assets
+│   │   └── Jamie-I-Forrest-PhD-MPH-.pdf
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── projects
+│   │   ├── activate-africa.png
+│   │   ├── cfe-logo.png
+│   │   ├── global-fund.png
+│   │   ├── momentum-health.png
+│   │   ├── purpose-africa.png
+│   │   ├── rwanda-health.png
+│   │   ├── rwanda-moh-logo.png
+│   │   └── together-trial.png
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   ├── app
+│   │   ├── api
+│   │   │   ├── contact
+│   │   │   │   └── route.ts
+│   │   │   └── rss
+│   │   │       └── route.ts
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── home-content.tsx
+│   │   ├── layout.tsx
+│   │   ├── not-found.tsx
+│   │   ├── page.tsx
+│   │   ├── rss.xml
+│   │   │   └── route.ts
+│   │   └── viewport.ts
+│   ├── components
+│   │   ├── CareerTimeline.tsx
+│   │   ├── ContactForm.tsx
+│   │   ├── EducationCards.tsx
+│   │   ├── Hero.tsx
+│   │   ├── RSSFeed.tsx
+│   │   ├── ResearchImpactDashboard.tsx
+│   │   ├── layout
+│   │   │   ├── Navigation.tsx
+│   │   │   └── footer.tsx
+│   │   ├── providers
+│   │   │   └── ThemeProvider.tsx
+│   │   ├── publication-dashboard
+│   │   │   ├── Focus.tsx
+│   │   │   ├── Impact.tsx
+│   │   │   ├── Timeline.tsx
+│   │   │   ├── all-project-code_2025-02-18.txt
+│   │   │   └── index.tsx
+│   │   ├── theme
+│   │   │   └── theme-toggle.tsx
+│   │   └── ui
+│   │       ├── ContactInfo.tsx
+│   │       ├── alert.tsx
+│   │       ├── animated-card.tsx
+│   │       ├── animated-container.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── cursor-effect.tsx
+│   │       ├── enhanced-tooltip.tsx
+│   │       ├── input.tsx
+│   │       ├── interactive-timeline.tsx
+│   │       ├── label.tsx
+│   │       ├── optimized-image.tsx
+│   │       ├── page-transition.tsx
+│   │       ├── parallax-background.tsx
+│   │       ├── project-carousel.tsx
+│   │       ├── publication-card.tsx
+│   │       ├── scroll-area.tsx
+│   │       ├── scroll-context.tsx
+│   │       ├── scroll-indicator.tsx
+│   │       ├── scroll-navigation.tsx
+│   │       ├── scroll-progress.tsx
+│   │       ├── section-heading.tsx
+│   │       ├── section-title.tsx
+│   │       ├── skeleton.tsx
+│   │       ├── skill-badge.tsx
+│   │       ├── smooth-scroll.tsx
+│   │       ├── switch.tsx
+│   │       ├── tabs.tsx
+│   │       ├── textarea.tsx
+│   │       ├── toggle.tsx
+│   │       └── tooltip.tsx
+│   ├── data
+│   │   ├── dashboard-metrics.ts
+│   │   ├── education.ts
+│   │   ├── expertise.ts
+│   │   ├── journal-impact.ts
+│   │   ├── positions.ts
+│   │   ├── projects.ts
+│   │   ├── publication-timeline.ts
+│   │   ├── research-focus.ts
+│   │   └── timeline-data.ts
+│   ├── hooks
+│   │   └── use-scroll-animation.ts
+│   ├── lib
+│   │   ├── analytics.ts
+│   │   ├── contact-protection.ts
+│   │   ├── generate-rss.ts
+│   │   ├── rss.ts
+│   │   └── utils.ts
+│   └── types
+│       ├── cv.ts
+│       ├── publications.ts
+│       └── theme.ts
+├── tailwind.config.ts
+├── tsconfig.json
+└── vercel.json

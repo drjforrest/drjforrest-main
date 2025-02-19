@@ -34,16 +34,16 @@ function IconFeature({
   return (
     <motion.button 
       onClick={scrollToSection}
-      className="bg-white rounded-lg shadow-lg w-[280px]"
+      className="bg-surface dark:bg-surface-elevated rounded-lg shadow-lg w-[280px]"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
       <div className="p-8 flex flex-col items-center text-center">
         <div className="p-3 rounded-xl bg-primary/5 mb-4">
-          <Icon className="w-8 h-8 text-primary/70" />
+          <Icon className="w-8 h-8 text-primary" />
         </div>
-        <h3 className="text-xl font-medium text-[#26385C] mb-2">{title}</h3>
-        <p className="text-sm text-[#26385C]/70">
+        <h3 className="text-xl font-medium text-foreground mb-2">{title}</h3>
+        <p className="text-sm text-foreground/70">
           {description}
         </p>
       </div>
@@ -95,7 +95,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-[#26385C] text-6xl font-bold mb-6"
+              className="text-foreground text-6xl font-bold mb-6"
             >
               Innovating Global Health Solutions
             </motion.h1>
@@ -104,7 +104,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-[#26385C]/80 text-xl max-w-3xl mx-auto"
+              className="text-foreground/80 text-xl max-w-3xl mx-auto"
             >
               Strategic partnerships, effective technical & scientific communication, 
               evidence-based approaches to results monitoring and evaluation

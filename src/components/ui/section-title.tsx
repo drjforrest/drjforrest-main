@@ -15,10 +15,10 @@ export function SectionTitle({ children, className, description }: SectionTitleP
       transition={{ duration: 0.5 }}
       className={cn("text-center mb-16", className)}
     >
-      <h2 className="text-5xl font-bold text-[#26385C] mb-6 tracking-tight">{children}</h2>
-      <div className="w-32 h-1 bg-[#2A9D8F] mx-auto rounded-full opacity-80" />
+      <h2 className="text-5xl font-bold text-foreground mb-6 tracking-tight">{children}</h2>
+      <div className="w-32 h-1 bg-accent mx-auto rounded-full opacity-80" />
       {description && (
-        <p className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <p className="mt-6 text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed">
           {description}
         </p>
       )}
