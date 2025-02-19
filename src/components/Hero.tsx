@@ -57,9 +57,9 @@ export function Hero() {
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                   w-[840px] h-[840px] border-[2px] 
-                  border-[#2A9D8F]/20 rounded-full"
+                  border-[#2A9D8F]/10 rounded-full"
         style={{
-          background: 'radial-gradient(circle, transparent 30%, rgba(42, 157, 143, 0.03) 70%)'
+          background: 'radial-gradient(circle, transparent 30%, rgba(42, 157, 143, 0.02) 70%)'
         }}
       />
       <div className="max-w-5xl mx-auto">
@@ -73,8 +73,8 @@ export function Hero() {
           <div className="p-4 bg-primary/10 rounded-2xl">
             <LineChart className="w-10 h-10 text-primary" />
           </div>
-          <div className="p-4 bg-accent/10 rounded-2xl">
-            <PenTool className="w-10 h-10 text-accent" />
+          <div className="p-4 bg-[#E63946]/10 rounded-2xl">
+            <PenTool className="w-10 h-10 text-[#E63946]" />
           </div>
           <div className="p-4 bg-success/10 rounded-2xl">
             <Globe2 className="w-10 h-10 text-success" />

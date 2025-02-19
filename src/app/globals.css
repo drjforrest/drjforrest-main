@@ -8,7 +8,7 @@
     --background: 244 241 222;   /* Ivory */
     --foreground: 43 45 66;      /* Charcoal */
     --primary: 26 58 92;         /* Deep navy */
-    --accent: 114 83 52;         /* Rich bronze */
+    --accent: 230 57 70;         /* Bright red */
     --success: 42 157 143;       /* Emerald */
     --muted: 112 66 20;          /* Warm brown */
     
@@ -21,7 +21,7 @@
     --background: 43 45 66;      /* Charcoal */
     --foreground: 244 241 222;   /* Ivory */
     --primary: 26 58 92;         /* Keep navy for consistency */
-    --accent: 114 83 52;         /* Keep bronze for consistency */
+    --accent: 230 57 70;         /* Bright red */
     --muted: 189 189 189;        /* Light Gray */
     
     --surface: 43 45 66;

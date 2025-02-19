@@ -31,25 +31,25 @@ const topics: TopicFeed[] = [
     id: 'ai', 
     label: '#AI', 
     feedUrl: 'https://medium.com/feed/towards-artificial-intelligence',
-    color: '#E9C46A'
+    color: '#2A9D8F'
   },
   { 
     id: 'travel', 
     label: '#Travel', 
     feedUrl: 'https://www.nomadicmatt.com/feed/',
-    color: '#F4A261'
+    color: '#2A9D8F'
   },
   { 
     id: 'news', 
     label: '#CanadianNews', 
     feedUrl: 'https://rss.cbc.ca/lineup/canada.xml',
-    color: '#E76F51'
+    color: '#2A9D8F'
   },
   { 
     id: 'ted', 
     label: '#TEDTalks', 
     feedUrl: 'https://www.ted.com/feeds/talks.rss',
-    color: '#264653'
+    color: '#2A9D8F'
   }
 ];
 
@@ -81,6 +81,11 @@ export default function RSSFeed() {
 
   return (
     <div className="w-full max-w-6xl mx-auto">
+      {/* Description Text */}
+      <p className="text-center text-foreground/70 mb-8">
+        Below are select RSS feeds I follow representing a cross-section of my general interests.
+      </p>
+
       {/* Topic Selection */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         {topics.map((topic) => (
@@ -92,7 +97,7 @@ export default function RSSFeed() {
             }}
             className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2
               ${selectedTopic === topic.id 
-                ? `bg-[${topic.color}] text-white` 
+                ? 'bg-[#2A9D8F] text-white' 
                 : 'bg-primary/10 text-primary hover:bg-primary/20'
               }`}
             whileHover={{ scale: 1.05 }}
@@ -105,7 +110,7 @@ export default function RSSFeed() {
       </div>
 
       {/* Feed Items Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AnimatePresence mode="sync">
           {isLoading ? (
             // Loading skeletons

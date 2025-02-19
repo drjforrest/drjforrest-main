@@ -71,9 +71,7 @@ export function ContactForm() {
         <div className="text-center mb-12">
           <p className="text-lg text-foreground/80">
             I'm always interested in connecting with colleagues and exploring new opportunities
-            in <span className="text-[#2A9D8F] font-medium">global health</span>, 
-            <span className="text-[#2A9D8F] font-medium"> clinical research</span>, and 
-            <span className="text-[#2A9D8F] font-medium"> data science</span>.
+            in global health, clinical research, and data science.
           </p>
         </div>
 
@@ -154,10 +152,10 @@ export function ContactForm() {
           </Card>
 
           {/* Contact Info */}
-          <Card className="p-8 bg-white/90 backdrop-blur-sm border border-[#2A9D8F]/20 shadow-lg">
+          <Card className="p-8 bg-[#2A9D8F]/5 backdrop-blur-sm border border-[#2A9D8F]/20 shadow-lg">
             <div className="space-y-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-primary">Contact Information</h3>
+                <h3 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contact Information</h3>
                 <div className="space-y-3">
                   {[
                     { icon: Mail, text: 'jamie@drjforrest.com', action: 'email' },
@@ -168,10 +166,10 @@ export function ContactForm() {
                       key={text}
                       whileHover={{ scale: 1.02, x: 4 }}
                       onClick={() => handleExternalLink(action, `${action === 'email' ? 'mailto:' : ''}${text}`)}
-                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 transition-colors"
+                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-[#2A9D8F]/10 transition-colors"
                     >
-                      <div className="p-2 rounded-full bg-primary/10">
-                        <Icon className="h-4 w-4 text-primary" />
+                      <div className="p-2 rounded-full bg-[#2A9D8F]/20">
+                        <Icon className="h-4 w-4 text-[#2A9D8F]" />
                       </div>
                       <span className="text-foreground/80">{text}</span>
                     </motion.button>
@@ -180,7 +178,7 @@ export function ContactForm() {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-primary">Looking to collaborate?</h3>
+                <h3 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Looking to collaborate?</h3>
                 <p className="text-foreground/70 mb-4">I'm open to discussing opportunities in:</p>
                 <div className="space-y-3">
                   {[
@@ -194,7 +192,7 @@ export function ContactForm() {
                       className="flex items-center gap-3 p-2"
                       whileHover={{ x: 4 }}
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#2A9D8F]"></div>
                       <span className="text-foreground/80">{item}</span>
                     </motion.div>
                   ))}
