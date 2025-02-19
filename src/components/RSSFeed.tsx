@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Rss, ExternalLink, Clock, Hash } from "lucide-react";
+import { Hash, ExternalLink, Clock } from "lucide-react";
 
 interface FeedItem {
   title: string;
@@ -17,40 +16,14 @@ interface TopicFeed {
   id: string;
   label: string;
   feedUrl: string;
-  color: string;
 }
 
 const topics: TopicFeed[] = [
-  { 
-    id: 'automation', 
-    label: '#Automation', 
-    feedUrl: 'https://talk.automators.fm/posts.rss',
-    color: '#2A9D8F'
-  },
-  { 
-    id: 'ai', 
-    label: '#AI', 
-    feedUrl: 'https://medium.com/feed/towards-artificial-intelligence',
-    color: '#2A9D8F'
-  },
-  { 
-    id: 'travel', 
-    label: '#Travel', 
-    feedUrl: 'https://www.nomadicmatt.com/feed/',
-    color: '#2A9D8F'
-  },
-  { 
-    id: 'news', 
-    label: '#CanadianNews', 
-    feedUrl: 'https://rss.cbc.ca/lineup/canada.xml',
-    color: '#2A9D8F'
-  },
-  { 
-    id: 'ted', 
-    label: '#TEDTalks', 
-    feedUrl: 'https://www.ted.com/feeds/talks.rss',
-    color: '#2A9D8F'
-  }
+  { id: 'automation', label: '#Automation', feedUrl: 'https://talk.automators.fm/posts.rss' },
+  { id: 'ai', label: '#AI', feedUrl: 'https://medium.com/feed/towards-artificial-intelligence' },
+  { id: 'travel', label: '#Travel', feedUrl: 'https://www.nomadicmatt.com/feed/' },
+  { id: 'news', label: '#CanadianNews', feedUrl: 'https://rss.cbc.ca/lineup/canada.xml' },
+  { id: 'ted', label: '#TEDTalks', feedUrl: 'https://www.ted.com/feeds/talks.rss' }
 ];
 
 export default function RSSFeed() {
@@ -74,14 +47,12 @@ export default function RSSFeed() {
     }
   };
 
-  // Fetch initial feed
   useEffect(() => {
     fetchFeedItems(selectedTopic);
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
-      {/* Description Text */}
+    <div className="w-full max-w-5xl mx-auto">
       <p className="text-center text-foreground/70 mb-8">
         Below are select RSS feeds I follow representing a cross-section of my general interests.
       </p>
@@ -95,11 +66,10 @@ export default function RSSFeed() {
               setSelectedTopic(topic.id);
               fetchFeedItems(topic.id);
             }}
-            className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2
+            className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2 
               ${selectedTopic === topic.id 
-                ? 'bg-[#2A9D8F] text-white' 
-                : 'bg-primary/10 text-primary hover:bg-primary/20'
-              }`}
+                ? 'bg-primary text-white shadow-md' 
+                : 'bg-background/50 text-primary hover:bg-primary/10'}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -113,14 +83,13 @@ export default function RSSFeed() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AnimatePresence mode="sync">
           {isLoading ? (
-            // Loading skeletons
             Array(8).fill(0).map((_, index) => (
               <motion.div
                 key={`skeleton-${index}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="h-[200px] bg-primary/5 rounded-lg animate-pulse"
+                className="h-[200px] bg-primary/10 rounded-lg animate-pulse"
               />
             ))
           ) : (
@@ -132,8 +101,7 @@ export default function RSSFeed() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <Card className="h-full group hover:shadow-lg transition-all duration-300">
-                  <a 
+                  <Card className="h-full group hover:shadow-lg transition-all duration-300 bg-[#f9fafb] border border-gray-300 shadow-md">                  <a 
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer" 

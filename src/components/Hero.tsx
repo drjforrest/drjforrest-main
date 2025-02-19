@@ -53,16 +53,23 @@ function IconFeature({
 
 export function Hero() {
   return (
-    <div className="w-full h-[calc(100vh-80px)] flex items-center justify-center relative">
-      <div 
+    <div className="relative w-full h-[calc(100vh-80px)] flex items-center justify-center">
+      
+      {/* 🔹 Hero Background Ring */}
+      <motion.div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                  w-[840px] h-[840px] border-[2px] 
-                  border-[#2A9D8F]/10 rounded-full"
+                  w-[720px] h-[720px] border-[1.5px] 
+                  border-[#2A9D8F]/10 rounded-full z-[-1]"
         style={{
-          background: 'radial-gradient(circle, transparent 30%, rgba(42, 157, 143, 0.02) 70%)'
+          background: 'radial-gradient(circle, transparent 40%, rgba(42, 157, 143, 0.015) 80%)'
         }}
+        animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.05, 1] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
+
+      {/* 🔹 Hero Content */}
       <div className="max-w-5xl mx-auto">
+        
         {/* Hero Icons */}
         <motion.div 
           className="flex items-center justify-center gap-4 mb-12"
@@ -80,6 +87,8 @@ export function Hero() {
             <Globe2 className="w-10 h-10 text-success" />
           </div>
         </motion.div>
+
+        {/* Hero Text */}
         <div className="w-full max-w-[1200px] mx-auto px-8 flex flex-col items-center relative">
           <div className="text-center mb-16">
             <motion.h1 
@@ -97,11 +106,12 @@ export function Hero() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-[#26385C]/80 text-xl max-w-3xl mx-auto"
             >
-              Strategic partnerships, effective technical & scientific communication, evidence-based
-              approaches to results monitoring and evaluation
+              Strategic partnerships, effective technical & scientific communication, 
+              evidence-based approaches to results monitoring and evaluation
             </motion.p>
           </div>
 
+          {/* 🔹 Call to Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

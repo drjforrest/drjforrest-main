@@ -1,6 +1,6 @@
-PROJECT INVENTORY 2025-02-17
+PROJECT INVENTORY 2025-02-18
 Project: 
-Timestamp: 2025-02-17 01:41:36
+Timestamp: 2025-02-18 18:57:37
 Root Directory: /Users/drjforrest/Development/DevProjects/WebDev/new-main/
 
 --- README.md Contents ---
@@ -47,8 +47,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 --- File: (Project Directory Structure) ---
 ├── README.md 
-├── all-project-code_2025-02-16.txt 
-├── all-project-code_2025-02-17.txt 
+├── all-project-code_2025-02-18.txt 
 ├── next-env.d.ts 
 ├── next.config.js 
 ├── package-lock.json 
@@ -168,25 +167,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/next-env.d.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/tailwind.config.ts (Timestamp: 2025-02-09 19:05:07) ---
-import type { Config } from "tailwindcss"
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/tailwind.config.ts (Timestamp: 2025-02-18 17:24:07) ---
+import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
-    './src/pages/**/*.{ts,tsx}',
-    './src/components/**/*.{ts,tsx}',
-    './src/app/**/*.{ts,tsx}',
-    './src/styles/**/*.{css,ts}',
+    "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
         background: "rgb(var(--background))",
@@ -195,43 +186,41 @@ const config: Config = {
         accent: "rgb(var(--accent))",
         success: "rgb(var(--success))",
         muted: "rgb(var(--muted))",
-        surface: {
-          DEFAULT: "rgb(var(--surface))",
-          muted: "rgb(var(--surface-muted))",
-          elevated: "rgb(var(--surface-elevated))",
-        },
+        surface: "rgb(var(--surface))",
+        "surface-muted": "rgb(var(--surface-muted))",
+        "surface-elevated": "rgb(var(--surface-elevated))",
+        border: "rgb(var(--border))",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fadeIn 0.5s ease-out",
+        "slide-up": "slideUp 0.5s ease-out",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(10px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [require("@tailwindcss/typography")],
+};
 
-export default config
-
+export default config;
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/tailwind.config.ts ---
 
---- Skipping package-lock.json (Too large: 124.10 KB) ---
+--- Skipping package-lock.json (Too large: 126.16 KB) ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/package.json (Timestamp: 2025-02-16 16:24:16) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/package.json (Timestamp: 2025-02-18 17:25:23) ---
 {
   "name": "drjforrest-main",
   "version": "0.1.0",
@@ -247,7 +236,9 @@ export default config
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.1.3",
+    "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@tailwindcss/typography": "^0.5.16",
     "@vercel/analytics": "^1.1.2",
     "bad-words": "^3.0.4",
     "class-variance-authority": "^0.7.0",
@@ -263,8 +254,7 @@ export default config
     "recharts": "^2.15.1",
     "rss-parser": "^3.13.0",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7",
-    "@radix-ui/react-toggle": "^1.0.3"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/bad-words": "^3.0.3",
@@ -440,7 +430,7 @@ export interface Certification {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/types/publications.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx (Timestamp: 2025-02-17 01:02:30) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx (Timestamp: 2025-02-18 17:57:59) ---
 import { Analytics } from '@vercel/analytics/react';
 import { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
@@ -469,40 +459,22 @@ export const viewport = {
   userScalable: false,
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <head>
-        <link 
-          rel="stylesheet" 
-          href="/_next/static/css/app/layout.css" 
-          as="style"
-          precedence="high"
-        />
-      </head>
       <body className="overflow-x-hidden">
         <ThemeProvider>
-          <ScrollProgress />
-          <SmoothScroll />
           <Navigation />
-          <div className="min-h-screen flex flex-col">
-            {children}
-          </div>
+          <main className="flex flex-col min-h-screen">{children}</main> {/* ✅ This ensures HomeContent renders */}
         </ThemeProvider>
         <Footer />
-        <Analytics />
       </body>
     </html>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/layout.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-17 00:57:44) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/home-content.tsx (Timestamp: 2025-02-18 18:51:22) ---
 'use client';
 
 import { motion } from "framer-motion";
@@ -518,16 +490,18 @@ import { Button } from "@/components/ui/button";
 export default function HomeContent() {
   return (
     <main className="flex min-h-screen flex-col">
+      {/* Hero Section */}
       <section id="hero" className="mb-16 min-h-screen flex items-center">
         <Hero />
       </section>
-      
+
+      {/* Career Timeline */}
       <motion.section 
         id="career"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-background/95"
       >
         <SectionTitle>Career Journey</SectionTitle>
         <div className="mt-8">
@@ -535,12 +509,13 @@ export default function HomeContent() {
         </div>
       </motion.section>
 
+      {/* Publications & Research */}
       <motion.section 
         id="publications"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-white"
       >
         <SectionTitle>Publications & Research Impact</SectionTitle>
         <div className="mt-8">
@@ -548,24 +523,21 @@ export default function HomeContent() {
         </div>
       </motion.section>
       
+      {/* Education & Achievements */}
       <motion.section 
         id="education"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-background/95"
       >
         <SectionTitle>Education & Achievements</SectionTitle>
         <div className="mt-8 flex justify-center">
-          <Button
-            asChild
-            size="lg"
-            className="!text-white"
-          >
+          <Button asChild size="lg" className="!text-white">
             <a 
               href="/assets/jamie-forrest-cv.pdf" 
               target="_blank"
-              rel="noopener noreferrer" 
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 !text-white"
             >
               <svg 
@@ -592,12 +564,13 @@ export default function HomeContent() {
         </div>
       </motion.section>
 
+      {/* Personal Interests */}
       <motion.section 
         id="interests"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-white"
       >
         <SectionTitle>Personal Interests</SectionTitle>
         <div className="mt-8">
@@ -605,12 +578,13 @@ export default function HomeContent() {
         </div>
       </motion.section>
       
+      {/* Contact Section */}
       <motion.section 
         id="contact"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center"
+        className="container mx-auto px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-background/95"
       >
         <SectionTitle>Get in Touch</SectionTitle>
         <div className="mt-8">
@@ -637,7 +611,7 @@ export default function Page() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/page.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/globals.css (Timestamp: 2025-02-16 15:38:42) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/globals.css (Timestamp: 2025-02-18 17:24:30) ---
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -645,115 +619,110 @@ export default function Page() {
 @layer base {
   :root {
     --radius: 0.75rem;
-    --background: 244 241 222;   /* Ivory */
-    --foreground: 43 45 66;      /* Charcoal */
-    --primary: 26 58 92;         /* Deep navy */
-    --accent: 114 83 52;         /* Rich bronze */
-    --success: 42 157 143;       /* Emerald */
-    --muted: 112 66 20;          /* Warm brown */
-    
-    --surface: 244 241 222;
-    --surface-muted: 236 233 214;
-    --surface-elevated: 248 245 226;
+    --background: 250 250 249;   /* Pale Yellow */
+    --foreground: 20 20 20;      /* Near Black */
+    --primary: 47 112 193;       /* Deep Navy */
+    --accent: 20 184 166;        /* Teal */
+    --danger: 239 68 68;         /* Red */
+    --success: 21 128 61;        /* Green */
+    --muted: 113 113 122;        /* Gray */
+
+    --surface: 255 255 255;
+    --surface-muted: 245 245 245;
+    --surface-elevated: 250 250 250;
+    --border: 229 231 235;
   }
 
   .dark {
-    --background: 43 45 66;      /* Charcoal */
-    --foreground: 244 241 222;   /* Ivory */
-    --primary: 26 58 92;         /* Keep navy for consistency */
-    --accent: 114 83 52;         /* Keep bronze for consistency */
-    --muted: 189 189 189;        /* Light Gray */
-    
-    --surface: 43 45 66;
-    --surface-muted: 35 37 58;
-    --surface-elevated: 51 53 74;
-  }
+    --background: 23 23 23;      /* Dark background */
+    --foreground: 250 250 249;   /* Pale Yellow */
+    --primary: 47 112 193;       /* Deep Navy */
+    --accent: 20 184 166;        /* Teal */
+    --danger: 239 68 68;         /* Red */
+    --success: 34 197 94;        /* Green */
+    --muted: 161 161 170;        /* Gray */
 
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Adjust based on your header height */
+    --surface: 32 32 32;
+    --surface-muted: 39 39 42;
+    --surface-elevated: 45 45 45;
+    --border: 63 63 70;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    overflow-x: hidden;
   }
 
-  /* Improved Section Spacing */
-  section {
-    @apply py-16 md:py-24;
-    transition: opacity 0.5s ease-in-out;
-  }
-
-  /* Section transitions when scrolling into view */
-  section[data-animate="true"] {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  }
-
-  section[data-animate="true"].in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Consistent heading styles */
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight text-foreground;
   }
 
-  h1 { @apply text-4xl md:text-5xl lg:text-6xl leading-tight; }
-  h2 { @apply text-3xl md:text-4xl leading-tight; }
-  h3 { @apply text-2xl md:text-3xl leading-snug; }
-  h4 { @apply text-xl md:text-2xl leading-snug; }
-
-  /* Improved link states */
   a:not(.unstyled) {
-    @apply text-primary transition-colors duration-200;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    @apply text-primary hover:text-accent transition-colors duration-200;
   }
 
-  a:not(.unstyled):hover {
-    @apply text-primary/80;
-  }
-
-  /* Better focus styles */
   :focus-visible {
-    @apply outline-2 outline-primary outline-offset-2 ring-0;
-  }
-
-  /* Improved touch targets on mobile */
-  @media (max-width: 640px) {
-    button, 
-    a.button,
-    input[type="button"],
-    input[type="submit"] {
-      @apply min-h-[44px] min-w-[44px];
-    }
+    @apply outline-2 outline-accent outline-offset-2;
   }
 }
 
 @layer components {
-  .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
   .card {
-    @apply bg-surface rounded-lg shadow-md 
-           transition-all duration-300
-           hover:shadow-lg
-           border border-foreground/5
-           p-6;
+    @apply bg-surface rounded-lg shadow-sm 
+           transition-all duration-300 
+           border border-[rgb(var(--border))]
+           backdrop-blur-[2px];
   }
 
   .button {
     @apply px-4 py-2 rounded-md font-medium 
-           transition-all duration-200
-           bg-primary text-background 
+           bg-primary text-white
            hover:bg-primary/90
-           active:scale-[0.98]
-           disabled:opacity-50 disabled:cursor-not-allowed;
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent;
+  }
+
+  .input {
+    @apply block w-full rounded-md border border-[rgb(var(--border))]
+           bg-surface px-3 py-2 text-sm 
+           placeholder:text-muted
+           focus:outline-none focus:ring-2 focus:ring-accent
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .nav-link {
+    @apply text-foreground/80 hover:text-accent 
+           transition-colors duration-200
+           relative after:absolute after:bottom-0 after:left-0 
+           after:w-full after:h-[2px] after:bg-accent
+           after:origin-bottom-right after:scale-x-0
+           hover:after:scale-x-100 hover:after:origin-bottom-left
+           after:transition-transform after:duration-300;
+  }
+
+  .hero-section {
+    @apply pt-32 pb-16 text-center;
+  }
+
+  .hero-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .hero-description {
+    @apply mt-6 text-lg text-foreground/70 max-w-3xl mx-auto;
+  }
+
+  .icon-banner {
+    @apply flex justify-center gap-16 md:gap-24 py-12;
+  }
+
+  .icon-item {
+    @apply flex flex-col items-center gap-2;
+    @apply p-3 rounded-full bg-primary/10;
+  }
+
+  .button-group {
+    @apply mt-8 flex justify-center gap-4;
   }
 }
 
@@ -764,14 +733,8 @@ export default function Page() {
 }
 
 @keyframes slideUp {
-  from { 
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to { 
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .animate-fade-in {
@@ -782,7 +745,7 @@ export default function Page() {
   animation: slideUp 0.5s ease-out;
 }
 
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -799,7 +762,6 @@ export default function Page() {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(var(--primary) / 0.5);
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/globals.css ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/not-found.tsx (Timestamp: 2025-02-16 18:40:42) ---
@@ -959,7 +921,7 @@ export async function GET(request: Request) {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/app/api/rss/route.ts ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-17 01:37:48) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx (Timestamp: 2025-02-18 18:05:29) ---
 'use client';
 
 import { motion } from "framer-motion";
@@ -1015,16 +977,23 @@ function IconFeature({
 
 export function Hero() {
   return (
-    <div className="w-full h-[calc(100vh-80px)] flex items-center justify-center relative">
-      <div 
+    <div className="relative w-full h-[calc(100vh-80px)] flex items-center justify-center">
+      
+      {/* 🔹 Hero Background Ring */}
+      <motion.div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                  w-[840px] h-[840px] border-[2px] 
-                  border-[#2A9D8F]/20 rounded-full"
+                  w-[720px] h-[720px] border-[1.5px] 
+                  border-[#2A9D8F]/10 rounded-full z-[-1]"
         style={{
-          background: 'radial-gradient(circle, transparent 30%, rgba(42, 157, 143, 0.03) 70%)'
+          background: 'radial-gradient(circle, transparent 40%, rgba(42, 157, 143, 0.015) 80%)'
         }}
+        animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.05, 1] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
+
+      {/* 🔹 Hero Content */}
       <div className="max-w-5xl mx-auto">
+        
         {/* Hero Icons */}
         <motion.div 
           className="flex items-center justify-center gap-4 mb-12"
@@ -1035,13 +1004,15 @@ export function Hero() {
           <div className="p-4 bg-primary/10 rounded-2xl">
             <LineChart className="w-10 h-10 text-primary" />
           </div>
-          <div className="p-4 bg-accent/10 rounded-2xl">
-            <PenTool className="w-10 h-10 text-accent" />
+          <div className="p-4 bg-[#E63946]/10 rounded-2xl">
+            <PenTool className="w-10 h-10 text-[#E63946]" />
           </div>
           <div className="p-4 bg-success/10 rounded-2xl">
             <Globe2 className="w-10 h-10 text-success" />
           </div>
         </motion.div>
+
+        {/* Hero Text */}
         <div className="w-full max-w-[1200px] mx-auto px-8 flex flex-col items-center relative">
           <div className="text-center mb-16">
             <motion.h1 
@@ -1059,11 +1030,12 @@ export function Hero() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-[#26385C]/80 text-xl max-w-3xl mx-auto"
             >
-              Strategic partnerships, effective technical & scientific communication, evidence-based
-              approaches to results monitoring and evaluation
+              Strategic partnerships, effective technical & scientific communication, 
+              evidence-based approaches to results monitoring and evaluation
             </motion.p>
           </div>
 
+          {/* 🔹 Call to Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1096,67 +1068,24 @@ export function Hero() {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Hero.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx (Timestamp: 2025-02-17 00:50:11) ---
-'use client';
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx (Timestamp: 2025-02-18 18:31:14) ---
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { positionData } from '@/data/positions';
-import { Card } from '@/components/ui/card';
+import { Card } from "@/components/ui/card";
 import { motion, AnimatePresence } from 'framer-motion';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Briefcase, MapPin, Calendar } from 'lucide-react';
 
 export function CareerTimeline() {
-  const [isLoading, setIsLoading] = useState(true);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="relative container mx-auto px-4">
-        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-primary/20" />
-        <div className="space-y-12">
-          {[1, 2, 3].map((_, index) => (
-            <div
-              key={index}
-              className={`flex items-center ${
-                index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-              }`}
-            >
-              <div className="w-full md:w-1/2 px-4 md:px-8">
-                <Card className="p-6 bg-white/90 backdrop-blur-sm border border-primary/10">
-                  <div className="space-y-3">
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-4 w-1/3" />
-                    <Skeleton className="h-20 w-full" />
-                  </div>
-                </Card>
-              </div>
-              <div className="hidden md:block w-4 h-4 rounded-full bg-primary/20" />
-              <div className="hidden md:block w-1/2" />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="relative container mx-auto px-4">
       {/* Vertical Timeline Line */}
       <div 
-        className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px]" 
-        style={{ 
-          background: "linear-gradient(180deg, transparent 0%, rgb(var(--primary)) 5%, rgb(var(--primary)) 95%, transparent 100%)",
-          zIndex: 0 
-        }} 
+        className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-primary/20" 
+        style={{ zIndex: 0 }} 
       />
 
       <div className="space-y-12">
@@ -1177,103 +1106,48 @@ export function CareerTimeline() {
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
                 <Card 
-                  className="p-6 bg-white/90 backdrop-blur-sm border border-primary/10 
-                           shadow-lg hover:shadow-xl transition-all duration-300 
-                           transform hover:-translate-y-1 cursor-pointer
+                  className="p-6 bg-background/50 border border-gray-200 shadow-lg 
+                           hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer
                            hover:border-primary/20"
                   onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
                 >
                   <div className="space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1">
-                        <h3 className="text-xl font-semibold text-primary">
-                          {position.title}
-                        </h3>
-                        <div className="flex items-center gap-2 text-foreground/70">
-                          <Briefcase className="w-4 h-4" />
-                          <span>{position.organization}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-foreground/70">
-                          <MapPin className="w-4 h-4" />
-                          <span>{position.location}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-foreground/70">
-                          <Calendar className="w-4 h-4" />
-                          <span>{position.period}</span>
-                        </div>
-                      </div>
+                    <h3 className="text-xl font-semibold text-primary">
+                      {position.title}
+                    </h3>
+                    <div className="flex items-center gap-2 text-foreground/70">
+                      <Briefcase className="w-4 h-4" />
+                      <span>{position.organization}</span>
                     </div>
-                    
+                    <div className="flex items-center gap-2 text-foreground/70">
+                      <MapPin className="w-4 h-4" />
+                      <span>{position.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-foreground/70">
+                      <Calendar className="w-4 h-4" />
+                      <span>{position.period}</span>
+                    </div>
                     <p className="text-foreground/80">
                       {position.description}
                     </p>
-
-                    <AnimatePresence>
-                      {expandedIndex === index && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pt-4 space-y-2 border-t border-primary/10">
-                            <h4 className="font-medium text-primary">Key Achievements:</h4>
-                            <ul className="space-y-2">
-                              {position.achievements.map((achievement, i) => (
-                                <motion.li 
-                                  key={i}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: i * 0.1 }}
-                                  className="flex items-start gap-2 text-foreground/70"
-                                >
-                                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                                  <span>{achievement}</span>
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
                   </div>
                 </Card>
               </motion.div>
             </div>
-
-            {/* Center Dot */}
-            <motion.div 
-              className="w-4 h-4 rounded-full relative shadow-md my-4 md:my-0"
-              style={{ backgroundColor: "#26385C" }}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.2 }}
-            >
-              <div 
-                className="w-8 h-8 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse"
-                style={{ backgroundColor: "rgba(38, 56, 92, 0.2)" }}
-              />
-            </motion.div>
-
-            {/* Empty space for alternating layout */}
-            <div className="hidden md:block w-1/2" />
           </div>
         ))}
       </div>
     </div>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/CareerTimeline.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx (Timestamp: 2025-02-17 00:47:44) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx (Timestamp: 2025-02-18 17:45:25) ---
 'use client';
 
 import React from 'react';
 import { educationData, certifications, awards } from '@/data/education';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { GraduationCap, Award, ScrollText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -1302,6 +1176,7 @@ export function EducationCards() {
   return (
     <section className="relative container mx-auto px-4 py-12">
       <div className="space-y-6 sm:space-y-8">
+      
       {/* Education Section */}
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
         {educationData.map((edu, index) => (
@@ -1312,38 +1187,29 @@ export function EducationCards() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -4 }}
           >
-            <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-              <CardHeader className="p-4 sm:p-6">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
-                    <GraduationCap className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="min-w-0">
-                    <CardTitle className="text-base sm:text-lg font-semibold text-primary break-words">
-                      {edu.degree}
-                    </CardTitle>
-                    <CardDescription className="text-sm">
-                      {edu.institution}
-                      <br />
-                      {edu.location} | {edu.period}
-                    </CardDescription>
-                  </div>
+            <Card className="p-6">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                  <GraduationCap className="h-5 w-5 text-primary" />
                 </div>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 text-sm">
-                <div className="space-y-3">
-                  <p className="font-medium text-foreground/80">
-                    <span className="text-primary">Focus:</span> {edu.focus}
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold text-primary break-words">
+                    {edu.degree}
+                  </h3>
+                  <p className="text-sm text-foreground/70">
+                    {edu.institution}
+                    <br />
+                    {edu.location} | {edu.period}
                   </p>
-                  {edu.thesis && (
-                    <div className="text-foreground/70">
-                      <span className="font-medium text-primary">Thesis:</span>
-                      <br />
-                      <span className="break-words">{edu.thesis}</span>
-                    </div>
-                  )}
                 </div>
-              </CardContent>
+              </div>
+              
+              <div className="mt-4 space-y-3 text-sm text-foreground/80">
+                <p><span className="font-medium text-primary">Focus:</span> {edu.focus}</p>
+                {edu.thesis && (
+                  <p><span className="font-medium text-primary">Thesis:</span> {edu.thesis}</p>
+                )}
+              </div>
             </Card>
           </motion.div>
         ))}
@@ -1351,6 +1217,7 @@ export function EducationCards() {
 
       {/* Awards and Certifications */}
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+        
         {/* Awards */}
         <motion.div
           variants={cardVariants}
@@ -1359,16 +1226,14 @@ export function EducationCards() {
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
         >
-          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Award className="h-5 w-5 text-primary" />
-                </div>
-                <CardTitle className="text-lg">Awards</CardTitle>
+          <Card className="p-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Award className="h-5 w-5 text-primary" />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              <h3 className="text-lg font-semibold text-primary">Awards</h3>
+            </div>
+            <div className="mt-4 space-y-6 text-sm">
               {awards.map((award, index) => (
                 <motion.div 
                   key={index} 
@@ -1379,19 +1244,13 @@ export function EducationCards() {
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
                     <div>
                       <h4 className="font-medium text-primary">{award.title}</h4>
-                      <p className="text-sm text-foreground/70">
-                        {award.organization} | {award.year}
-                      </p>
-                      {award.description && (
-                        <p className="text-sm text-foreground/70 mt-1">
-                          {award.description}
-                        </p>
-                      )}
+                      <p className="text-foreground/70">{award.organization} | {award.year}</p>
+                      {award.description && <p className="mt-1">{award.description}</p>}
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </CardContent>
+            </div>
           </Card>
         </motion.div>
 
@@ -1403,16 +1262,14 @@ export function EducationCards() {
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
         >
-          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <ScrollText className="h-5 w-5 text-primary" />
-                </div>
-                <CardTitle className="text-lg">Certifications</CardTitle>
+          <Card className="p-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <ScrollText className="h-5 w-5 text-primary" />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              <h3 className="text-lg font-semibold text-primary">Certifications</h3>
+            </div>
+            <div className="mt-4 space-y-6 text-sm">
               {certifications.map((cert, index) => (
                 <motion.div 
                   key={index} 
@@ -1423,14 +1280,12 @@ export function EducationCards() {
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
                     <div>
                       <h4 className="font-medium text-primary">{cert.title}</h4>
-                      <p className="text-sm text-foreground/70">
-                        {cert.organization}
-                      </p>
+                      <p className="text-foreground/70">{cert.organization}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </CardContent>
+            </div>
           </Card>
         </motion.div>
       </div>
@@ -1438,17 +1293,15 @@ export function EducationCards() {
     </section>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/EducationCards.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-17 01:02:30) ---
-'use client';
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx (Timestamp: 2025-02-18 18:30:35) ---
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Rss, ExternalLink, Clock, Hash } from "lucide-react";
+import { Hash, ExternalLink, Clock } from "lucide-react";
 
 interface FeedItem {
   title: string;
@@ -1461,40 +1314,14 @@ interface TopicFeed {
   id: string;
   label: string;
   feedUrl: string;
-  color: string;
 }
 
 const topics: TopicFeed[] = [
-  { 
-    id: 'automation', 
-    label: '#Automation', 
-    feedUrl: 'https://talk.automators.fm/posts.rss',
-    color: '#2A9D8F'
-  },
-  { 
-    id: 'ai', 
-    label: '#AI', 
-    feedUrl: 'https://medium.com/feed/towards-artificial-intelligence',
-    color: '#E9C46A'
-  },
-  { 
-    id: 'travel', 
-    label: '#Travel', 
-    feedUrl: 'https://www.nomadicmatt.com/feed/',
-    color: '#F4A261'
-  },
-  { 
-    id: 'news', 
-    label: '#CanadianNews', 
-    feedUrl: 'https://rss.cbc.ca/lineup/canada.xml',
-    color: '#E76F51'
-  },
-  { 
-    id: 'ted', 
-    label: '#TEDTalks', 
-    feedUrl: 'https://www.ted.com/feeds/talks.rss',
-    color: '#264653'
-  }
+  { id: 'automation', label: '#Automation', feedUrl: 'https://talk.automators.fm/posts.rss' },
+  { id: 'ai', label: '#AI', feedUrl: 'https://medium.com/feed/towards-artificial-intelligence' },
+  { id: 'travel', label: '#Travel', feedUrl: 'https://www.nomadicmatt.com/feed/' },
+  { id: 'news', label: '#CanadianNews', feedUrl: 'https://rss.cbc.ca/lineup/canada.xml' },
+  { id: 'ted', label: '#TEDTalks', feedUrl: 'https://www.ted.com/feeds/talks.rss' }
 ];
 
 export default function RSSFeed() {
@@ -1518,13 +1345,16 @@ export default function RSSFeed() {
     }
   };
 
-  // Fetch initial feed
   useEffect(() => {
     fetchFeedItems(selectedTopic);
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full max-w-5xl mx-auto">
+      <p className="text-center text-foreground/70 mb-8">
+        Below are select RSS feeds I follow representing a cross-section of my general interests.
+      </p>
+
       {/* Topic Selection */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         {topics.map((topic) => (
@@ -1534,11 +1364,10 @@ export default function RSSFeed() {
               setSelectedTopic(topic.id);
               fetchFeedItems(topic.id);
             }}
-            className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2
+            className={`px-4 py-2 rounded-full text-lg font-medium transition-colors flex items-center gap-2 
               ${selectedTopic === topic.id 
-                ? `bg-[${topic.color}] text-white` 
-                : 'bg-primary/10 text-primary hover:bg-primary/20'
-              }`}
+                ? 'bg-primary text-white shadow-md' 
+                : 'bg-background/50 text-primary hover:bg-primary/10'}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -1549,17 +1378,16 @@ export default function RSSFeed() {
       </div>
 
       {/* Feed Items Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AnimatePresence mode="sync">
           {isLoading ? (
-            // Loading skeletons
             Array(8).fill(0).map((_, index) => (
               <motion.div
                 key={`skeleton-${index}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="h-[200px] bg-primary/5 rounded-lg animate-pulse"
+                className="h-[200px] bg-primary/10 rounded-lg animate-pulse"
               />
             ))
           ) : (
@@ -1571,7 +1399,7 @@ export default function RSSFeed() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <Card className="h-full group hover:shadow-lg transition-all duration-300">
+                <Card className="h-full group hover:shadow-lg transition-all duration-300 bg-background/50 border border-gray-200">
                   <a 
                     href={item.link}
                     target="_blank"
@@ -1604,7 +1432,6 @@ export default function RSSFeed() {
     </div>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/RSSFeed.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Footer.tsx (Timestamp: 2025-02-17 01:03:59) ---
@@ -1657,7 +1484,7 @@ export function Footer() {
 } 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/Footer.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx (Timestamp: 2025-02-17 01:02:30) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx (Timestamp: 2025-02-18 18:26:53) ---
 "use client";
 
 import { useState } from "react";
@@ -1670,7 +1497,6 @@ import { motion } from "framer-motion";
 import { trackFormSubmission, trackExternalLink } from '@/lib/analytics';
 
 interface FormData {
-  [key: string]: string;
   name: string;
   email: string;
   subject: string;
@@ -1731,21 +1557,19 @@ export function ContactForm() {
         <div className="text-center mb-12">
           <p className="text-lg text-foreground/80">
             I'm always interested in connecting with colleagues and exploring new opportunities
-            in <span className="text-[#2A9D8F] font-medium">global health</span>, 
-            <span className="text-[#2A9D8F] font-medium"> clinical research</span>, and 
-            <span className="text-[#2A9D8F] font-medium"> data science</span>.
+            in global health, clinical research, and data science.
           </p>
         </div>
 
         <div className="grid md:grid-cols-[1.5fr,1fr] gap-8">
           {/* Contact Form */}
-          <Card className="p-8 bg-white/90 backdrop-blur-sm border border-[#2A9D8F]/20 shadow-lg transition-all duration-300">
+          <Card className="p-8 bg-white/90 backdrop-blur-sm border border-gray-200 shadow-lg transition-all duration-300">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
                 {[
-                  { id: 'name', label: 'Name', type: 'text', icon: 'user' },
-                  { id: 'email', label: 'Email', type: 'email', icon: 'mail' },
-                  { id: 'subject', label: 'Subject', type: 'text', icon: 'message' }
+                  { id: 'name', label: 'Name', type: 'text' },
+                  { id: 'email', label: 'Email', type: 'email' },
+                  { id: 'subject', label: 'Subject', type: 'text' }
                 ].map(({ id, label, type }) => (
                   <motion.div 
                     key={id}
@@ -1758,7 +1582,7 @@ export function ContactForm() {
                       <Input
                         id={id}
                         type={type}
-                        value={formData[id]}
+                        value={formData[id as keyof FormData]}
                         onChange={(e) => setFormData(prev => ({ ...prev, [id]: e.target.value }))}
                         onFocus={() => setFocusedField(id)}
                         onBlur={() => setFocusedField(null)}
@@ -1814,23 +1638,24 @@ export function ContactForm() {
           </Card>
 
           {/* Contact Info */}
-          <Card className="p-8 bg-white/90 backdrop-blur-sm border border-[#2A9D8F]/20 shadow-lg">
+          <Card className="p-8 bg-background/50 shadow-lg border border-gray-200">
             <div className="space-y-8">
+              {/* Contact Information */}
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-primary">Contact Information</h3>
                 <div className="space-y-3">
                   {[
-                    { icon: Mail, text: 'jamie@drjforrest.com', action: 'email' },
-                    { icon: Linkedin, text: 'Connect on LinkedIn', action: 'linkedin' },
-                    { icon: Github, text: 'GitHub Profile', action: 'github' }
+                    { icon: Mail, text: 'jamie@drjforrest.com', action: 'mailto:jamie@drjforrest.com' },
+                    { icon: Linkedin, text: 'Connect on LinkedIn', action: 'https://linkedin.com/in/jamieforrest' },
+                    { icon: Github, text: 'GitHub Profile', action: 'https://github.com/jamieforrest' }
                   ].map(({ icon: Icon, text, action }) => (
                     <motion.button
                       key={text}
-                      whileHover={{ scale: 1.02, x: 4 }}
-                      onClick={() => handleExternalLink(action, `${action === 'email' ? 'mailto:' : ''}${text}`)}
-                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 transition-colors"
+                      whileHover={{ scale: 1.01, x: 2 }}
+                      onClick={() => handleExternalLink(action, action)}
+                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary/10 transition-colors"
                     >
-                      <div className="p-2 rounded-full bg-primary/10">
+                      <div className="p-2 rounded-full bg-primary/20 shadow-md">
                         <Icon className="h-4 w-4 text-primary" />
                       </div>
                       <span className="text-foreground/80">{text}</span>
@@ -1839,12 +1664,13 @@ export function ContactForm() {
                 </div>
               </div>
 
+              {/* Collaboration Interests */}
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-primary">Looking to collaborate?</h3>
                 <p className="text-foreground/70 mb-4">I'm open to discussing opportunities in:</p>
                 <div className="space-y-3">
                   {[
-                    'Clinical Research Leadership',
+                    'Strategic Leadership & Research Partnerships',
                     'Global Health Projects',
                     'Data Science Initiatives',
                     'Health Systems Strengthening'
@@ -1852,7 +1678,7 @@ export function ContactForm() {
                     <motion.div 
                       key={item} 
                       className="flex items-center gap-3 p-2"
-                      whileHover={{ x: 4 }}
+                      whileHover={{ x: 2 }}
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
                       <span className="text-foreground/80">{item}</span>
@@ -1867,14 +1693,13 @@ export function ContactForm() {
     </div>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ContactForm.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ResearchImpactDashboard.tsx (Timestamp: 2025-02-09 14:01:21) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ResearchImpactDashboard.tsx (Timestamp: 2025-02-18 17:47:26) ---
 'use client';
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { FileText, TrendingUp, Globe, Award } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -1882,105 +1707,66 @@ export function ResearchImpactDashboard() {
   return (
     <section className="relative">
       <div className="container mx-auto px-4 py-12 space-y-6">
+      
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
+        {[
+          { icon: FileText, value: "45+", label: "Peer-reviewed Publications" },
+          { icon: TrendingUp, value: "9", label: "High-Impact Journal Papers" },
+          { icon: Globe, value: "15+", label: "Countries Impacted" },
+          { icon: Award, value: "2021", label: "Sackett Trial Award" },
+        ].map(({ icon: Icon, value, label }, index) => (
+          <Card key={index} className="p-6 bg-white/90 hover:shadow-lg transition-all duration-300">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <FileText className="h-6 w-6 text-primary" />
+                <Icon className="h-6 w-6 text-primary" />
               </div>
-              <div className="text-3xl font-bold text-primary mb-1">45+</div>
-              <p className="text-sm font-medium text-foreground/70">
-                Peer-reviewed Publications
-              </p>
+              <div className="text-3xl font-bold text-primary mb-1">{value}</div>
+              <p className="text-sm font-medium text-foreground/70">{label}</p>
             </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <TrendingUp className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">9</div>
-              <p className="text-sm font-medium text-foreground/70">
-                High-Impact Journal Papers
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <Globe className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">15+</div>
-              <p className="text-sm font-medium text-foreground/70">
-                Countries Impacted
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <Award className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">2021</div>
-              <p className="text-sm font-medium text-foreground/70">
-                Sackett Trial Award
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+          </Card>
+        ))}
       </div>
 
       {/* Featured Publications */}
-      <Card className="bg-white/90">
-        <CardHeader>
-          <CardTitle>Featured Publications</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ScrollArea className="h-[300px] pr-4">
-            <div className="space-y-4">
-              <div className="space-y-2 pb-4 border-b border-foreground/10">
-                <h3 className="font-medium text-primary">Resilient Clinical Trial Infrastructure in Response to COVID-19</h3>
-                <p className="text-sm text-foreground/70">
-                  American Journal of Tropical Medicine & Hygiene (2022)
-                </p>
+      <Card className="p-6 bg-white/90">
+        <h3 className="text-xl font-bold text-primary mb-4">Featured Publications</h3>
+        <ScrollArea className="h-[300px] pr-4">
+          <div className="space-y-4">
+            {[
+              {
+                title: "Resilient Clinical Trial Infrastructure in Response to COVID-19",
+                journal: "American Journal of Tropical Medicine & Hygiene (2022)",
+              },
+              {
+                title: "Early Treatment of COVID-19: A Missed Opportunity",
+                journal: "Infectious Diseases & Therapies (2021)",
+              },
+              // Add more publications here if needed
+            ].map(({ title, journal }, index) => (
+              <div key={index} className="space-y-2 pb-4 border-b border-foreground/10">
+                <h3 className="font-medium text-primary">{title}</h3>
+                <p className="text-sm text-foreground/70">{journal}</p>
               </div>
-              <div className="space-y-2 pb-4 border-b border-foreground/10">
-                <h3 className="font-medium text-primary">Early Treatment of COVID-19: A Missed Opportunity</h3>
-                <p className="text-sm text-foreground/70">
-                  Infectious Diseases & Therapies (2021)
-                </p>
-              </div>
-              {/* Add more publications */}
-            </div>
-          </ScrollArea>
-        </CardContent>
+            ))}
+          </div>
+        </ScrollArea>
       </Card>
+
       </div>
     </section>
   );
 }
-
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ResearchImpactDashboard.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/project-carousel.tsx (Timestamp: 2025-02-07 14:41:19) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/project-carousel.tsx (Timestamp: 2025-02-18 17:49:49) ---
 'use client';
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import Image from 'next/image';
-import { Button } from './button';
+import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 interface Project {
@@ -2023,6 +1809,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
   return (
     <div className="relative w-full">
+      {/* Navigation Buttons */}
       <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
         <Button
           variant="ghost"
@@ -2049,112 +1836,111 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         </Button>
       </div>
 
-      <Card 
-        variant="default"
-        className="w-full max-w-5xl mx-auto"
-      >
-        <CardContent className="p-6">
-          <motion.div
-            key={activeProject}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
-            }}
-            className="grid md:grid-cols-2 gap-8"
-          >
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
-              {projects[activeProject].paperLink ? (
-                <a 
-                  href={projects[activeProject].paperLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 group cursor-pointer"
-                >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {projects[activeProject].paperThumbnail && (
-                      <Image
-                        src={projects[activeProject].paperThumbnail}
-                        alt={projects[activeProject].paperTitle || projects[activeProject].title}
-                        fill
-                        className="object-contain transition-transform duration-200 group-hover:scale-[1.02]"
-                        style={{ objectPosition: 'center' }}
-                      />
-                    )}
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/5">
-                    <div className="bg-background/90 px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
-                      <span className="text-sm font-medium">Read Publication</span>
-                      <ExternalLink className="h-4 w-4" />
-                    </div>
-                  </div>
-                </a>
-              ) : (
+      {/* Project Card */}
+      <Card className="w-full max-w-5xl mx-auto p-6 shadow-lg bg-white/90">
+        <motion.div
+          key={activeProject}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
+          className="grid md:grid-cols-2 gap-8"
+        >
+          {/* Image / Publication Link */}
+          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
+            {projects[activeProject].paperLink ? (
+              <a 
+                href={projects[activeProject].paperLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 group cursor-pointer"
+              >
                 <div className="absolute inset-0 flex items-center justify-center">
                   {projects[activeProject].paperThumbnail && (
                     <Image
                       src={projects[activeProject].paperThumbnail}
                       alt={projects[activeProject].paperTitle || projects[activeProject].title}
                       fill
-                      className="object-contain"
+                      className="object-contain transition-transform duration-200 group-hover:scale-[1.02]"
                       style={{ objectPosition: 'center' }}
                     />
                   )}
                 </div>
-              )}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/5">
+                  <div className="bg-background/90 px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
+                    <span className="text-sm font-medium">Read Publication</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </div>
+                </div>
+              </a>
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                {projects[activeProject].paperThumbnail && (
+                  <Image
+                    src={projects[activeProject].paperThumbnail}
+                    alt={projects[activeProject].paperTitle || projects[activeProject].title}
+                    fill
+                    className="object-contain"
+                    style={{ objectPosition: 'center' }}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+          
+          {/* Project Details */}
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-2xl font-bold mb-1">{projects[activeProject].title}</h3>
+              <p className="text-sm text-primary font-medium">{projects[activeProject].period}</p>
             </div>
             
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-2xl font-bold mb-1">{projects[activeProject].title}</h3>
-                <p className="text-sm text-primary font-medium">{projects[activeProject].period}</p>
-              </div>
+            <p className="text-muted-foreground">{projects[activeProject].description}</p>
+            
+            <div className="space-y-2">
+              <p className="text-sm">{projects[activeProject].expandedDescription}</p>
               
-              <p className="text-muted-foreground">{projects[activeProject].description}</p>
-              
-              <div className="space-y-2">
-                <p className="text-sm">{projects[activeProject].expandedDescription}</p>
-                
-                {projects[activeProject].paperTitle && (
-                  <div className="mt-4 p-4 bg-muted/5 rounded-lg border border-primary/10">
-                    <h4 className="font-medium mb-2">Key Publication</h4>
-                    <p className="text-sm font-medium">{projects[activeProject].paperTitle}</p>
-                    {projects[activeProject].journal && (
-                      <p className="text-sm text-primary mt-1">{projects[activeProject].journal}</p>
-                    )}
-                    {projects[activeProject].citationCount && (
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Citations: {projects[activeProject].citationCount}
-                      </p>
-                    )}
-                  </div>
-                )}
-                
-                <p className="text-sm font-medium mt-4">Impact: {projects[activeProject].impact}</p>
-              </div>
-
-              {projects[activeProject].paperLink && (
-                <Button asChild variant="outline" size="sm">
-                  <a 
-                    href={projects[activeProject].paperLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    Read Publication
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </Button>
+              {projects[activeProject].paperTitle && (
+                <div className="mt-4 p-4 bg-muted/5 rounded-lg border border-primary/10">
+                  <h4 className="font-medium mb-2">Key Publication</h4>
+                  <p className="text-sm font-medium">{projects[activeProject].paperTitle}</p>
+                  {projects[activeProject].journal && (
+                    <p className="text-sm text-primary mt-1">{projects[activeProject].journal}</p>
+                  )}
+                  {projects[activeProject].citationCount && (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Citations: {projects[activeProject].citationCount}
+                    </p>
+                  )}
+                </div>
               )}
+              
+              <p className="text-sm font-medium mt-4">Impact: {projects[activeProject].impact}</p>
             </div>
-          </motion.div>
-        </CardContent>
+
+            {projects[activeProject].paperLink && (
+              <Button asChild variant="outline" size="sm">
+                <a 
+                  href={projects[activeProject].paperLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  Read Publication
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </Button>
+            )}
+          </div>
+        </motion.div>
       </Card>
 
+      {/* Dots Indicator */}
       <div className="flex justify-center mt-6 gap-2">
         {projects.map((_, index) => (
           <button
@@ -2232,93 +2018,37 @@ export { Tabs, TabsList, TabsTrigger, TabsContent };
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/tabs.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/card.tsx (Timestamp: 2025-02-09 00:30:30) ---
-import * as React from "react"
-import { cn } from "@/lib/utils"
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/card.tsx (Timestamp: 2025-02-18 18:46:48) ---
+import * as React from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'interactive'
+interface CardProps extends HTMLMotionProps<"div"> {
+  variant?: "default" | "interactive";
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'default', ...props }, ref) => (
-    <div
+  ({ className, variant = "default", ...props }, ref) => (
+    <motion.div
       ref={ref}
       className={cn(
-        "rounded-lg border border-foreground/10 bg-white/90 text-foreground shadow-sm backdrop-blur-sm",
-        variant === 'interactive' && "hover:shadow-lg transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 cursor-pointer hover:border-foreground/30",
+        "rounded-lg border border-foreground/20 bg-background/90 shadow-md shadow-foreground/10 backdrop-blur-sm",
+        variant === "interactive" &&
+          "hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer",
         className
       )}
+      whileHover={variant === "interactive" ? { y: -4, transition: { duration: 0.2 } } : {}}
       {...props}
     />
   )
-)
-Card.displayName = "Card"
+);
 
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
-    {...props}
-  />
-))
-CardHeader.displayName = "CardHeader"
+Card.displayName = "Card";
 
-const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn(
-      "text-2xl font-semibold leading-none tracking-tight text-primary",
-      className
-    )}
-    {...props}
-  />
-))
-CardTitle.displayName = "CardTitle"
-
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-foreground/70", className)}
-    {...props}
-  />
-))
-CardDescription.displayName = "CardDescription"
-
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-))
-CardContent.displayName = "CardContent"
-
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
-    {...props}
-  />
-))
-CardFooter.displayName = "CardFooter"
-
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
-
+export { Card };
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/card.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-card.tsx (Timestamp: 2025-02-06 15:15:10) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-card.tsx (Timestamp: 2025-02-18 17:16:37) ---
 'use client';
 
 import { motion } from 'framer-motion';
@@ -2342,12 +2072,12 @@ export function AnimatedCard({ children, className, delay = 0, hover = true }: A
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={hover ? { y: -5, transition: { duration: 0.2 } } : undefined}
+      whileHover={hover ? { scale: 1.02, y: -2, transition: { duration: 0.2 } } : undefined}
     >
       <Card 
         className={cn(
-          "bg-surface-elevated/95 backdrop-blur transition-all duration-300",
-          hover && "hover:elevation-3",
+          "bg-surface-elevated shadow-md backdrop-blur-sm transition-all duration-300",
+          hover && "hover:shadow-lg hover:border-primary/30",
           className
         )}
       >
@@ -2537,11 +2267,11 @@ export function ScrollProgress() {
 }
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/scroll-progress.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/publication-card.tsx (Timestamp: 2025-02-06 16:59:42) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/publication-card.tsx (Timestamp: 2025-02-18 17:48:08) ---
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Book, Award, Calendar } from 'lucide-react';
@@ -3454,74 +3184,38 @@ export function CursorEffect() {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/cursor-effect.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx (Timestamp: 2025-02-16 18:04:40) ---
-'use client';
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx (Timestamp: 2025-02-18 17:27:59) ---
+import * as React from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-import * as React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
-import { cva, type VariantProps } from 'class-variance-authority';
-
-// Define the ButtonProps type
 type ButtonProps = {
   className?: string;
-  variant?: VariantProps<typeof buttonVariants>['variant'];
-  size?: VariantProps<typeof buttonVariants>['size'];
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive";
+  size?: "default" | "sm" | "lg" | "icon";
   asChild?: boolean;
   children: React.ReactNode;
-} & HTMLMotionProps<'button'>; // Extend with HTML button props
-
-const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
-  {
-    variants: {
-      variant: {
-        default: [
-          'bg-primary',
-          'text-background',
-          'hover:bg-primary/90',
-          'hover:text-background',
-        ].join(' '),
-        white: [
-          'bg-primary',
-          '[&_*]:text-white',
-          'hover:bg-primary/90',
-          '[&_*]:hover:text-white',
-        ].join(' '),
-        outline: [
-          'border',
-          'border-primary',
-          'text-primary',
-          'hover:bg-primary/10',
-          'hover:text-primary',
-        ].join(' '),
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-      },
-      size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 px-3',
-        lg: 'h-11 px-8',
-        icon: 'h-10 w-10',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
-    },
-  }
-);
+} & HTMLMotionProps<"button">; // ✅ Explicitly extend HTMLMotionProps for Framer Motion
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
-    if (asChild) {
-      return <span className={buttonVariants({ variant, size, className })}>{children}</span>;
-    }
+  ({ className, variant = "primary", size = "default", asChild = false, children, ...props }, ref) => {
     return (
       <motion.button
-        className={buttonVariants({ variant, size, className })}
         ref={ref}
         whileTap={{ scale: 0.98 }}
         whileHover={{ scale: 1.02 }}
-        {...props}
+        className={cn(
+          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors",
+          variant === "primary" && "bg-primary text-white hover:bg-primary/90",
+          variant === "outline" && "border border-primary text-primary hover:bg-primary/10",
+          variant === "ghost" && "hover:bg-accent hover:text-accent-foreground",
+          size === "default" && "h-10 px-4 py-2",
+          size === "sm" && "h-9 px-3",
+          size === "lg" && "h-11 px-8",
+          size === "icon" && "h-10 w-10",
+          className
+        )}
+        {...props} // ✅ Ensures correct event typing
       >
         {children}
       </motion.button>
@@ -3529,7 +3223,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-export { Button, buttonVariants };
+Button.displayName = "Button";
+
+export { Button };
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/button.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/toggle.tsx (Timestamp: 2025-02-16 16:24:16) ---
@@ -3579,7 +3275,7 @@ Toggle.displayName = TogglePrimitive.Root.displayName
 export { Toggle, toggleVariants } 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/toggle.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx (Timestamp: 2025-02-16 23:35:18) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx (Timestamp: 2025-02-18 18:10:15) ---
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -3592,20 +3288,21 @@ interface SectionTitleProps {
 export function SectionTitle({ children, className, description }: SectionTitleProps) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className={cn("text-center mb-16", className)}
     >
-      <h2 className="text-4xl font-bold text-[#26385C] mb-4">{children}</h2>
-      <div className="w-24 h-1 bg-[#2A9D8F] mx-auto rounded-full" />
+      <h2 className="text-5xl font-bold text-[#26385C] mb-6 tracking-tight">{children}</h2>
+      <div className="w-32 h-1 bg-[#2A9D8F] mx-auto rounded-full opacity-80" />
       {description && (
-        <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+        <p className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           {description}
         </p>
       )}
     </motion.div>
   );
-} 
+}
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/section-title.tsx ---
 
 --- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/textarea.tsx (Timestamp: 2025-02-06 18:19:46) ---
@@ -3793,7 +3490,7 @@ export function InteractiveTimeline({ events }: InteractiveTimelineProps) {
 
 --- End of /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/interactive-timeline.tsx ---
 
---- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-container.tsx (Timestamp: 2025-02-06 15:13:34) ---
+--- File: /Users/drjforrest/Development/DevProjects/WebDev/new-main/src/components/ui/animated-container.tsx (Timestamp: 2025-02-18 17:16:22) ---
 'use client';
 
 import { motion } from 'framer-motion';

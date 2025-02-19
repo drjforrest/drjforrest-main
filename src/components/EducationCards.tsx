@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { educationData, certifications, awards } from '@/data/education';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { GraduationCap, Award, ScrollText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -31,6 +31,7 @@ export function EducationCards() {
   return (
     <section className="relative container mx-auto px-4 py-12">
       <div className="space-y-6 sm:space-y-8">
+      
       {/* Education Section */}
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
         {educationData.map((edu, index) => (
@@ -41,38 +42,29 @@ export function EducationCards() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -4 }}
           >
-            <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-              <CardHeader className="p-4 sm:p-6">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
-                    <GraduationCap className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="min-w-0">
-                    <CardTitle className="text-base sm:text-lg font-semibold text-primary break-words">
-                      {edu.degree}
-                    </CardTitle>
-                    <CardDescription className="text-sm">
-                      {edu.institution}
-                      <br />
-                      {edu.location} | {edu.period}
-                    </CardDescription>
-                  </div>
+            <Card className="p-6">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                  <GraduationCap className="h-5 w-5 text-primary" />
                 </div>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6 text-sm">
-                <div className="space-y-3">
-                  <p className="font-medium text-foreground/80">
-                    <span className="text-primary">Focus:</span> {edu.focus}
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold text-primary break-words">
+                    {edu.degree}
+                  </h3>
+                  <p className="text-sm text-foreground/70">
+                    {edu.institution}
+                    <br />
+                    {edu.location} | {edu.period}
                   </p>
-                  {edu.thesis && (
-                    <div className="text-foreground/70">
-                      <span className="font-medium text-primary">Thesis:</span>
-                      <br />
-                      <span className="break-words">{edu.thesis}</span>
-                    </div>
-                  )}
                 </div>
-              </CardContent>
+              </div>
+              
+              <div className="mt-4 space-y-3 text-sm text-foreground/80">
+                <p><span className="font-medium text-primary">Focus:</span> {edu.focus}</p>
+                {edu.thesis && (
+                  <p><span className="font-medium text-primary">Thesis:</span> {edu.thesis}</p>
+                )}
+              </div>
             </Card>
           </motion.div>
         ))}
@@ -80,6 +72,7 @@ export function EducationCards() {
 
       {/* Awards and Certifications */}
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+        
         {/* Awards */}
         <motion.div
           variants={cardVariants}
@@ -88,16 +81,14 @@ export function EducationCards() {
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
         >
-          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Award className="h-5 w-5 text-primary" />
-                </div>
-                <CardTitle className="text-lg">Awards</CardTitle>
+          <Card className="p-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Award className="h-5 w-5 text-primary" />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              <h3 className="text-lg font-semibold text-primary">Awards</h3>
+            </div>
+            <div className="mt-4 space-y-6 text-sm">
               {awards.map((award, index) => (
                 <motion.div 
                   key={index} 
@@ -108,19 +99,13 @@ export function EducationCards() {
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
                     <div>
                       <h4 className="font-medium text-primary">{award.title}</h4>
-                      <p className="text-sm text-foreground/70">
-                        {award.organization} | {award.year}
-                      </p>
-                      {award.description && (
-                        <p className="text-sm text-foreground/70 mt-1">
-                          {award.description}
-                        </p>
-                      )}
+                      <p className="text-foreground/70">{award.organization} | {award.year}</p>
+                      {award.description && <p className="mt-1">{award.description}</p>}
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </CardContent>
+            </div>
           </Card>
         </motion.div>
 
@@ -132,16 +117,14 @@ export function EducationCards() {
           viewport={{ once: true }}
           whileHover={{ y: -4 }}
         >
-          <Card className="bg-white/90 backdrop-blur-sm shadow-lg border border-primary/10 h-full">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <ScrollText className="h-5 w-5 text-primary" />
-                </div>
-                <CardTitle className="text-lg">Certifications</CardTitle>
+          <Card className="p-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <ScrollText className="h-5 w-5 text-primary" />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              <h3 className="text-lg font-semibold text-primary">Certifications</h3>
+            </div>
+            <div className="mt-4 space-y-6 text-sm">
               {certifications.map((cert, index) => (
                 <motion.div 
                   key={index} 
@@ -152,14 +135,12 @@ export function EducationCards() {
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
                     <div>
                       <h4 className="font-medium text-primary">{cert.title}</h4>
-                      <p className="text-sm text-foreground/70">
-                        {cert.organization}
-                      </p>
+                      <p className="text-foreground/70">{cert.organization}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
-            </CardContent>
+            </div>
           </Card>
         </motion.div>
       </div>

@@ -1,98 +1,61 @@
 'use client';
 
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { useState } from 'react';
+import { Card } from '@/components/ui/card';
 import { FileText, TrendingUp, Globe, Award } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Timeline } from '@/components/publication-dashboard/Timeline';
+import { Impact } from '@/components/publication-dashboard/Impact';
+import { Focus } from '@/components/publication-dashboard/Focus';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 export function ResearchImpactDashboard() {
+  const [activeTab, setActiveTab] = useState('timeline');
+
   return (
     <section className="relative">
       <div className="container mx-auto px-4 py-12 space-y-6">
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <FileText className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">45+</div>
-              <p className="text-sm font-medium text-foreground/70">
-                Peer-reviewed Publications
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <TrendingUp className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">9</div>
-              <p className="text-sm font-medium text-foreground/70">
-                High-Impact Journal Papers
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <Globe className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">15+</div>
-              <p className="text-sm font-medium text-foreground/70">
-                Countries Impacted
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-white/90 hover:shadow-lg transition-all duration-300">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <Award className="h-6 w-6 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary mb-1">2021</div>
-              <p className="text-sm font-medium text-foreground/70">
-                Sackett Trial Award
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
 
-      {/* Featured Publications */}
-      <Card className="bg-white/90">
-        <CardHeader>
-          <CardTitle>Featured Publications</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ScrollArea className="h-[300px] pr-4">
-            <div className="space-y-4">
-              <div className="space-y-2 pb-4 border-b border-foreground/10">
-                <h3 className="font-medium text-primary">Resilient Clinical Trial Infrastructure in Response to COVID-19</h3>
-                <p className="text-sm text-foreground/70">
-                  American Journal of Tropical Medicine & Hygiene (2022)
-                </p>
+        {/* Key Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {[
+            { icon: FileText, value: "45+", label: "Peer-reviewed Publications" },
+            { icon: TrendingUp, value: "9", label: "High-Impact Journal Papers" },
+            { icon: Globe, value: "15+", label: "Countries Impacted" },
+            { icon: Award, value: "2021", label: "Sackett Trial Award" },
+          ].map(({ icon: Icon, value, label }, index) => (
+            <Card key={index} className="p-6 bg-white/90 hover:shadow-lg transition-all duration-300">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                  <Icon className="h-6 w-6 text-primary" />
+                </div>
+                <div className="text-3xl font-bold text-primary mb-1">{value}</div>
+                <p className="text-sm font-medium text-foreground/70">{label}</p>
               </div>
-              <div className="space-y-2 pb-4 border-b border-foreground/10">
-                <h3 className="font-medium text-primary">Early Treatment of COVID-19: A Missed Opportunity</h3>
-                <p className="text-sm text-foreground/70">
-                  Infectious Diseases & Therapies (2021)
-                </p>
-              </div>
-              {/* Add more publications */}
-            </div>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+            </Card>
+          ))}
+        </div>
+
+        {/* Research Insights */}
+        <Card className="p-6 bg-white/90">
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="bg-gray-50 border border-[#26385C]/10 p-1 mb-8">
+              <TabsTrigger value="timeline">Publication Timeline</TabsTrigger>
+              <TabsTrigger value="impact">Journal Impact</TabsTrigger>
+              <TabsTrigger value="focus">Research Focus</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="timeline">
+              <Timeline />
+            </TabsContent>
+            <TabsContent value="impact">
+              <Impact />
+            </TabsContent>
+            <TabsContent value="focus">
+              <Focus />
+            </TabsContent>
+          </Tabs>
+        </Card>
       </div>
     </section>
   );

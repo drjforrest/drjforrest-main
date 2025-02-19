@@ -36,10 +36,10 @@ export function ParallaxBackground() {
 
   return (
     <div ref={ref} className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Gradient Background */}
+      {/* ✅ Smooth Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-background/50" />
 
-      {/* Animated Shapes */}
+      {/* ✅ Floating Animated Shapes */}
       <motion.div
         style={{ y: y1, rotate: rotate1 }}
         className="absolute top-[20%] left-[10%] w-64 h-64 rounded-full bg-primary/5"
@@ -53,32 +53,8 @@ export function ParallaxBackground() {
         className="absolute top-[50%] left-[30%] w-48 h-48 rounded-full bg-accent/5"
       />
 
-      {/* Floating Particles */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <circle cx="20" cy="20" r="1" fill="currentColor" className="text-primary/20" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
-
-      {/* Animated Lines */}
-      <div className="absolute inset-0">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            style={{
-              y: useSpring(
-                useTransform(scrollYProgress, [0, 1], [0, -100 * (i + 1)]),
-                springConfig
-              ),
-              top: `${20 + i * 15}%`
-            }}
-            className="absolute left-0 right-0 h-px bg-primary/10"
-          />
-        ))}
-      </div>
+      {/* ❌ REMOVED Grid Lines */}
+      {/* ❌ REMOVED Animated Lines */}
     </div>
   );
 }

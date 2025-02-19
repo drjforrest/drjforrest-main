@@ -21,12 +21,12 @@ export function AnimatedCard({ children, className, delay = 0, hover = true }: A
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={hover ? { y: -5, transition: { duration: 0.2 } } : undefined}
+      whileHover={hover ? { scale: 1.02, y: -2, transition: { duration: 0.2 } } : undefined}
     >
       <Card 
         className={cn(
-          "bg-surface-elevated/95 backdrop-blur transition-all duration-300",
-          hover && "hover:elevation-3",
+          "bg-surface-elevated shadow-md backdrop-blur-sm transition-all duration-300",
+          hover && "hover:shadow-lg hover:border-primary/30",
           className
         )}
       >
