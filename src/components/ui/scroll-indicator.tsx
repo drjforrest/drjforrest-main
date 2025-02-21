@@ -20,28 +20,23 @@ export function ScrollIndicator() {
     restDelta: 0.001
   });
 
-  const [activeSection, setActiveSection] = useState<string>("");
+  const [activeSection, setActiveSection] = useState<string>("hero"); // Set initial state to "hero"
 
   useEffect(() => {
     // Intersection Observer for detecting active section
     const observer = new IntersectionObserver(
       (entries) => {
-        let mostVisibleSection = activeSection;
-
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const visibleRatio = entry.intersectionRatio;
-            if (!mostVisibleSection || visibleRatio > 0.5) {
-              mostVisibleSection = entry.target.id;
-            }
+          // If element is intersecting and in viewport
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+            setActiveSection(entry.target.id);
           }
         });
-
-        if (mostVisibleSection) {
-          setActiveSection(mostVisibleSection);
-        }
       },
-      { threshold: [0.3, 0.6, 0.9] }
+      { 
+        threshold: [0.3], // Single threshold for more consistent tracking
+        rootMargin: '-10% 0px -70% 0px' // Adjust the detection area to favor the top of sections
+      }
     );
 
     // Observe all sections
@@ -53,7 +48,7 @@ export function ScrollIndicator() {
     });
 
     return () => observer.disconnect();
-  }, [activeSection]);
+  }, []); // Remove activeSection from dependencies
 
   const scrollTo = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -71,28 +66,28 @@ export function ScrollIndicator() {
       />
   
       {/* Navigation Dots with Labels */}
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col items-center space-y-4">
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col items-end space-y-4">
         {sections.map((section) => (
           <motion.button
-            key={section.id} // Use section.id as key
+            key={section.id}
             className="group relative flex items-center space-x-2"
-            onClick={() => scrollTo(section.id)} // Use section.id for scrolling
+            onClick={() => scrollTo(section.id)}
             whileHover={{ x: -8 }}
             transition={{ duration: 0.2 }}
           >
+            {/* Always Visible Label with Proper Spacing */}
+            <motion.span
+              className="text-primary text-sm font-medium opacity-100 transition-opacity whitespace-nowrap mr-2"
+              animate={activeSection === section.id ? { fontWeight: 700 } : {}}
+            >
+              {section.label}
+            </motion.span>
+
             {/* Circle Indicator with Better Scaling */}
             <motion.div
               className={`w-3 h-3 rounded-full border-2 border-primary transition-all duration-200
                           ${activeSection === section.id ? 'bg-primary scale-[1.4] shadow-lg' : 'bg-background'}`}
             />
-  
-            {/* Always Visible Label with Proper Spacing */}
-            <motion.span
-              className="text-primary text-sm font-medium opacity-100 transition-opacity whitespace-nowrap"
-              animate={activeSection === section.id ? { fontWeight: 700 } : {}}
-            >
-              {section.label} {/* Use section.label for the label */}
-            </motion.span>
           </motion.button>
         ))}
       </div>

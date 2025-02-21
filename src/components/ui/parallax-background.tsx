@@ -1,60 +1,49 @@
 'use client';
 
-import { useScroll, useTransform, motion, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 export function ParallaxBackground() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  
-  const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -200]),
-    springConfig
-  );
-  const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -400]),
-    springConfig
-  );
-  const y3 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -600]),
-    springConfig
-  );
-
-  const rotate1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 45]),
-    springConfig
-  );
-  const rotate2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -45]),
-    springConfig
-  );
+  const { theme } = useTheme();
 
   return (
-    <div ref={ref} className="fixed inset-0 -z-10 overflow-hidden">
-      {/* ✅ Smooth Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-background/50" />
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        {/* Gradient overlay */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-transparent to-background/20"
+          style={{
+            background: theme === 'dark' 
+              ? 'radial-gradient(circle at top left, rgba(42, 157, 143, 0.05), transparent 70%)' 
+              : 'radial-gradient(circle at top left, rgba(42, 157, 143, 0.02), transparent 70%)'
+          }}
+        />
 
-      {/* ✅ Floating Animated Shapes */}
-      <motion.div
-        style={{ y: y1, rotate: rotate1 }}
-        className="absolute top-[20%] left-[10%] w-64 h-64 rounded-full bg-primary/5"
-      />
-      <motion.div
-        style={{ y: y2, rotate: rotate2 }}
-        className="absolute top-[30%] right-[15%] w-96 h-96 rounded-full bg-primary/10"
-      />
-      <motion.div
-        style={{ y: y3 }}
-        className="absolute top-[50%] left-[30%] w-48 h-48 rounded-full bg-accent/5"
-      />
-
-      {/* ❌ REMOVED Grid Lines */}
-      {/* ❌ REMOVED Animated Lines */}
+        {/* Subtle animated shapes */}
+        <motion.div
+          className="absolute top-0 left-0 w-full h-full"
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'linear',
+          }}
+          style={{
+            backgroundImage: theme === 'dark'
+              ? 'radial-gradient(circle at 50% 50%, rgba(42, 157, 143, 0.03) 0%, transparent 50%)'
+              : 'radial-gradient(circle at 50% 50%, rgba(42, 157, 143, 0.015) 0%, transparent 50%)',
+            backgroundSize: '100% 100%',
+          }}
+        />
+      </motion.div>
     </div>
   );
 }
