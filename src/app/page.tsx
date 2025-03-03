@@ -1,11 +1,6 @@
 import HomeContent from './home-content';
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-}
+// Use the viewport configuration from viewport.ts instead of defining it here
 export default function Page() {
   return <HomeContent />;
 }

@@ -1,18 +1,39 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 import { motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
-import { CareerTimeline } from "@/components/CareerTimeline";
-import { EducationCards } from "@/components/EducationCards";
-import { ResearchImpactDashboard } from "@/components/ResearchImpactDashboard";
-import RSSFeed from "@/components/RSSFeed";
-import { ContactForm } from "@/components/ContactForm";
 import { SectionTitle } from "@/components/ui/section-title";
 import { Button } from "@/components/ui/button";
-import { ContactInfo } from "@/components/ui/ContactInfo";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 import { ScrollNavigation } from "@/components/ui/scroll-navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+// Dynamically import heavy components
+const CareerTimeline = dynamic(() => import('@/components/CareerTimeline').then(mod => mod.CareerTimeline), {
+  loading: () => <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />
+});
+
+const ResearchImpactDashboard = dynamic(() => import('@/components/ResearchImpactDashboard').then(mod => mod.ResearchImpactDashboard), {
+  loading: () => <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />
+});
+
+const EducationCards = dynamic(() => import('@/components/EducationCards').then(mod => mod.EducationCards), {
+  loading: () => <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />
+});
+
+const RSSFeed = dynamic(() => import('@/components/RSSFeed').then(mod => mod.default), {
+  loading: () => <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />
+});
+
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), {
+  loading: () => <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />
+});
+
+const ContactInfo = dynamic(() => import('@/components/ui/ContactInfo').then(mod => mod.ContactInfo), {
+  loading: () => <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />
+});
 
 const sections = [
   { id: 'hero', label: 'Introduction' },
@@ -30,7 +51,7 @@ export default function HomeContent() {
       <ScrollNavigation sections={sections} />
 
       {/* Hero Section */}
-      <section id="hero" className="mb-16 min-h-screen flex items-center">
+      <section id="hero" className="mb-4 sm:mb-8 md:mb-16 min-h-[60vh] sm:min-h-[85vh] md:min-h-screen flex items-center">
         <Hero />
       </section>
 
@@ -39,12 +60,14 @@ export default function HomeContent() {
         id="career"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-surface dark:bg-surface-elevated"
+        viewport={{ once: true, margin: "-50px" }}
+        className="px-4 py-6 sm:py-10 md:py-16 mb-8 sm:mb-12 md:mb-24 min-h-[60vh] sm:min-h-[85vh] md:min-h-screen flex flex-col justify-center bg-surface dark:bg-surface-elevated"
       >
         <SectionTitle>Career Journey</SectionTitle>
-        <div className="mt-8">
-          <CareerTimeline />
+        <div className="mt-4 sm:mt-8">
+          <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />}>
+            <CareerTimeline />
+          </Suspense>
         </div>
       </motion.section>
 
@@ -53,12 +76,14 @@ export default function HomeContent() {
         id="publications"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-background dark:bg-background"
+        viewport={{ once: true, margin: "-50px" }}
+        className="px-4 py-6 sm:py-10 md:py-16 mb-8 sm:mb-12 md:mb-24 min-h-[60vh] sm:min-h-[85vh] md:min-h-screen flex flex-col justify-center bg-background dark:bg-background"
       >
         <SectionTitle>Publications & Research Impact</SectionTitle>
-        <div className="mt-8">
-          <ResearchImpactDashboard />
+        <div className="mt-4 sm:mt-8">
+          <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />}>
+            <ResearchImpactDashboard />
+          </Suspense>
         </div>
       </motion.section>
 
@@ -67,11 +92,11 @@ export default function HomeContent() {
         id="education"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-surface dark:bg-surface-elevated"
+        viewport={{ once: true, margin: "-50px" }}
+        className="px-4 py-6 sm:py-10 md:py-16 mb-8 sm:mb-12 md:mb-24 min-h-[60vh] sm:min-h-[85vh] md:min-h-screen flex flex-col justify-center bg-surface dark:bg-surface-elevated"
       >
         <SectionTitle>Education & Achievements</SectionTitle>
-        <div className="mt-8 flex justify-center">
+        <div className="mt-4 sm:mt-8 flex justify-center">
           <Button asChild size="lg" className="!text-white">
             <a 
               href="/assets/jamie-forrest-cv.pdf" 
@@ -98,8 +123,10 @@ export default function HomeContent() {
             </a>
           </Button>
         </div>
-        <div className="mt-8">
-          <EducationCards />
+        <div className="mt-4 sm:mt-8">
+          <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />}>
+            <EducationCards />
+          </Suspense>
         </div>
       </motion.section>
 
@@ -108,12 +135,14 @@ export default function HomeContent() {
         id="interests"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="px-4 py-16 mb-24 min-h-screen flex flex-col justify-center bg-background dark:bg-background"
+        viewport={{ once: true, margin: "-50px" }}
+        className="px-4 py-6 sm:py-10 md:py-16 mb-8 sm:mb-12 md:mb-24 min-h-[60vh] sm:min-h-[85vh] md:min-h-screen flex flex-col justify-center bg-background dark:bg-background"
       >
         <SectionTitle>Personal Interests</SectionTitle>
-        <div className="mt-8">
-          <RSSFeed />
+        <div className="mt-4 sm:mt-8">
+          <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />}>
+            <RSSFeed />
+          </Suspense>
         </div>
       </motion.section>
 
@@ -122,16 +151,20 @@ export default function HomeContent() {
         id="contact"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="px-4 py-16 mb-24 min-h-screen flex flex-col justify-center items-center bg-surface dark:bg-surface-elevated"
+        viewport={{ once: true, margin: "-50px" }}
+        className="px-4 py-6 sm:py-10 md:py-16 mb-8 sm:mb-12 md:mb-24 min-h-[60vh] sm:min-h-[85vh] md:min-h-screen flex flex-col justify-center items-center bg-surface dark:bg-surface-elevated"
       >
         <SectionTitle>Get in Touch</SectionTitle>
-        <div className="w-full max-w-4xl mx-auto mt-8 flex flex-col md:flex-row gap-8 items-stretch">
+        <div className="w-full max-w-4xl mx-auto mt-4 sm:mt-8 flex flex-col md:flex-row gap-4 sm:gap-8 items-stretch">
           <div className="w-full md:w-1/2 flex">
-            <ContactForm />
+            <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />}>
+              <ContactForm />
+            </Suspense>
           </div>
           <div className="w-full md:w-1/2 flex">
-            <ContactInfo />
+            <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-64 sm:h-96 rounded-lg" />}>
+              <ContactInfo />
+            </Suspense>
           </div>
         </div>
       </motion.section>

@@ -13,7 +13,7 @@ interface ScrollNavigationProps {
 }
 
 export function ScrollNavigation({ sections }: ScrollNavigationProps) {
-  const { scrollProgress } = useScroll();
+  const { scrollProgress, activeSection } = useScroll();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -24,7 +24,7 @@ export function ScrollNavigation({ sections }: ScrollNavigationProps) {
 
   return (
     <>
-      {/* ✅ Keep: Progress Bar at the Top */}
+      {/* ✅ Progress Bar at the Top */}
       <div className="fixed top-0 left-0 w-full h-1 bg-primary/20 z-50">
         <motion.div
           className="h-full bg-primary"
@@ -33,7 +33,12 @@ export function ScrollNavigation({ sections }: ScrollNavigationProps) {
         />
       </div>
 
-      {/* ❌ Remove: Side Navigation Dots */}
+      {/* Mobile section indicator */}
+      <div className="fixed bottom-16 left-0 w-full flex justify-center items-center lg:hidden z-40">
+        <div className="bg-background/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium shadow-lg border border-border">
+          {sections.find(s => s.id === activeSection)?.label || 'Introduction'}
+        </div>
+      </div>
     </>
   );
 }

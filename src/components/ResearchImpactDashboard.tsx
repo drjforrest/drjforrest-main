@@ -16,7 +16,7 @@ export function ResearchImpactDashboard() {
     <section className="relative">
       <div className="container mx-auto px-4 py-12 space-y-6">
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { icon: FileText, value: "45+", label: "Peer-reviewed Publications" },
             { icon: TrendingUp, value: "9", label: "High-Impact Journal Papers" },
@@ -41,7 +41,7 @@ export function ResearchImpactDashboard() {
         {/* Research Insights */}
         <Card className="p-6 bg-surface dark:bg-surface-elevated">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="bg-background/50 dark:bg-background/50 border border-border p-1 mb-8">
+            <TabsList className="bg-background/50 dark:bg-background/50 border border-border p-1 mb-8 flex flex-wrap justify-center w-full">
               <TabsTrigger value="timeline">Publication Timeline</TabsTrigger>
               <TabsTrigger value="impact">Journal Impact</TabsTrigger>
               <TabsTrigger value="focus">Research Focus</TabsTrigger>

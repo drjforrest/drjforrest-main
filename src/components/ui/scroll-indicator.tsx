@@ -1,7 +1,8 @@
 'use client';
 
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useSpring as useFramerSpring } from "framer-motion";
+import { useEffect } from "react";
+import { useScroll } from './scroll-context';
 
 const sections = [
   { id: 'hero', label: 'Introduction' },
@@ -13,29 +14,30 @@ const sections = [
 ];
 
 export function ScrollIndicator() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
+  // Use our custom scroll context instead of framer-motion's useScroll
+  const { scrollProgress, activeSection, setActiveSection } = useScroll();
+  
+  // Create a spring animation for the progress bar
+  const scaleX = useFramerSpring(scrollProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
   });
 
-  const [activeSection, setActiveSection] = useState<string>("hero"); // Set initial state to "hero"
-
   useEffect(() => {
-    // Intersection Observer for detecting active section
+    // Enhanced Intersection Observer for detecting active section
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // If element is intersecting and in viewport
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+          // If element is intersecting with higher threshold for accuracy
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
             setActiveSection(entry.target.id);
           }
         });
       },
       { 
-        threshold: [0.3], // Single threshold for more consistent tracking
-        rootMargin: '-10% 0px -70% 0px' // Adjust the detection area to favor the top of sections
+        threshold: [0.2, 0.4, 0.6], // Multiple thresholds for smoother detection
+        rootMargin: '-5% 0px -45% 0px' // Adjusted margins for better detection
       }
     );
 
@@ -48,7 +50,7 @@ export function ScrollIndicator() {
     });
 
     return () => observer.disconnect();
-  }, []); // Remove activeSection from dependencies
+  }, [setActiveSection]); // Include setActiveSection in dependencies
 
   const scrollTo = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -83,10 +85,15 @@ export function ScrollIndicator() {
               {section.label}
             </motion.span>
 
-            {/* Circle Indicator with Better Scaling */}
-            <motion.div
-              className={`w-3 h-3 rounded-full border-2 border-primary transition-all duration-200
-                          ${activeSection === section.id ? 'bg-primary scale-[1.4] shadow-lg' : 'bg-background'}`}
+            {/* Enhanced Circle Indicator with Better Animation */}
+            <motion.div 
+              className="w-3 h-3 rounded-full border-2 border-primary transition-all duration-300"
+              animate={{
+                backgroundColor: activeSection === section.id ? 'var(--primary)' : 'var(--background)',
+                scale: activeSection === section.id ? 1.4 : 1,
+                boxShadow: activeSection === section.id ? '0 0 10px rgba(var(--primary-rgb), 0.5)' : 'none'
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
           </motion.button>
         ))}

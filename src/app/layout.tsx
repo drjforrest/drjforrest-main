@@ -15,7 +15,7 @@ import { ParallaxBackground } from '@/components/ui/parallax-background';
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className="overflow-x-hidden">
+      <body className="overflow-x-hidden max-w-full">
         <ParallaxBackground /> {/* ✅ Background animation without grid markers */}
         <SmoothScroll /> {/* ✅ Adds smooth scrolling to internal links */}
         <ThemeProvider>

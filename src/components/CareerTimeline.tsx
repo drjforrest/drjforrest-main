@@ -25,7 +25,7 @@ export function CareerTimeline() {
     <div className="relative container mx-auto px-4">
       {/* Vertical Timeline Line */}
       <div 
-        className="absolute left-1/2 transform -translate-x-1/2 h-full w-[3px] bg-primary/20" 
+        className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-[3px] bg-primary/20" 
         style={{ zIndex: 0 }} 
       />
 
@@ -33,8 +33,8 @@ export function CareerTimeline() {
         {positionData.map((position, index) => (
           <div
             key={`${position.title}-${index}`}
-            className={`flex items-center ${
-              index % 2 === 0 ? 'md:flex-row flex-col' : 'md:flex-row-reverse flex-col'
+            className={`flex items-start ${
+              index % 2 === 0 ? 'md:flex-row flex-col pl-8 md:pl-0' : 'md:flex-row-reverse flex-col pl-8 md:pl-0'
             }`}
             style={{ position: 'relative', zIndex: 1 }}
           >

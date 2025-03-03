@@ -34,7 +34,7 @@ function IconFeature({
   return (
     <motion.button 
       onClick={scrollToSection}
-      className="bg-surface dark:bg-surface-elevated rounded-lg shadow-lg w-[280px]"
+      className="bg-surface dark:bg-surface-elevated rounded-lg shadow-lg w-full md:w-[280px] max-w-xs"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -53,12 +53,12 @@ function IconFeature({
 
 export function Hero() {
   return (
-    <div className="relative w-full h-[calc(100vh-80px)] flex items-center justify-center">
+    <div className="relative w-full min-h-[calc(100vh-80px)] py-8 md:py-0 flex items-center justify-center">
       
       {/* 🔹 Hero Background Ring */}
       <motion.div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                  w-[720px] h-[720px] border-[1.5px] 
+                  w-[90vw] h-[90vw] md:w-[720px] md:h-[720px] border-[1.5px] 
                   border-[#2A9D8F]/10 rounded-full z-[-1]"
         style={{
           background: 'radial-gradient(circle, transparent 40%, rgba(42, 157, 143, 0.015) 80%)'
@@ -95,7 +95,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-foreground text-6xl font-bold mb-6"
+              className="text-foreground text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
             >
               Innovating Global Health Solutions
             </motion.h1>
@@ -116,7 +116,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="flex gap-8 justify-center"
+            className="flex flex-col md:flex-row gap-6 md:gap-8 justify-center items-center"
           >
             <IconFeature
               icon={Network}
